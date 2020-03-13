@@ -2,7 +2,7 @@ var gulp = require('gulp');
 var git = require('gulp-git');
 var install = require('gulp-install');
 
-function updateSubmodules() {
+glup.task('Initialize Each Repositories', function () {
   return new Promise(function(resolve, reject) {
     git.updateSubmodule({args : '--init'}, function(err){
       if(err){
@@ -12,19 +12,18 @@ function updateSubmodules() {
       }
     });
   })
-}
-function initNpm() {
+});
+glup.task('Install Npm Each Repositories', function (){
   return new Promise(function(resolve, reject) {
     gulp.src([
-        './webportal/package.json', 
-        './telegrambotmanagementassistserver/package.json', 
-        './otadevelopmentassistserver/package.json', 
-        './dashboard/package.json'
-      ])
-      .pipe(install())
-      .on('error', reject)
-      .pipe(gulp.dest("./dashboard/"))
-      .on('end', resolve);
+      './webportal/package.json', 
+      './telegrambotmanagementassistserver/package.json', 
+      './otadevelopmentassistserver/package.json', 
+      './dashboard/package.json'
+    ])
+    .pipe(install())
+    .on('error', reject)
+    .pipe(gulp.dest("./dashboard/"))
+    .on('end', resolve);
   })
-}
-exports.default = gulp.parallel(updateSubmodules, initNpm);
+})
