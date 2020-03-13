@@ -14,9 +14,9 @@
   "license": "MIT",
   "homepage": "https://bitbucket.org/synctechnoinc/integratedmultiplatform#readme",
   "dependencies": {
-    "gulp-git": "^2.10.0"
   },
   "devDependencies": {
+    "gulp-git": "^2.10.0",
     "gulp": "^4.0.2",
     "gulp-install": "^1.1.0",
     "mongodb": "^3.5.5"
