@@ -1,8 +1,9 @@
 # Install Guide #
 
 ## 1. Install Gulp
->$> npm install gulp-cli -g
->$> npm install --save-dev gulp
+>$> npm install gulp-cli -g  
+>...  
+>$> npm install gulp --save-dev
 
 ## 2. Pull Repositories
 >$> gulp updateSubmodule
