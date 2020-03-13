@@ -1,0 +1,29 @@
+
+{
+  "common" : {
+    "host": "localhost",
+    "port": "27017"
+  },
+  "DBs" : {
+    "webportal" : {
+      "database": "mobius_webportal",
+      "username": "mobius_webportal_user",
+      "password": "tkdydwk12#$"
+    },
+    "dashboard" : {
+      "database": "dashboard",
+      "username": "dashboard-user",
+      "password": "tkdydwk12#$"
+    },
+    "ota" : {
+      "database": "OTA_Assist",
+      "username": "ota_manager",
+      "password": "ota_manager!@"
+    },
+    "sns" : {
+	    "database" : "Bot_Mgmt",
+	    "username": "telebot",
+	    "password" : "telebot!@"
+    }
+  }
+}

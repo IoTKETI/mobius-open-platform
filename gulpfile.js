@@ -2,7 +2,9 @@ var gulp = require('gulp');
 var git = require('gulp-git');
 var install = require('gulp-install');
 
-glup.task('Initialize Each Repositories', function () {
+var dbSetting = require('./set_mongo');
+
+gulp.task('updateSubmodule', function () {
   return new Promise(function(resolve, reject) {
     git.updateSubmodule({args : '--init'}, function(err){
       if(err){
@@ -13,7 +15,7 @@ glup.task('Initialize Each Repositories', function () {
     });
   })
 });
-glup.task('Install Npm Each Repositories', function (){
+gulp.task('installNPM', function (){
   return new Promise(function(resolve, reject) {
     gulp.src([
       './webportal/package.json', 
@@ -26,4 +28,7 @@ glup.task('Install Npm Each Repositories', function (){
     .pipe(gulp.dest("./dashboard/"))
     .on('end', resolve);
   })
+})
+gulp.task('setDatabase', function(){
+  return dbSetting();
 })
