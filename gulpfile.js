@@ -4,12 +4,13 @@ var install = require('gulp-install');
 
 function updateSubmodules() {
   return new Promise(function(resolve, reject) {
-    try {
-      git.updateSubmodule();
-      resolve();
-    }catch(err) {
-      reject(err);
-    }
+    git.updateSubmodule({args : '--init'}, function(err){
+      if(err){
+        reject(err);
+      } else {
+        resolve()
+      }
+    });
   })
 }
 function initNpm() {
@@ -22,8 +23,8 @@ function initNpm() {
       ])
       .pipe(install())
       .on('error', reject)
-      .pipe(gulp.dest("./"))
+      .pipe(gulp.dest("./dashboard/"))
       .on('end', resolve);
   })
 }
-exports.default = gulp.series(updateSubmodules, initNpm);
+exports.default = gulp.parallel(updateSubmodules, initNpm);
