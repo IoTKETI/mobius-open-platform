@@ -2,4 +2,4 @@
 
 ## INSTALL
 >$> npm install-cli -g
->$> npm install-glup
+>$> npm install --save-dev glup
