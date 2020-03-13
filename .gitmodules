@@ -4,9 +4,9 @@
 [submodule "otadevelopmentassistserver"]
 	path = otadevelopmentassistserver
 	url = https://bitbucket.org/kimjinhyeok/otadevelopmentassistserver.git
-[submodule "telegrambotmanagementassist"]
-	path = telegrambotmanagementassist
-	url = https://bitbucket.org/kimjinhyeok/telegrambotmanagementassist.git
+[submodule "telegrambotmanagementassistserver"]
+	path = telegrambotmanagementassistserver
+	url = https://bitbucket.org/kimjinhyeok/telegrambotmanagementassistserver.git
 [submodule "dashboard"]
 	path = dashboard
 	url = https://bitbucket.org/synctechnoinc/dashboard.git
