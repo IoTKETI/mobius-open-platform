@@ -1,4 +1,4 @@
-# Install Guide #
+# Service Install
 
 ## 1. Install Gulp
 >$> npm install gulp-cli -g  
@@ -13,3 +13,17 @@
 
 ## 4. Set Databases
 >$> gulp setDatabase
+
+
+
+# Service Start
+
+## Start PM2 
+>$> gulp startPm2
+***
+
+## Check appliations 
+>$> pm2 list
+
+
+## 

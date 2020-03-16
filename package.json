@@ -13,12 +13,12 @@
   "author": "KETI",
   "license": "MIT",
   "homepage": "https://bitbucket.org/synctechnoinc/integratedmultiplatform#readme",
-  "dependencies": {
-  },
+  "dependencies": {},
   "devDependencies": {
-    "gulp-git": "^2.10.0",
     "gulp": "^4.0.2",
+    "gulp-git": "^2.10.0",
     "gulp-install": "^1.1.0",
+    "gulp-run": "^1.7.1",
     "mongodb": "^3.5.5"
   }
 }
