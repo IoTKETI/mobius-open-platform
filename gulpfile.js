@@ -91,11 +91,11 @@ function startOta() {
 function startSns() {
   return run(`pm2 start ./sns_agent_manage_tool/bin/www --name sns`).exec()
 }
-function startSns() {
-  return run(`pm2 start ./resource_browser/bin/www --name sns`).exec()
+function startRes() {
+  return run(`pm2 start ./resource_browser/bin/www --name res`).exec()
 }
 
-gulp.task('serviceStart', gulp.series([startWebportal, startDashboard, startOta, startSns]));
+gulp.task('serviceStart', gulp.series([startWebportal, startDashboard, startOta, startSns, startRes]));
 
 gulp.task('serviceRestart', function(){
   return run("pm2 restart webportal dashboard ota sns").exec()
