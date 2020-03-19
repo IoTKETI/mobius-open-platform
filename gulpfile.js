@@ -47,20 +47,15 @@ function setSelecService(selected) {
     return el;
   })
 }
-gulp.task('npmInstall', function (){
-  return new Promise(function(resolve, reject) {
-    gulp.src([
-      './webportal/package.json', 
-      './telegrambotmanagementassistserver/package.json', 
-      './otadevelopmentassistserver/package.json', 
+gulp.task('npmInstall', async function (){
+    await gulp.src([
+      './webportal/package.json',
       './dashboard/package.json',
+      './ota_manage_tool/package.json',
+      './sns_agent_manage_tool/package.json',
       './resource_browser/package.json'
     ])
     .pipe(install())
-    .on('error', reject)
-    .pipe(gulp.src("./package.json"))
-    .on('end', resolve);
-  })
 });
 /*
 gulp.task('npmInstall', function (){
@@ -91,10 +86,13 @@ function startDashboard() {
   return run(`pm2 start ./dashboard/backend/www --name dashboard`).exec();
 }
 function startOta() {
-  return run(`pm2 start ./otadevelopmentassistserver/bin/www --name ota`).exec()
+  return run(`pm2 start ./ota_manage_tool/bin/www --name ota`).exec()
 }
 function startSns() {
-  return run(`pm2 start ./telegrambotmanagementassistserver/bin/www --name sns`).exec()
+  return run(`pm2 start ./sns_agent_manage_tool/bin/www --name sns`).exec()
+}
+function startSns() {
+  return run(`pm2 start ./resource_browser/bin/www --name sns`).exec()
 }
 
 gulp.task('serviceStart', gulp.series([startWebportal, startDashboard, startOta, startSns]));
