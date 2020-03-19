@@ -24,9 +24,13 @@ function createUser(db, info) {
         { role : "readWrite", db : info.database }
       ]}, function(err, result) {
         if(err) {
-          if(err.code === 11000) { resolve(); }
-          else { reject(); }
+          if(err.code === 11000 || err.code === 51003) { 
+            console.log(`${info.database} already exist`);
+            resolve(); 
+          }
+          else { reject(err); }
         } else {
+          console.log(`create ${info.database} user`);
           resolve();
         }
       }
