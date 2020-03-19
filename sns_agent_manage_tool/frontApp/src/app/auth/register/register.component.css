@@ -1,0 +1,70 @@
+.join-page{
+    height: 100%;
+    width: 100%;
+}
+
+.join-spacer{
+    height: 10vh;
+}
+
+.join-container{
+    margin: auto;
+    width: 300px;
+    padding: 2vh;
+    background-color: #fff;
+    box-shadow: 5px 5px 15px grey;
+}
+
+.join-form{
+    display: flex;
+    flex-direction: column;
+}
+
+.form-group {
+    width: 100%;
+}
+
+mat-error{
+    float: right;
+}
+mat-error::after{
+    clear: both;
+}
+#join-fab {
+	border-radius: 50%;
+    height: 56px;
+    margin: auto;
+    min-width: 56px;
+    width: 56px;
+    overflow: hidden;
+    box-shadow: 0 1px 1.5px 0 rgba(0,0,0,.12), 0 1px 1px 0 rgba(0,0,0,.24);
+    margin-top: -35px;
+    text-align: center;
+    left: 0;
+    right: 0;
+}
+
+#join-icon{
+    line-height: 56px;
+    color: #fff;
+}
+.card-heading{
+    text-align: center;
+    color: rgba(0, 0, 0, 0.51);
+}
+
+.buttons .join{
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.buttons .join > button{
+    width: 100%;
+}
+
+.buttons .register{
+    display: flex;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    justify-content: space-between;
+}

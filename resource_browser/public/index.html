@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html ng-app="onem2mResourceMonitor">
+  <head>
+    <meta charset="utf-8"/>
+
+    <title>oneM2M Resource Monitor for Mobius</title>
+    <meta app-version="V2.0_R20190618-01" />
+    <!--
+    <link rel="shortcut icon" type="image/png" href="/icons/keti.onem2m.resmon_32x32.png"/>
+    -->
+
+    <link rel="shortcut icon" type="image/ico" href="./icons/keti.onem2m.resmon.ico"/>
+    <link rel="shortcut icon" type="image/png" href="./icons/keti.onem2m.resmon_32x32.png"/>
+
+    <link rel='stylesheet' href='./stylesheets/style.css' />
+    <link rel='stylesheet' href='/noto-sans-kr/styles.css' />
+    <link rel='stylesheet' href='/@fortawesome/fontawesome-free/css/all.css' />
+
+
+    <script src="/jquery/dist/jquery.min.js"></script>
+
+
+    <link rel='stylesheet' href='/bootstrap/dist/css/bootstrap.css' />
+    <script src='/bootstrap/dist/js/bootstrap.js'></script>
+
+    <script src="/urijs/src/URI.min.js"></script>
+    <script src="/underscore/underscore-min.js"></script>
+    <script src="/promise-polyfill/dist/polyfill.js"></script>
+
+
+    <script src="/d3/d3.js"></script>
+
+    <script src="/socket.io-client/dist/socket.io.js"></script>
+
+    <script src="/angular/angular.js"></script>
+    <script src="/angular-ui-router/release/angular-ui-router.min.js"></script>
+    <script src="/angular-modal-service/dst/angular-modal-service.js"></script>
+    <script src="/angular-animate/angular-animate.min.js"></script>
+    <script src="/angular-ui-bootstrap/dist/ui-bootstrap.js"></script>
+    <script src="/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js"></script>
+
+
+    <script src="/auth0-angular/build/auth0-angular.js"></script>
+    <script src="/angular-storage/dist/angular-storage.js"></script>
+
+    <script src="/jsonformatter/dist/json-formatter.js"></script>
+    <link  href="/jsonformatter/dist/json-formatter.css" rel="stylesheet" type="text/css" />
+
+    <link rel="stylesheet" href="/angular-material/angular-material.css">
+    <script src="/angular-aria/angular-aria.js"></script>
+    <script src="/angular-messages/angular-messages.js"></script>
+    <script src="/angular-material/angular-material.js"></script>
+
+
+    <script src="./javascripts/xogus.xstring.js"></script>
+
+    <script src="./app/main.js"></script>
+    <script src="./app/controller.controlpanel.js"></script>
+    <script src="./app/controller.resourcetree.js"></script>
+    <script src="./app/controller.propertiespanel.js"></script>
+    <script src="./app/service.event.js"></script>
+    <script src="./app/service.onem2m.js"></script>
+    <script src="./app/service.resmon.js"></script>
+
+    <script src="./app/modal/controller.input.acpname.js"></script>
+    <script src="./app/modal/resource.property.dialog.js"></script>
+
+    <script src="./app/directives/create.resource.form.js"></script>
+    <script src="./app/modal/controller.create.resource.js"></script>
+    <script src="./app/modal/controller.update.resource.js"></script>
+    <script src="./app/modal/controller.delete.resource.js"></script>
+
+    <script src="./app/directives/draggable.js"></script>
+    <script src="./app/directives/focusme.js"></script>
+
+    <script src="./app/onem2m/onem2m.model.js"></script>
+
+  </head>
+  <body lang="ko" ng-cloak layout="column" ng-controller="layoutController">
+
+    <!-- NAVIGATION -->
+    <md-toolbar layout="row" class="md-toolbar-tools md-whiteframe-3dp" ng-if="!hideToolbar">
+
+
+      <a class="logo" ui-sref="#"></a>
+      <!-- <ul class="nav navbar-nav">
+        <li class="nav-item"><a ui-sref="monitor">Resource Monitor</a></li>
+        <li class="nav-item"><a ui-sref="home">About</a></li>
+      </ul>
+      <span flex></span> -->
+      <!--
+        <li ><a ui-sref="home">Home</a></li>
+        <li ><a ui-sref="monitor">Resource Monitor</a></li>
+        <li>Powered by SyncTechno Inc.,</li>
+      -->
+      <!-- <md-button class="menu md-icon-button pull-right" ng-click="toggleSidebar()">
+        <md-icon md-svg-icon="menu" ></md-icon>
+      </md-button> -->
+      <div class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown">리소스 브라우저</a>
+        <div class="dropdown-menu service-map">
+          <ul>
+            <li class="dropdown-item">
+                <a ng-href="{{serviceUrl.mobiusState}}" class="menu-element" ><div class="img-button mobius-status"></div><span class="menu-label">Mobius 상태 조회</span></a>
+            </li>
+            <li class="dropdown-item">
+                <a ng-href="{{serviceUrl.deviceManage}}" class="menu-element" ><div class="img-button device-manage"></div><span class="menu-label">디바이스 관리</span></a>
+            </li>
+            <li class="dropdown-item">
+                <a ng-href="{{serviceUrl.accessProtect}}" class="menu-element"><div class="img-button access-protect"></div><span class="menu-label">접근 권한 관리</span></a>
+            </li>
+            <li class="dropdown-item">
+                <a ng-href="{{serviceUrl.dataBrowser}}" class="menu-element"><div class="img-button data-search"></div><span class="menu-label">데이터 탐색기</span></a>
+            </li>
+          </ul>
+          <ul>
+            <li class="dropdown-item">
+                <a ng-href="{{serviceUrl.resmon}}" class="menu-element"><div class="img-button resmon"></div><span class="menu-label">리소스 브라우저</span></a>
+            </li>
+            <li class="dropdown-item">
+                <a ng-href="{{serviceUrl.dashboard}}" class="menu-element"><div class="img-button dashboard"></div><span class="menu-label">대시보드</span></a>
+            </li>
+            <li class="dropdown-item">
+                <a ng-href="{{serviceUrl.ota}}" class="menu-element"><div class="img-button ota"></div><span class="menu-label">OTA 관리기</span></a>
+            </li>
+            <li class="dropdown-item">
+                <a ng-href="{{serviceUrl.sns}}" class="menu-element"><div class="img-button agent"></div><span class="menu-label">에이전트 관리기</span></a>
+            </li>
+          </ul>
+        </div>
+  
+      </div>
+      <span class="toolbar-spacer" flex></span>
+      <div class="dropdown account" ng-if="user">
+        <a class="dropdown-toggle" data-toggle="dropdown">
+          <span class="img-avatar" >
+            <i class="fas fa-user"></i>
+          </span>
+          <span>{{user.u_n}}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <div class="dropdown-header">
+            <strong>Account</strong>
+          </div>
+          <ul>
+            <li class="dropdown-item">
+              <a ng-click="onClickLogout()">
+                <i class="fa fa-lock"></i> Logout
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </md-toolbar>
+
+    <!-- Container #2 -->
+    <div flex layout="row">
+
+      <!-- Container #4 -->
+      <div flex layout="column" id="content">
+        <div ui-view flex layout="column" ></div>
+      </div>
+
+    </div>
+
+    <md-sidenav class="md-sidenav-right md-whiteframe-4dp" md-component-id="legends" style="width: 250px;">
+
+      <md-toolbar class="md-toolbar-tools md-whiteframe-3dp" layout="row">
+        <h1 class="md-toolbar-tools">Resource types</h1>
+        <span flex></span>
+        <md-button class="menu md-icon-button pull-right" ng-click="toggleSidebar()">
+          <md-icon md-svg-icon="menu" ></md-icon>
+        </md-button>
+      </md-toolbar>
+      <md-content layout-padding>
+
+        <div class="legend-list">
+          <img class="legend-item" src="/images/legend_cb.png"/>
+          <img class="legend-item" src="/images/legend_ae.png"/>
+          <img class="legend-item" src="/images/legend_cnt.png"/>
+          <img class="legend-item" src="/images/legend_cin.png"/>
+          <img class="legend-item" src="/images/legend_grp.png"/>
+          <img class="legend-item" src="/images/legend_sd.png"/>
+          <img class="legend-item" src="/images/legend_sub.png"/>
+          <img class="legend-item" src="/images/legend_ts.png"/>
+          <img class="legend-item" src="/images/legend_tsi.png"/>
+          <img class="legend-item" src="/images/legend_unknown.png "/>
+        </div>
+
+
+      </md-content>
+
+    </md-sidenav>
+
+
+    <div class="create-resource modal fade" id="common-waitfor-modal">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header bg-primary">
+            <h4 class="modal-title">
+              <span class="glyphicon glyphicon-time"></span> Please Wait
+            </h4>
+          </div>
+          <div class="modal-body">
+            <br />
+            <br />
+            <div class="progress">
+              <div class="progress-bar progress-bar-info progress-bar-striped active" style="width: 100%"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </body>
+
+  <script src="./javascripts/notiny/dist/notiny.js"></script>
+  <link  href="./javascripts/notiny/dist/notiny.css" rel="stylesheet" type="text/css" />
+</html>

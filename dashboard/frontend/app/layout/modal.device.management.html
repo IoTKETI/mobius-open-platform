@@ -1,0 +1,47 @@
+<md-dialog flex-xs="80" flex-sm="60" flex-md="50" flex-lg="30" flex-xl="20" aria-label="Device Management" class="transparent-dialog" md-theme="dashboard">
+  <form ng-cloak>
+    <md-dialog-content>
+
+      <md-card class="" >
+        <md-card-title class="bg-dashboard bd-shadow">
+          <md-card-title-text>
+            <span class="md-headline" ng-bind="title"></span>
+          </md-card-title-text>
+        </md-card-title>
+
+        <md-card-content layout="column" layout-align="center center">
+          <div flex layout="column" layout-align="center center">
+            <div flex layout="column" ng-if="message.length == 2">
+              <h3 class="dialog-message" ng-bind="message[1]"></h3>
+            </div>
+            <div flex layout="column" ng-if="message.length == 3">
+              <h3 class="dialog-message" ng-bind="message[1]"></h3>
+              <p class="dialog-description" ng-bind="message[2]"></p>
+            </div>
+            <div flex layout="column" ng-if="message.length == 4">
+              <h3 class="dialog-message" ng-bind="message[1]"></h3>
+              <h4 class="dialog-warning" ng-bind="message[2]"></h4>
+              <p class="dialog-description" ng-bind="message[3]"></p>
+            </div>
+          </div>
+
+          <div flex="none" class="dialog-progress">
+
+            <md-progress-circular md-diameter="96">
+            </md-progress-circular>
+
+            <div class="progress-countdown" ng-bind="countdown" ng-if="message[0]"></div>
+          </div>
+
+        </md-card-content>
+
+        <md-card-actions layout="row" layout-align="center center">
+          <md-button class="" ng-click="abort()">
+            Close
+          </md-button>
+        </md-card-actions>
+      </md-card>
+
+    </md-dialog-content>
+  </form>
+</md-dialog>

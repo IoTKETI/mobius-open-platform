@@ -1,0 +1,36 @@
+<div flex layout="row" layout-align="center center" class="chart-container" ng-controller="LineController as vm">
+
+    <c3chart 
+      bindto-id="chart_{{widget.widgetId}}" 
+      padding-top="0" padding-left="0" padding-right="0"
+      show-labels="true">
+
+      <chart-column column-id="line1"
+        column-name="Line 1"
+        column-values="2010,2011,2012,2013,2014,2015"
+        column-type="line"/>
+
+      <chart-column column-id="x1"
+        column-name="Line 1"
+        column-values="30,200,100,400,150,250"
+        column-type="spline"/>
+
+      <chart-column column-id="line2"
+        column-name="Line 2"
+        column-values="2011,2012,2013,2014,2015"
+        column-type="line"/>
+
+      <chart-column column-id="x2"
+        column-name="Line 2"
+        column-values="250,150,300,250,200"
+        column-type="spline"/>
+
+      <chart-points point-radius="5"
+        show-point="true"
+        point-expand-enabled="true"
+        point-expand-radius="10"/>
+
+      <chart-axes values-xs="x1:line1,x2:line2"></chart-axes>
+    </c3chart>
+
+</div>

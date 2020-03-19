@@ -1,0 +1,77 @@
+<div class="content-container">
+  <!-- float left -->
+  <div class="content-table">
+    <mat-card>
+      <mat-card-title>
+        대기 목록
+      </mat-card-title>
+      <mat-card-content>
+        <mat-table table [dataSource]="requesterList" class="mat-elevation-z8">
+          <ng-container matColumnDef="checked">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-checkbox color="primary" (change)="$event ? masterToggle(true) : null" [checked]="requestSelection.hasValue() && isAllSelected(true)"
+                [indeterminate]="requestSelection.hasValue() && !isAllSelected(true)">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox color="primary" (click)="$event.stopPropagation()" (change)="$event ? requestSelection.toggle(row) : null"
+                [checked]="requestSelection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="userName">
+            <mat-header-cell *matHeaderCellDef>채널</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.chatID}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef>신청일.</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.date}}</mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumn"></mat-header-row>
+          <mat-row *matRowDef="let row; columns : displayedColumn;" [ngClass]="{highlighted : requestSelection.isSelected(row)}"
+            (click)="requestSelection.toggle(row)"></mat-row>
+        </mat-table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+  <div class="mid-btn">
+    <div class="btn"><a (click)="onClickToValidUser()" title="등록"><i [ngClass]="{'btn-disabled' : !requestSelection.hasValue()}"
+          class="far fa-arrow-alt-circle-right primaryColor"></i></a></div>
+    <div class="btn"><a (click)="onClickToRequest()" title="제외"><i [ngClass]="{'btn-disabled' : !userSelection.hasValue()}"
+          class="far fa-arrow-alt-circle-left primaryColor"></i></a></div>
+    <div class="btn"><a (click)="onClickRemove()"><i [ngClass]="{'btn-disabled' : !(userSelection.hasValue() || requestSelection.hasValue())}"
+          class="fas fa-trash primaryColor" title="삭제"></i></a></div>
+  </div>
+  <div class="content-table">
+    <mat-card>
+      <mat-card-title>승인 목록</mat-card-title>
+      <mat-card-content>
+        <mat-table table [dataSource]="userList" class="mat-elevation-z8">
+          <ng-container matColumnDef="checked">
+            <mat-header-cell *matHeaderCellDef>
+              <mat-checkbox color="primary" (change)="$event ? masterToggle(false) : null" [checked]="userSelection.hasValue() && isAllSelected(false)"
+                [indeterminate]="userSelection.hasValue() && !isAllSelected(false)">
+              </mat-checkbox>
+            </mat-header-cell>
+            <mat-cell *matCellDef="let row">
+              <mat-checkbox color="primary" (click)="$event.stopPropagation()" (change)="$event ? userSelection.toggle(row) : null"
+                [checked]="userSelection.isSelected(row)">
+              </mat-checkbox>
+            </mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="userName">
+            <mat-header-cell *matHeaderCellDef>채널</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.chatID}}</mat-cell>
+          </ng-container>
+          <ng-container matColumnDef="date">
+            <mat-header-cell *matHeaderCellDef>신청일.</mat-header-cell>
+            <mat-cell *matCellDef="let element">{{element.date}}</mat-cell>
+          </ng-container>
+          <mat-header-row *matHeaderRowDef="displayedColumn"></mat-header-row>
+          <mat-row *matRowDef="let row; columns : displayedColumn;" [ngClass]="{highlighted : userSelection.isSelected(row)}"
+            (click)="userSelection.toggle(row)"></mat-row>
+        </mat-table>
+      </mat-card-content>
+    </mat-card>
+  </div>
+</div>

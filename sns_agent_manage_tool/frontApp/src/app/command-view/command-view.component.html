@@ -1,0 +1,62 @@
+<div class="cmd-container">
+  <div class="cmd-functions">
+    <span class="addCmd" (click)="openAddDialog()">
+        <a><i class="fas fa-plus-circle primaryColor" title="명령어 추가"></i></a>
+    </span>
+    <span [ngClass]="selection.hasValue() ? 'selected' : 'notSelected'">
+      <a (click)="changeActivityMany(true)" title="모두 실행"><i class="far fa-play-circle primaryColor"></i></a>
+      <a (click)="changeActivityMany(false)" title="모두 정지"><i class="far fa-pause-circle primaryColor"></i></a>
+      <a (click)="openDeleteManyAlert()" title="삭제"><i class="fas fa-trash primaryColor"></i></a>
+    </span>
+  </div>
+  
+  <mat-table [dataSource]="commandList" class="mat-elevation-z8" style="width: 100%; text-align: center;">
+    <ng-container matColumnDef="checked">
+      <mat-header-cell *matHeaderCellDef>
+        <mat-checkbox color="primary"
+          (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()">
+        </mat-checkbox>
+      </mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <mat-checkbox color="primary"
+          (click)="$event.stopPropagation()" 
+          (change)="$event ? selection.toggle(row) : null" 
+          [checked]="selection.isSelected(row)">
+        </mat-checkbox>
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="command">
+      <mat-header-cell *matHeaderCellDef>Command.</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.command}}</mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="target">
+      <mat-header-cell *matHeaderCellDef>URL.</mat-header-cell>
+      <mat-cell *matCellDef="let element">{{element.target}}</mat-cell>
+    </ng-container>
+    <!-- <ng-container matColumnDef="activity">
+      <mat-header-cell *matHeaderCellDef>Status.</mat-header-cell>
+      <mat-cell *matCellDef="let element; let i = index;">
+        <mat-slide-toggle [checked]="element.activity" color="primary" (change)="toggleCommandActivity(i)"></mat-slide-toggle>
+      </mat-cell>
+    </ng-container> -->
+    <ng-container matColumnDef="control">
+      <mat-header-cell *matHeaderCellDef>Control</mat-header-cell>
+      <mat-cell *matCellDef="let element;let row;let i = index;">
+        <a (click)="openModifyDialog(row, i)" title="명령어 수정">
+          <i class="fas fa-edit primaryColor"></i>
+        </a>
+        <span style="display : inline-block; width : 10%"></span>
+        <a (click)="openDeleteDialog(row, i)" title="명령어 제거">
+            <i class="fas fa-trash primaryColor"></i>
+        </a>
+      </mat-cell>
+    </ng-container>
+    <mat-header-row *matHeaderRowDef="displayedColumn"></mat-header-row>
+    <mat-row *matRowDef="let row; columns : displayedColumn;" [ngClass]="{highlighted : selection.isSelected(row)}" (click)="selection.toggle(row)"></mat-row>
+  </mat-table>
+  <div *ngIf="commandList.length === 0" class="nothing-alert center">
+    생성된 명령어가 없습니다.
+  </div>
+</div>

@@ -1,0 +1,54 @@
+<mat-toolbar class="primaryColorBG">
+  <span class="logo"></span>
+  <div class="mat-toolbar-title menu">
+    <div class="dropdown">
+      <a class="dropdown-toggle" data-toggle="dropdown">OTA 관리기</a>
+      <div class="dropdown-menu service-map">
+        <ul>
+          <li class="dropdown-item">
+              <a [href]="serviceUrl.mobiusState" class="menu-element" ><div class="img-button mobius-status"></div><span class="menu-label">Mobius 상태 조회</span></a>
+          </li>
+          <li class="dropdown-item">
+              <a [href]="serviceUrl.deviceManage" class="menu-element" ><div class="img-button device-manage"></div><span class="menu-label">디바이스 관리</span></a>
+          </li>
+          <li class="dropdown-item">
+              <a [href]="serviceUrl.accessProtect" class="menu-element"><div class="img-button access-protect"></div><span class="menu-label">접근 권한 관리</span></a>
+          </li>
+          <li class="dropdown-item">
+              <a [href]="serviceUrl.dataBrowser" class="menu-element"><div class="img-button data-search"></div><span class="menu-label">데이터 탐색기</span></a>
+          </li>
+        </ul>
+        <ul>
+          <li class="dropdown-item">
+              <a [href]="serviceUrl.resmon" class="menu-element"><div class="img-button resmon"></div><span class="menu-label">리소스 브라우저</span></a>
+          </li>
+          <li class="dropdown-item">
+              <a [href]="serviceUrl.dashboard" class="menu-element"><div class="img-button dashboard"></div><span class="menu-label">대시보드</span></a>
+          </li>
+          <li class="dropdown-item">
+              <a [href]="serviceUrl.ota" class="menu-element"><div class="img-button ota"></div><span class="menu-label">OTA 관리기</span></a>
+          </li>
+          <li class="dropdown-item">
+              <a [href]="serviceUrl.sns" class="menu-element"><div class="img-button agent"></div><span class="menu-label">에이전트 관리기</span></a>
+          </li>
+        </ul>
+      </div>
+
+    </div>
+  </div>
+  <span class="toolbar-spacer"></span>
+  <div class="dropdown account">
+    <a class="dropdown-toggle" data-toggle="dropdown">
+      <span class="img-avatar" >
+        <i class="fas fa-user"></i>
+      </span>
+      <span>{{user && user.u_n ? user.u_n : 'KETI'}}</span>
+    </a>
+    <div class="dropdown-menu dropdown-menu-right">
+      <div class="dropdown-header">
+        <strong>Account</strong>
+      </div>
+      <a class="dropdown-item" (click)="onClickLogout()"><i class="fa fa-lock"></i> Logout</a>
+    </div>
+  </div>
+</mat-toolbar>

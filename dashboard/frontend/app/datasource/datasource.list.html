@@ -1,0 +1,27 @@
+<div flex layout="column" ng-controller="datasourceListController" ng-init="init()" >
+
+  <md-content flex class="datasource-content">
+
+    <div flex="none" layout="row">
+      <span flex></span>
+      <md-button class="md-raised new-widget-button" ng-click="createNewDatasource()">
+          <md-icon md-font-icon="far fa-calendar-plus"></md-icon>
+          ADD NEW DATA SOURCE 
+      </md-button>
+    </div>
+
+    <div flex="none" layout="row" layout-wrap>
+
+
+      <div flex-xl="33" flex-lg="33" flex-md="50" flex-sm="50" flex-xs="100" layout="column" ng-repeat="datasource in datasourceList" class="datasource-list-item">
+
+        <div flex layout="column" dashboard-datasource datasource="datasource" on-delete="deleteDatasource" on-edit="showDatasourceGenerator" on-change-status="onDatasourceStatusChanged"></div>
+
+      </div>
+
+    </div>
+
+
+  </md-content>
+
+</div>

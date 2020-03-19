@@ -1,0 +1,549 @@
+/**
+ *  Minimum body width : 568px (iPhone 5/SE 기준)
+ */
+body {
+  min-width: 320px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.root-layout.public {
+}
+
+.root-layout.public.has-bg-image {
+  background-image: url(../../images/bg/bg_login.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: top center;
+}
+
+.root-layout.public.has-bg-image md-toolbar {
+  background: none;
+  background-color: #20a8d8;
+  height: 55px;
+  padding: 0px;
+}
+
+.main-container md-toolbar {
+  border-bottom: 1px solid lightgray;
+}
+
+.main-container > md-toolbar md-icon {
+  color: rgb(11,159,84) !important;
+}
+
+.logo {
+  width: 250px;
+  height: 50px;
+  background: url(../../images/icon/logo.png);
+  background-size: 140px auto;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+.root-layout md-sidenav.md-sidenav-left {
+  width: 260px;
+  box-shadow: rgba(0, 0, 0, 0.56) 0px 16px 38px -12px, rgba(0, 0, 0, 0.12) 0px 4px 25px 0px, rgba(0, 0, 0, 0.2) 0px 8px 10px -5px;
+  background-image: url(../../images/bg/bg2.png);
+
+}
+
+
+md-content.main-container md-toolbar {
+  color: rgb(112,113,115) !important;
+}
+
+
+ul.gnb-menu {
+}
+
+ul.gnb-menu {
+  margin-top: 30px;
+  padding: 0;
+  border-radius: 0;
+  /* background-color: rgba(255,255,255,0.8); */
+}
+
+ul.gnb-sub-menu {
+  margin: 0;
+  padding: 0;
+  border-radius: 0 15px 15px 0;
+  background-color: rgba(255,255,255,0.8);
+}
+
+
+
+ul.gnb-sub-menu {
+  padding-left: 0;
+
+}
+ul.gnb-sub-menu li.gnb-menu-item {
+  padding-left: 20px;
+
+}
+
+li.gnb-menu-item {
+  border-bottom: 1px solid white;
+  border-left: 3px solid rgb(255, 167, 38);
+  margin: 3px 0;
+  background-color: rgba(255,255,255,0.3);
+}
+
+li.gnb-menu-item:hover {
+  background-color: rgb(255, 167, 38);
+  border-left: 3px solid white;
+
+}
+li.gnb-menu-item:hover .md-button:hover {
+  background-color: transparent !important;
+  color: white !important;
+
+}
+
+li.gnb-menu-item .md-button {
+  border-radius: 0;
+  cursor: pointer;
+  display: block;
+  -webkit-box-align: inherit;
+  -webkit-align-items: inherit;
+  align-items: inherit;
+  line-height: 40px;
+  margin: 0;
+  max-height: 70px;
+  overflow: hidden;
+  padding: 10px 16px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+  width: 100%;
+  font-size: 18px;
+  color: #da962a;
+}
+
+ul.gnb-sub-menu li.gnb-menu-item .md-button {
+  font-size: 15px;
+}
+
+div.gnb-shop-menu .md-button {
+  border-radius: 0;
+  cursor: pointer;
+  display: block;
+  -webkit-box-align: inherit;
+  -webkit-align-items: inherit;
+  line-height: 40px;
+  margin: 0;
+  overflow: hidden;
+  padding: 15px 16px;
+  text-align: center;
+  text-decoration: none;
+  white-space: normal;
+  width: 100%;
+}
+
+.md-title {
+  padding-left: 15px;
+}
+
+.card-content-icon {
+  width: 100px;
+  height: 100px;
+  background-color: white;
+  text-align: center;
+  border: 1px solid darkgray;
+  border-radius: 50px;
+  color: white;
+  font-size: 50px;
+  line-height: 100px;
+  margin: auto;
+}
+
+md-card.gnb-gateway {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin: 0;
+  padding: 20px 5px;
+}
+
+md-card.gnb-gateway md-card-actions {
+  border-bottom: 1px solid lightgray;
+  border-top: 1px solid lightgray;
+}
+
+button.md-button.gateway-management {
+  margin: 1px;
+  text-align: center;
+  height: 40px;
+  font-size: 80%;
+}
+button.md-button.gateway-management md-icon {
+  color: white;
+  font-size: 18px;
+  line-height: 18px;
+}
+button.md-button.gateway-management .button-text {
+  display: none;
+}
+button.md-button.gateway-management:hover .button-text {
+  display: block;
+}
+button.md-button.gateway-management:hover md-icon {
+  display: none;
+}
+
+.connected-devices {
+  margin-bottom: 10px;
+  /* border: 1px solid white; */
+}
+
+.total-devices {
+  border-right: 1px solid white;
+}
+
+.total-devices h3 {
+  padding: 10px;
+  margin: 5px;
+  color: darkgray;
+}
+
+.total-devices p {
+  padding: 0;
+  margin: 0;
+  color: darkgray;
+}
+
+.problems-devices {
+
+}
+
+.problems-devices h4 {
+  color: darkgray;
+  padding: 5px;
+  margin: 5px;
+}
+
+.problems-devices p {
+  padding: 0;
+  margin: 0;
+  color: darkgray;
+  padding: 9px 0;
+}
+
+
+
+.dialog-message, .dialog-description, .dialog-warning {
+  text-align: center;
+}
+
+
+.dialog-message {
+  color: rgb(92,167,80);
+}
+.dialog-warning {
+  color: rgb(255, 167, 38);
+}
+
+
+.dialog-progress {
+  position: relative;
+}
+
+.dialog-progress .progress-countdown {
+  position: absolute;
+  margin: auto;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  font-size: 30px;
+  line-height: 40px;
+  text-align: center;
+  padding-top: 25px;
+  color: rgb(177,210,67);
+  font-weight: 400;
+}
+
+.content-wrapper {
+  position: relative;
+  background-color: #949494 !important;
+}
+.content-loading {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background-color:  rgba(216, 216, 216, 0.43);
+}
+
+
+#device-management-buttons {
+  display: none;
+  border-radius: 50px;
+}
+
+.gateway-buttons .md-button {
+  height: 50px;
+  border-radius: 20px;
+}
+
+.gateway-buttons .md-button md-icon {
+  color: white;
+  font-size: 30px;
+}
+
+.gateway-buttons .md-button span.button-text {
+  display: none;
+  white-space: normal;
+  line-height: 130%;
+}
+
+.gateway-buttons .md-button:hover span.button-text {
+  display: block;
+}
+.gateway-buttons .md-button:hover md-icon {
+  display: none;
+}
+
+
+.panel-widget-toolbar {
+  min-height: 25px;
+  padding: 0 5px;
+  height: 25px;
+}
+
+.panel-widget-toolbar .md-toolbar-tools {
+  height: 25px;
+}
+
+.panel-widget-toolbar .panel-widget-tittle {
+  font-size: 13px;
+  font-weight: 600;
+  color: white;
+  padding: 2px 10px;
+}
+.panel-widget-toolbar button.md-icon-button {
+  margin: 5px 0 0 0;
+  padding: 0;
+  width: 25px;
+  height: 25px;
+  line-height: 0;
+  min-height: 25px;
+}
+
+.dashboard-content, 
+.datasource-content {
+  padding: 10px 50px 40px 50px;
+  background-color: #949494 !important;
+}
+
+.gnb-menu-item {
+  border-left: 3px solid rgb(255, 167, 38);
+  margin: 3px 0;
+  background-color: rgba(255,255,255,0.3);
+  font-size: 18px;
+  font-weight: 400;
+
+}
+
+.gnb-menu-item:hover {
+  background-color: rgb(255, 167, 38)  !important;;
+  border-left: 3px solid white ;
+  color: white !important;
+}
+
+.gnb-menu-item  {
+  border-radius: 0;
+  cursor: pointer;
+  display: block;
+  -webkit-box-align: inherit;
+  -webkit-align-items: inherit;
+  align-items: inherit;
+  line-height: 30px;
+  max-height: 70px;
+  overflow: hidden;
+  padding: 2px 16px;
+  text-align: left;
+  text-decoration: none;
+  white-space: normal;
+}
+ 
+.gnb-menu-container {
+  margin-left: 20px;
+  width: 400px;
+  height: 33px;
+}
+
+.chart-container {
+  margin: 5px 20px;
+  overflow: visible;
+}
+
+.dropdown-menu {
+  color: #fff;
+  min-width: 0px;
+}
+.dropdown-menu::after {
+  display: inline-block;
+  width: 0;
+  height: 0;
+  margin-left: 0.3em;
+  vertical-align: middle;
+  content: "";
+  border-top: 0.3em solid;
+  border-right: 0.3em solid transparent;
+  border-left: 0.3em solid transparent;
+  color: #fff;
+}
+
+a {
+  text-decoration: none;
+}
+.account-button {
+  margin-right: 20px;
+}
+.menu-button {
+  color: #fff;
+  font-size: 17px;
+}
+.dropdown.open + .account_menu,
+.dropdown.open + .service-map {
+  display: flex;
+  flex-direction: column;
+  padding: 5px;
+}
+.drop-menu {
+  position: absolute;
+  display: none;
+  z-index: 1000;
+  min-width: 160px;
+  padding: 5px 0;
+  margin: 2px 0 0;
+  font-size: 14px;
+  text-align: left;
+  list-style: none;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid #ccc;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  border-radius: 4px;
+  -webkit-box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.175);    
+}
+
+.service-map ul {
+  display : flex;
+  flex-direction: row;
+  list-style: none;
+  padding: 0px;
+  margin: 0px;
+}
+.service-map ul li {
+  text-align: center;
+  line-height: 12px;
+}
+.service-map .menu-element .img-button {
+  width: 80px;
+  height: 80px;
+  background-size: 60px;
+  margin: 5px 5px 0px 5px;
+}
+.service-map .menu-element .menu-label {
+  font-size: 11px;
+}
+
+.img-button {
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 10px;
+  border: 4px solid #20a8d8;
+  display: block;
+}
+
+.img-button.mobius-status {
+  background-image: url("../../images/icon/mobius.png");
+}
+.img-button.device-manage {
+  background-image: url("../../images/icon/device.png");
+}
+.img-button.access-protect {
+  background-image: url("../../images/icon/shield.png");
+}
+.img-button.data-search {
+  background-image: url("../../images/icon/folder.png");
+}   
+.img-button.resmon {
+  background-image: url("../../images/icon/resmon.png");
+}
+.img-button.dashboard {
+  background-image: url("../../images/icon/dashboard.png");
+}
+.img-button.ota {
+  background-image: url("../../images/icon/ota.png");
+}
+.img-button.agent {
+  background-image: url("../../images/icon/agent.png");
+}
+
+.menu-element .menu-label {
+  text-align: center;
+  color: #565656;
+  font-size: 17px;
+}
+
+.img-avatar {
+  height: 35px;
+  margin: 0 10px;
+}
+.account_menu {
+  position: absolute;
+  display: none;
+  right: 0px;
+}
+.account_menu ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+.account_menu ul li {
+  color: #2a2c36;
+  white-space: normal;
+  padding: 0px 20px;
+  margin: 10px 0px;
+}
+
+.account_menu ul li i {
+  display: inline-block;
+  width: 20px;
+  margin-right: 10px;
+  color: #d1d4d7;
+  text-align: center;
+}
+.dropdown-header {
+  display: block;
+  padding: 3px 20px;
+  font-size: 12px;
+  line-height: 1.42857143;
+  color: #777777;
+  white-space: nowrap;
+  background: #f8f9fa;
+  border-bottom: 1px solid #d1d4d7;
+  text-align: center;
+}

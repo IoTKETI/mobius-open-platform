@@ -1,0 +1,18 @@
+{
+  "default" : {
+    "node_port" : "7575",
+    "db_host" : "localhost",
+    "db_port" : "3306",
+    "db_user" : "keti.iot",
+    "db_password" : "ketiiot!@34",
+    "db_database" : "DB_KETI_IOT_RESOURCE_MONITOR"
+  },
+  "thkim" : {
+    "node_port" : "7575",
+    "db_host" : "localhost",
+    "db_port" : "3306",
+    "db_user" : "keti.iot",
+    "db_password" : "ketiiot!@34",
+    "db_database" : "DB_KETI_IOT_RESOURCE_MONITOR"
+  }
+}

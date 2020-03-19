@@ -1,0 +1,59 @@
+<md-content flex layout="column" ng-controller="dashboardController" ng-init="init()">
+  <md-content flex layout="column" class="dashboard-content" >
+    <div flex="none" layout="row">
+      <span flex></span>
+
+      <md-menu md-position-mode="target-left bottom" >
+        <md-button  aria-label="Open create widget menu" 
+                    class="md-raised" ng-click="showCreateWidgetPopup()">
+          <md-icon md-menu-origin md-font-icon="fas fa-plus"></md-icon>새로운 위젯 생성 
+        </md-button>
+        <md-menu-content width="2">
+          <md-menu-item ng-repeat="widgetType in WIDGET_TYPES">
+            <md-button ng-click="createNewWidget(widgetType.typeId)">
+              <md-icon md-font-icon="{{widgetType.icon}}" md-menu-align-target></md-icon>
+              {{widgetType.name}}
+            </md-button>
+          </md-menu-item>
+        </md-menu-content>
+      </md-menu>
+
+    </div>
+    <md-grid-list 
+        md-cols-xs="2" md-cols-sm="3" md-cols-md="4" md-cols-gt-md="6"
+        md-row-height="1:1" 
+        md-gutter="12px" 
+        md-gutter-gt-sm="8px" 
+        class="widget-container">
+      <md-grid-tile 
+        class="md-whiteframe-z1 panel-widget" 
+        md-theme="dashboard" 
+        overflow="hidden"
+        layout="column" 
+        ng-drag="true" ng-drop="true" 
+        ng-drop-success="onDropComplete($index, $data, $event)"
+        ng-drag-data="widget"
+        md-rowspan="{{widget.rowspan}}" md-colspan="{{widget.colspan}}" 
+        ng-repeat="widget in filtered = (widgetList  | filter: searchKeyword)">
+
+        <md-grid-tile-header class="panel-widget-toolbar">
+          <div flex="none" layout="row" >
+              <span class="md-headline panel-widget-tittle" flex >{{widget.title}}</span>
+              <md-button class="md-icon-button md-mini" ng-click="editWidget(widget)" aria-label="Change data source">
+                <i class="fas fa-cog"></i>
+              </md-button>
+              <md-button class="md-icon-button" ng-click="deleteWidget(widget)" aria-label="Delte widget">
+                <i class="fas fa-trash-alt"></i>
+              </md-button>
+            </div>
+        </md-grid-tile-header>
+        <div ng-if="widget.widgetData == null">
+          <span class="md-accent" style="font-size: 0.5em; color: darkgray"><i class="fas fa-exclamation"></i> 데이터 연결 오류</span>
+        </div>
+        <panel-widget flex layout="column" ng-if="widget.widgetData != null" widget="widget" template="app/widget/partials/{{widget.widgetType}}.html" ></panel-widget>
+      </md-grid-tile>
+    </md-grid-list>
+
+  </md-content>
+
+</md-content>

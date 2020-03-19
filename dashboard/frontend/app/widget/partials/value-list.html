@@ -1,0 +1,12 @@
+<md-content flex layout="column" layout-align="start stretch" ng-controller="ControlPanelController as vm" class="md-padding">
+    <div flex layout="column" class="widget-progress" ng-repeat="data in values">
+        <div flex="none" layout="row" md-colors="{color: '{{data.color}}'}" >
+            <h2 flex class="value-text"><span ng-bind="data.value"></span> <span ng-bind="data.units" style="font-size: 0.5em"></span></h2></h2> 
+            <span flex="none" class="title-text" ng-bind="data.name"></span>
+        </div>
+        <div flex>
+            <md-progress-linear flex class="md-{{data.color}}" md-mode="determinate" value="{{data.value}}" >
+            </md-progress-linear>
+        </div>
+    </div>
+</md-content>

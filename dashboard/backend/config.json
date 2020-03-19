@@ -1,0 +1,79 @@
+{
+  "default": {
+    "node": {
+      "port": "7580"
+    },
+    "mongo": {
+      "host": "localhost",
+      "port": "27017",
+      "database": "dashboard",
+      "user": "dashboard-user",
+      "password": "tkdydwk12#$"
+    },
+    "portal_url" : "http://203.253.128.161:8881",
+    "sendmail": {
+      "host": "smtp.gmail.com",
+      "port": 465,
+      "secure": true,
+      "auth": {
+        "user": "iotketi@gmail.com",
+        "pass": "wlapdlf12#$"
+      }
+    },
+    "security": {
+      "authSecret": "Z29f/iImdZ5QrAaHW1xGQqcvaWrLmmQw8pmQGMtYZqBJAL9WLnWa67qyq8H9phVX43plaSWQ/Ab1rPdoBhKS9Q==",
+      "expiresIn": {
+        "web": {
+          "access": "4w",
+          "refresh": "2m"
+        },
+        "mobile": {
+          "access": "4w",
+          "refresh": "2m"
+        }
+      },
+      "tokenIssuer": "KETI.MOBIUS",
+      "tokenSubject": "Mobius Dashboard Service"
+    },
+    "jwt" : {
+      "SECRET" : "Z29f/iImdZ5QrAaHW1xGQqcvaWrLmmQw8pmQGMtYZqBJAL9WLnWa67qyq8H9phVX43plaSWQ/Ab1rPdoBhKS9Q=="
+    },
+    "iotplatform_": {
+      "host": "http://203.253.128.161",
+      "mqtt": "mqtt://203.253.128.161",
+      "port": "7579",
+      "csebase": "Mobius"
+    },
+    "iotplatform": {
+      "host": "http://203.253.128.161",
+      "mqtt": "mqtt://203.253.128.161",
+      "port": "7579",
+      "csebase": "Mobius"
+    },
+    "directories": {
+      "code": "./code/dashboardrules"
+    },
+    "dummy1": "203.253.128.161",
+    "dummy3": "localhost"
+  },
+  "production": {
+    "iotplatform": {
+      "host": "http://192.168.1.5",
+      "mqtt": "mqtt://192.168.1.5",
+      "port": "7579",
+      "csebase": "Mobius"
+    }
+  },
+  "synctechno": {
+    "iotplatform": {
+      "host": "http://203.253.128.161",
+      "mqtt": "mqtt://203.253.128.161",
+      "port": "7579",
+      "csebase": "Mobius"
+    }
+  },
+  "KJH" : {
+    "mobius_sub_prefix" : "KJH_DASHBOARD",
+    "portal_url" : "http://localhost:8881"
+  }
+}

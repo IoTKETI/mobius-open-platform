@@ -1,0 +1,169 @@
+<div class="animated fadeIn" ng-init="init()">
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          디바이스 정보
+        </div>
+        <div class="card-block">
+
+
+          <div class="row">
+            <div class="col-sm-12 col-md-6">  <!-- device info -->
+              <div class="card edit-device-info" >
+                <div class="card-header card-header-inverse" ng-class="headerColorClass()">
+                  <div class="device-icon-box button-group">
+                    <button type="button" class="btn btn-transparent dropdown-toggle p-0" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <span class="fa" ng-class="device.deviceInfo.icon"></span>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-left">
+                      <div class="icon-selection" >
+                        <ul class="icon-selection-list">
+                          <li class="icon-selection-item" ng-repeat="icon in iconList">
+                            <div ng-click="selectDeviceIcon(icon)" class="device-icon fa" ng-class="iconImageAndColorClass(icon)"></div>
+                          </li>
+                        </ul>
+                      </div>  <!-- icon-selection -->
+                    </div>  <!-- dropdown-menu -->
+                  </div>  <!-- device-icon -->
+
+                  <div class="device-info-box">
+                    <div class="device-name">
+                      <span ng-bind="device.deviceInfo.nickname"></span>
+                    </div>
+                    <div class="device-owner">
+                      <i class="fa fa-user" style="margin-right: 5px"></i>
+                      <span ng-if="device.owner.username != null" ng-bind="device.owner.username" title="{{device.owner.email}}"></span>
+                      <span ng-if="device.owner.username == null" ng-bind="device.owner.email"></span>
+                    </div>
+                  </div>
+
+                  <div class="save-button">
+                    <button class="btn btn-transparent" ng-click="saveDeviceInfo()" ng-disabled="isSaveButtonDisabled()">
+                      <i class="fa fa-save"></i>
+                    </button>
+                  </div>
+
+                </div>
+                <div class="card-block">
+                  <form name="formDeviceNickname">
+                    <div class="form-row">
+                      <div class="col-sm-12">
+                        <div class="device-name row" style="margin-top:8px;">
+                          <div class="col-sm-12">
+                            <div class="input-group">
+                              <label>디바이스 이름 (nickname)</label>
+                              <input class="form-control" name="deviceNickname" ng-model="device.deviceInfo.nickname" ng-required="true"></input>
+                            </div>
+                          </div>
+                        </div>
+                        <div class="device-description row" style="margin-top:8px;">
+                          <div class="col-sm-12">
+                            <div class="input-group">
+                              <label>디바이스 설명</label>
+                              <textarea class="form-control" name="deviceDescription" ng-model="device.deviceInfo.description" rows="4"></textarea>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>  <!-- device-name -->
+                  </form>
+                </div>  <!-- card block -->
+              </div> <!-- card -->
+            </div>
+
+            <div class="col-sm-12 col-md-6">  <!-- resource info -->
+              <div class="card resource-info-card" >
+                <div class="card-header">
+                  리소스 정보
+                </div>
+                <div class="card-block">
+                  <h5>리소스 이름 (rn)</h5>
+                  <div ng-bind="device.resourceInfo.resourceObject.rn" style="text-align: right; border-bottom: 1px dotted gray; padding-bottom: 2px;"></div>
+
+                  <h5>리소스 레이블 (lbl)</h5>
+                  <div style="text-align: right; border-bottom: 1px dotted gray; padding-bottom: 2px;">
+                    <span ng-repeat="lbl in device.resourceInfo.resourceObject.lbl track by $index">
+                      <span ng-if="$index != 0" >, </span>
+                      <span class="label label-info" ng-bind="lbl" ></span>
+                    </span>
+                  </div>
+
+                  <h5>AE ID (aei)</h5>
+                  <div ng-bind="device.resourceInfo.resourceObject.aei" style="text-align: right; border-bottom: 1px dotted gray; padding-bottom: 2px;"></div>
+
+                  <h5>어플리케이션 ID (api)</h5>
+                  <div ng-bind="device.resourceInfo.resourceObject.api" style="text-align: right; border-bottom: 1px dotted gray; padding-bottom: 2px;"></div>
+                </div>  <!-- card block -->
+              </div> <!-- card -->
+            </div>
+          </div>
+
+        </div>  <!-- card-block -->
+      </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+      <div class="card">
+        <div class="card-header">
+          접근 제어 정책
+        </div>
+        <div class="card-header">
+          <div class="row">
+            <div class="col-md-6">
+              <button ng-click="addAcpiToDevice()" class="btn btn-primary-40"> <i class="icon-plus"></i> 접근 제어 정책 추가 </button>
+            </div>
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                <input type="text" ng-model="acpFilter" class="form-control" placeholder="검색 키워드">
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-block">
+          <div class="row">
+            <div class="col-sm-12 col-md-6" ng-repeat="acp in device.acpList  | filter:acpListFilter track by $index  ">
+              <div class="card acp-item-block">
+                <div class="card-header">
+                  <div class="acp-name">
+                    <div ng-bind="acp.rn"></div>
+                  </div>
+                  <div class="acp-lbl">
+                    <span ng-repeat="lbl in acp.lbl track by $index">
+                      <span ng-if="$index != 0">, </span>
+                      <span class="label label-info" ng-bind="lbl" ></span>
+                    </span>
+                  </div>
+
+                  <div class="acp-delete-btn button-group">
+                    <button type="button" class="btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      <i class="icon-options-vertical"></i>
+                    </button>
+                    <div class="dropdown-menu dropdown-menu-right">
+                      <a class="dropdown-item" ng-click="deleteAcpiFromDevice(acp)">삭제</a>
+                      <a class="dropdown-item" ng-click="editAcpResource(acp)">편집</a>
+                    </div>
+                  </div>
+
+                </div>
+                <div class="card-block acr-list-block">
+                  <div class="acp-acr-list" ng-repeat="acr in acp.pv.acr">
+                    <acop acr="acr" acp="acp"></acop>
+
+                    <div class="acr-acor">
+                      <div ng-repeat="acor in acr.acor">
+                        <span ng-bind="acor" ></span><br />
+                      </div>
+                    </div>
+                  </div>  <!-- acp-acr-list -->
+                </div>  <!-- card-block -->
+            </div>
+          </div>
+        </div>
+      </div>  <!-- card 접근 권한 -->
+
+    </div>
+  </div> <!--/.row-->
+</div>

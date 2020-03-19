@@ -1,0 +1,137 @@
+<div class="animated fadeIn" ng-init="init()">
+  <div class="row">
+    <div class="col-lg-12">
+
+      <div class="card">
+        <div class="card-header">
+          <div class="col-md-6">
+            <button ng-click="popupCreateAcpModal()" type="submit" class="btn btn-primary-40"><i class="icon-plus"></i> 권한 정책 생성 </button>
+            <!--
+            <div class="nav-item dropdown pr-4" style="display:inline-block">
+              <button class="nav-link btn btn-primary-40 dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                작업
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <div class="dropdown-header text-center">
+                  <strong>작업 선택</strong>
+                </div>
+                <a class="dropdown-item" ng-click="">
+                  복제
+                </a>
+                <a class="dropdown-item" ng-click="">
+                  삭제
+                </a>
+              </div>
+            </div>
+             -->
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              <input type="text" ng-model="acpFilter" class="form-control" placeholder="검색어 입력">
+            </div>
+          </div>
+        </div>
+        <div class="card-block">
+
+          <ul class="list list-collapsable acp-list">
+            <li class="list-item list-header">
+              <div class="list-content">
+                <span class="list-column column-selection">
+                  <input ng-bind="selectAll" type="checkbox">
+                </span>
+                <span class="list-column column-name">권한 정책 이름(ACP rn)</span>
+                <span class="list-column column-label">레이블</span>
+              </div>
+            </li>
+
+            <li class="list-item list-no-content" ng-if="acpList == null || acpList.length == 0">
+              <div style="text-align: center; color: darkgray; font-size: 18pt; height: 400px">
+                <br/><br/>
+                권한정책이 존재하지 않습니다.<br/>
+                새로운 권한정책을 생성하세요.<br /><br />
+
+                <button ng-click="popupCreateAcpModal()" type="submit" class="btn btn-primary-40"><i class="icon-plus"></i> 권한 정책 생성 </button>
+
+
+              </div>
+            </li>
+
+            <li class="list-item" ng-class="acp.expanded ? 'expanded' : ''" ng-repeat="acp in acpList | filter:acpListFilter track by $index  ">
+              <div class="list-content" >
+                <span class="list-column column-selection" ><input ng-click="acp.selected = !acp.selected" type="checkbox"></span>
+                <span class="list-column column-name" ng-click="toogleExpandItem($event, acp)"><span ng-bind="acp.rn"></span></span>
+                <span class="list-column column-label">
+
+                  <div class="input-group col-sm-12">
+                    <span class="input-group-addon" style="width:40px"><i class="fa fa-tags"></i></span>
+                    <tags-input class="form-control" use-strings="true" ng-model="acp.lbl" placeholder="레이블 입력 후 <enter> 또는 ','를 입력하세요" add-on-enter="true" add-on-comma="true"></tags-input>
+                  </div>
+
+                </span>
+                <button class="list-expand-button" ng-click="toogleExpandItem($event, acp)">
+                  <i class="fa" ng-class="acp.expanded ? 'fa-angle-double-up' : 'fa-angle-double-down'"></i>
+                </button>
+              </div>
+              <div class="list-collapsed-content" >
+                <div class="row">
+                  <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2">
+                    <div class="card add-user-acp ac-rule-card card-primary"  style="color:white !important">
+                      <div class="card-block ">
+                        <div class="h4" style="height: 50px; padding: 10px 0 10px 0; border-bottom: 1px solid white;">
+                          <i class="icon-user-follow" style="color:white !important"></i> <span>권한 규칙 추가</span>
+                        </div>
+                        <div>
+                          <button class="acp-add-button btn btn-md btn-primary-outline" ng-click="addAcrule(acp)">
+                            <i class="fa fa-plus"></i> 추가하기
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="col-sm-6 col-md-4 col-lg-3 col-xl-2" ng-repeat="acr in acp.pv.acr">
+                    <div class="card ac-rule-card">
+                      <div class="card-header">
+
+                        <div class="acop-block">
+                          <acop-switch acr="acr" acp="acp" on-value-changed="onAcopValueChanged"></acop-switch>
+                        </div>
+
+
+
+                        <button class="acp-delete-button btn btn-transparent" ng-click="deleteAcrule(acp, $index)">
+                          <i class="fa fa-trash-alt"></i>
+                        </button>
+                      </div>
+                      <div class="card-block">
+
+
+
+                        <div class="ac-rule-origin" ng-repeat="acor in acr.acor">
+                          <div class="ac-rule-origin-name">
+                            <i ng-if="userNameTable[acor] != null" class="fa fa-user"></i>
+                            <i ng-if="userNameTable[acor] == null" class="fa fa-microchip"></i>
+                            <span ng-if="userNameTable[acor] != null" ng-bind="userNameTable[acor]" title="{{acor}}"></span>
+                            <span ng-if="userNameTable[acor] == null" ng-bind="acor"></span>
+                          </div>
+                        </div>
+
+
+
+
+                      </div>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </li>
+
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!--/.row-->
+</div>

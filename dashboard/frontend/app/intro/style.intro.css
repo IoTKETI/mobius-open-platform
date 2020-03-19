@@ -1,0 +1,13 @@
+.home-service-block {
+  margin: 20px 0;
+  padding: 0 20px;
+}
+
+.home-service-image {
+  width: 400px;
+  height: 400px;
+}
+
+.home-service-desc {
+  padding: 40px;
+}

@@ -1,0 +1,15 @@
+SELECT *
+FROM T_User
+LEFT JOIN T_Setting
+ON T_Setting.user_ref = T_User.obj_id;
+
+
+
+SELECT *
+FROM T_Setting
+LEFT JOIN T_User
+ON T_Setting.user_ref = T_User.obj_id;
+
+
+
+

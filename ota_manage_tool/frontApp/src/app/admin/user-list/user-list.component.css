@@ -1,0 +1,47 @@
+mat-row:hover{
+    background-color: #E4F5FD;
+}
+
+.mat-row.highlighted {
+    background: rgb(207, 236, 250);
+}
+
+mat-cell a i{
+    font-size: 1.5em;
+    padding: 0 10px 0 10px;
+}
+
+mat-cell a .fas{
+    color : #050093;
+}
+
+mat-cell a .fas:hover{
+    color : #4039fb;
+}
+
+.notSelected{
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s linear, opacity 0.3s linear;
+    /* display: none; */
+}
+
+.selected{
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0.3s linear, opacity 0.3 linear;
+}
+
+.functions{
+    font-size: 2em;
+    color: #020950;   
+    display: flex;
+    justify-content: space-between;
+}
+.functions a{
+    margin: 10px;
+}
+.functions .btn-text {
+    font-size: .7em;
+    
+}

@@ -1,0 +1,524 @@
+<div flex layout="column" id="blocklyContainer" ng-controller="datasourceController" ng-init="init()" >
+
+  <xml xmlns="http://www.w3.org/1999/xhtml" id="toolbox" style="display: none;">
+    <category name="Event trigger" colour="#a55b5b">
+      <block type="onem2m_trigger"></block>
+      <block type="scheduler_trigger">
+        <field name="NAME" id="T;1S5|r~^*Yq],OWvKFf" variabletype="">EVERY_SECONDS</field>
+        <field name="NAME">EVERY_SECONDS</field>
+      </block>
+    </category>
+    <category name="Data source" colour="#a55b5b">
+      <block type="gauge_data"></block>
+      <block type="lists_create_with">
+          <mutation items="2"></mutation>
+          <value name="ADD0">
+            <block type="progress_data">
+              <field name="UNITS">%</field>
+              <field name="COLOR">COLOR_PRIMARY</field>
+            </block>
+          </value>
+        </block>
+      <block type="get_property"></block>
+    </category>
+    <category name="Variables" colour="#A65C81" custom="VARIABLE"></category>
+    <category name="Math" colour="#5C68A6">
+      <block type="math_number">
+        <field name="NUM">0</field>
+      </block>
+      <block type="math_arithmetic">
+        <field name="OP">ADD</field>
+        <value name="A">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="B">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_single">
+        <field name="OP">ROOT</field>
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">9</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_trig">
+        <field name="OP">SIN</field>
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">45</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_constant">
+        <field name="CONSTANT">PI</field>
+      </block>
+      <block type="math_number_property">
+        <mutation divisor_input="false"></mutation>
+        <field name="PROPERTY">EVEN</field>
+        <value name="NUMBER_TO_CHECK">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_round">
+        <field name="OP">ROUND</field>
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">3.1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_on_list">
+        <mutation op="SUM"></mutation>
+        <field name="OP">SUM</field>
+      </block>
+      <block type="math_modulo">
+        <value name="DIVIDEND">
+          <shadow type="math_number">
+            <field name="NUM">64</field>
+          </shadow>
+        </value>
+        <value name="DIVISOR">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_constrain">
+        <value name="VALUE">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="LOW">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="HIGH">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_random_int">
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="math_random_float"></block>
+    </category>
+    <category name="Text" colour="#5CA68D">
+      <block type="text">
+        <field name="TEXT"></field>
+      </block>
+      <block type="text_join">
+        <mutation items="2"></mutation>
+      </block>
+      <block type="text_append">
+        <field name="VAR" id="*;#^C7=Smxac#bHw!C4y" variabletype="">item</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_length">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_isEmpty">
+        <value name="VALUE">
+          <shadow type="text">
+            <field name="TEXT"></field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_indexOf">
+        <field name="END">FIRST</field>
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR" id="3TA2K}ypeK!**|c.Q9Sc" variabletype="">text</field>
+          </block>
+        </value>
+        <value name="FIND">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_charAt">
+        <mutation at="true"></mutation>
+        <field name="WHERE">FROM_START</field>
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR" id="3TA2K}ypeK!**|c.Q9Sc" variabletype="">text</field>
+          </block>
+        </value>
+      </block>
+      <block type="text_getSubstring">
+        <mutation at1="true" at2="true"></mutation>
+        <field name="WHERE1">FROM_START</field>
+        <field name="WHERE2">FROM_START</field>
+        <value name="STRING">
+          <block type="variables_get">
+            <field name="VAR" id="3TA2K}ypeK!**|c.Q9Sc" variabletype="">text</field>
+          </block>
+        </value>
+      </block>
+      <block type="text_changeCase">
+        <field name="CASE">UPPERCASE</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_trim">
+        <field name="MODE">BOTH</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_print">
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="text_prompt_ext">
+        <mutation type="TEXT"></mutation>
+        <field name="TYPE">TEXT</field>
+        <value name="TEXT">
+          <shadow type="text">
+            <field name="TEXT">abc</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <category name="Colour" colour="#A6745C">
+      <block type="colour_picker">
+        <field name="COLOUR">#ff0000</field>
+      </block>
+      <block type="colour_random"></block>
+      <block type="colour_rgb">
+        <value name="RED">
+          <shadow type="math_number">
+            <field name="NUM">100</field>
+          </shadow>
+        </value>
+        <value name="GREEN">
+          <shadow type="math_number">
+            <field name="NUM">50</field>
+          </shadow>
+        </value>
+        <value name="BLUE">
+          <shadow type="math_number">
+            <field name="NUM">0</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="colour_blend">
+        <value name="COLOUR1">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#ff0000</field>
+          </shadow>
+        </value>
+        <value name="COLOUR2">
+          <shadow type="colour_picker">
+            <field name="COLOUR">#3333ff</field>
+          </shadow>
+        </value>
+        <value name="RATIO">
+          <shadow type="math_number">
+            <field name="NUM">0.5</field>
+          </shadow>
+        </value>
+      </block>
+    </category>
+    <sep></sep>
+    <category name="Logic" colour="#5C81A6">
+      <block type="controls_if"></block>
+      <block type="logic_compare">
+        <field name="OP">EQ</field>
+      </block>
+      <block type="logic_operation">
+        <field name="OP">AND</field>
+      </block>
+      <block type="logic_negate"></block>
+      <block type="logic_boolean">
+        <field name="BOOL">TRUE</field>
+      </block>
+      <block type="logic_null"></block>
+      <block type="logic_ternary"></block>
+    </category>
+    <category name="Loops" colour="#5CA65C">
+      <block type="controls_repeat_ext">
+        <value name="TIMES">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_whileUntil">
+        <field name="MODE">WHILE</field>
+      </block>
+      <block type="controls_for">
+        <field name="VAR" id="cjbsO]KPBFd!,(}[GTXP" variabletype="">i</field>
+        <value name="FROM">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+        <value name="TO">
+          <shadow type="math_number">
+            <field name="NUM">10</field>
+          </shadow>
+        </value>
+        <value name="BY">
+          <shadow type="math_number">
+            <field name="NUM">1</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="controls_forEach">
+        <field name="VAR" id="|{1qR=w@oFeF?tP:aLp1" variabletype="">j</field>
+      </block>
+      <block type="controls_flow_statements" disabled="true">
+        <field name="FLOW">BREAK</field>
+      </block>
+    </category>
+    <sep></sep>
+  
+    <category name="Lists" colour="#745CA6">
+      <block type="lists_create_with">
+        <mutation items="0"></mutation>
+      </block>
+      <block type="lists_create_with">
+        <mutation items="3"></mutation>
+      </block>
+      <block type="lists_repeat">
+        <value name="NUM">
+          <shadow type="math_number">
+            <field name="NUM">5</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="lists_length"></block>
+      <block type="lists_isEmpty"></block>
+      <block type="lists_indexOf">
+        <field name="END">FIRST</field>
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR" id="Xoj[+h@8/KAq;HhB`Zwd" variabletype="">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getIndex">
+        <mutation statement="false" at="true"></mutation>
+        <field name="MODE">GET</field>
+        <field name="WHERE">FROM_START</field>
+        <value name="VALUE">
+          <block type="variables_get">
+            <field name="VAR" id="Xoj[+h@8/KAq;HhB`Zwd" variabletype="">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_setIndex">
+        <mutation at="true"></mutation>
+        <field name="MODE">SET</field>
+        <field name="WHERE">FROM_START</field>
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR" id="Xoj[+h@8/KAq;HhB`Zwd" variabletype="">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_getSublist">
+        <mutation at1="true" at2="true"></mutation>
+        <field name="WHERE1">FROM_START</field>
+        <field name="WHERE2">FROM_START</field>
+        <value name="LIST">
+          <block type="variables_get">
+            <field name="VAR" id="Xoj[+h@8/KAq;HhB`Zwd" variabletype="">list</field>
+          </block>
+        </value>
+      </block>
+      <block type="lists_split">
+        <mutation mode="SPLIT"></mutation>
+        <field name="MODE">SPLIT</field>
+        <value name="DELIM">
+          <shadow type="text">
+            <field name="TEXT">,</field>
+          </shadow>
+        </value>
+      </block>
+      <block type="lists_sort">
+        <field name="TYPE">NUMERIC</field>
+        <field name="DIRECTION">1</field>
+      </block>
+    </category>
+  </xml>
+
+  <xml xmlns="https://developers.google.com/blockly/xml" id="initialWorkspace_gauge" style="display: none">
+    <variables>
+      <variable id="UEIOy[=sl(Zkv[Y;9|0C">con</variable>
+    </variables>
+    <block type="onem2m_trigger" id="eNVUFs)Q+4v@*U{V{ELr" x="0" y="0">
+      <field name="CON_VALUE" id="UEIOy[=sl(Zkv[Y;9|0C">con</field>
+      <value name="RESOURCE_PATH">
+        <block type="text" id="`NbpshsDK|)7kDcdCGm:">
+          <field name="TEXT">/Mobius/AE/cnt</field>
+        </block>
+      </value>
+      <value name="output">
+        <block type="gauge_data" id="Bpo~LDHd{/l)6XKsugvl">
+          <field name="MIN_VALUE">0</field>
+          <field name="MAX_VALUE">100</field>
+          <field name="UNITS">%</field>
+          <value name="VALUE">
+            <block type="variables_get" id="edR42M+|zS-@3x!qV|FR">
+              <field name="VAR" id="YZ%cw0=|i,6hoyu**HtL">con</field>
+            </block>
+          </value>
+          <value name="NAME">
+            <block type="text" id="dZX2uZU1uEsjRUbUDJyG">
+              <field name="TEXT">이름</field>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>
+  </xml>
+  <xml xmlns="https://developers.google.com/blockly/xml" id="initialWorkspace_value-list" style="display: none">
+    <variables>
+      <variable id="UEIOy[=sl(Zkv[Y;9|0C">con</variable>
+    </variables>
+    <block type="onem2m_trigger" id="eNVUFs)Q+4v@*U{V{ELr" x="0" y="0">
+      <field name="CON_VALUE" id="UEIOy[=sl(Zkv[Y;9|0C">con</field>
+      <value name="RESOURCE_PATH">
+        <block type="text" id="`NbpshsDK|)7kDcdCGm:">
+          <field name="TEXT">/Mobius/AE/cnt</field>
+        </block>
+      </value>
+      <value name="output">
+        <block type="lists_create_with" id="`c}^A!}#e$/iR)=L7*[]">
+          <mutation items="3"></mutation>
+          <value name="ADD0">
+            <block type="progress_data" id="OA@it^%.xXr6SWzOs_+Q">
+              <field name="UNITS">%</field>
+              <field name="COLOR">primary</field>
+              <value name="NAME">
+                <block type="text" id="BKJ9AbbxCILGUpW5Mloc">
+                  <field name="TEXT">레이블</field>
+                </block>
+              </value>
+              <value name="VALUE">
+                <block type="variables_get" id="edR42M+|zS-@3x!qV|FR">
+                  <field name="VAR" id="YZ%cw0=|i,6hoyu**HtL">con</field>
+                </block>
+              </value>
+            </block>
+          </value>
+          <value name="ADD1">
+            <block type="progress_data" id="U3h^D:JsKWTsZ_ZT?.S9">
+              <field name="UNITS">%</field>
+              <field name="COLOR">primary</field>
+              <value name="VALUE">
+                <value name="NAME">
+                    <block type="text" id="Nfr4EXpSIPOdiLuVlZLM">
+                      <field name="TEXT">레이블</field>
+                    </block>
+                  </value>
+                <block type="variables_get" id="do%y%Cp5:7eg6S~j}!X:">
+                  <field name="VAR" id="YZ%cw0=|i,6hoyu**HtL">con</field>
+                </block>
+              </value>
+            </block>
+          </value>
+        </block>
+      </value>
+    </block>
+  </xml>
+
+  <div flex="none" layout="row" class="dashboard-datasource-info md-accent" ng-class="datasource.status">
+    <div flex="none" layout="column" class="dashboard-datasource-left">
+      <md-button class="md-icon-button"   ng-click="closeEditor()">               
+        <md-icon md-font-icon="fas fa-arrow-circle-left" ></md-icon>
+      </md-button>
+    </div>
+    <div flex layout="row" class="dashboard-datasource-center">
+      <md-menu md-position-mode="target-left target" >
+        <md-button aria-label="Open phone interactions menu" class="md-raised md-primary" ng-click="openSizeSelectionMenu($mdMenu, $event)">
+          <i class="fas fa-expand-arrows-alt"></i> <span>{{widget.width}} x {{widget.height}}</span>
+        </md-button>
+        <md-menu-content width="4" layout="column" class="size-selection-block" >
+          <div felx layout="row" ng-repeat="row in [1, 2, 3]">
+            <div felx layout="" class="size-button" 
+                ng-class="getSizeButtonHoverClass(row, col)" 
+                ng-mouseover="onMouseoverSizeButton(row, col)" 
+                ng-mouseover="onMouseoverSizeButton(row, col)" 
+                ng-click="onClickSizeButton(row, col)" 
+                ng-repeat="col in [1, 2, 3, 4, 5, 6]">
+              {{col}} x {{row}}
+            </div>
+          </div>
+        </md-menu-content>
+      </md-menu>
+
+      <md-input-container flex class="md-accent">
+        <label>제목</label>
+        <input ng-model="widget.title"/>
+      </md-input-container>
+    </div>
+    <div flex="none" class="dashboard-datasource-right">
+      <div layout="row" class="dashboard-datasource-startstop">
+
+        <md-button class="md-icon-button"  ng-click="resetCode()">
+          <md-icon md-font-icon="fas fa-undo"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button"  ng-click="saveCode()">
+          <md-icon md-font-icon="fas fa-save"></md-icon>
+        </md-button>
+        <md-button class="md-icon-button {{showCodeViewer ? 'md-accent' : ''}}" ng-click="togglerCodeViewer()" >
+          <md-icon md-font-icon="far fa-file-code"></md-icon>
+        </md-button>
+
+      </div>
+    </div>
+  </div>
+
+  <div flex id="blocklyArea" layout="row">
+    <div flex layout="row" blockly id="blocklyDiv">
+      <div flex class="blockly-workspace"></div>
+      
+      <div flex="none" layout="column" id="codeViewer" ng-show="showCodeViewer">
+        <div flex hljs hljs-source="widgetCode" hljs-interpolate="true">
+      </div>
+    </div>       
+    </div>
+  </div>
+
+
+
+</div>

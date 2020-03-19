@@ -1,0 +1,9 @@
+<div class="resource-list device-list">
+  <ul>
+    <li class="device-item" ng-repeat="item in deviceList" ng-click="onItemSelected(item)" ng-class="item.selected">
+      <div class="device-icon fa" ng-class="item.deviceInfo.icon"></div>
+      <div class="device-name" ng-bind="item.deviceInfo.nickname.ellipsis(16)" title="{{item.deviceInfo.nickname}}"></div>
+      <div style="float:right;"><i class="fa fa-caret-right"></i></div>
+    </li>
+  </ul>
+</div>

@@ -1,0 +1,24 @@
+<md-content flex layout="row" layout-align="center center" class="chart-container" ng-controller="GaugeController" ng-init="init()">
+    <c3chart 
+            bindto-id="chart_{{widget.widgetId}}"
+            chart-data="gaugePoints"
+            chart-columns="gaugeColumns" 
+            padding-left="0"
+            padding-top="0"
+            padding-right="0"
+            padding-bottom="0"
+            show-legend="false"
+            >
+        <chart-gauge 
+                min="{{min}}"
+                max="{{max}}"
+                units="{{units}}"
+                width="25"
+                show-label="true"
+                expand="true"
+        />
+        <chart-legend show-legend="false"></chart-legend>
+    </c3chart>
+
+
+</md-content>

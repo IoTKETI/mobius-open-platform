@@ -1,0 +1,77 @@
+<md-dialog layout="column" class="widget-create-popup" aria-label="Widget create" md-theme="dashboard">
+  <md-toolbar flex="none" class="bd-shadow">
+    <h2>Dashboard widget 추가</h2>
+  </md-toolbar>
+
+  <md-dialog-content flex layout="column">
+    <div flex="none" layout="row" class="widget-info">
+      <md-menu md-position-mode="target-left target" >
+        <md-button aria-label="Open phone interactions menu" class="md-raised md-primary" ng-click="openSizeSelectionMenu($mdMenu, $event)">
+          <i class="fas fa-expand-arrows-alt"></i> <span>{{widgetInfo.width}} x {{widgetInfo.height}}</span>
+        </md-button>
+        <md-menu-content width="4" layout="column" class="size-selection-block" >
+          <div felx layout="row" ng-repeat="row in [1, 2, 3]">
+            <div felx layout="" class="size-button" 
+                ng-class="getSizeButtonHoverClass(row, col)" 
+                ng-mouseover="onMouseoverSizeButton(row, col)" 
+                ng-mouseover="onMouseoverSizeButton(row, col)" 
+                ng-click="onClickSizeButton(row, col)" 
+                ng-repeat="col in [1, 2, 3, 4, 5, 6]">
+              {{col}} x {{row}}
+            </div>
+          </div>
+        </md-menu-content>
+      </md-menu>
+
+      <md-input-container flex class="md-accent">
+        <label>제목</label>
+        <input ng-model="widgetInfo.title"/>
+      </md-input-container>
+    </div>
+
+    <md-content flex class="md-padding" layout="column">
+      <div flex >
+          <md-radio-group ng-model="widgetInfo.widgetType">
+          <md-grid-list
+              md-cols-xs="2" md-cols-sm="2" md-cols-md="4" md-cols-gt-md="5"
+              md-row-height="2:2"
+              md-gutter="5px" >
+
+            <md-grid-tile ng-repeat="widgetType in WIDGET_TYPES" class="md-accent"
+                md-rowspan="{{widgetType.height}}" md-colspan="{{widgetType.width}}"
+                ng-click="widgetInfo.widgetType = widgetType.typeId">
+              <img class="widget-type-image" src="images/widget/{{widgetType.typeId}}.png" />
+
+              <md-grid-tile-header layout="row" >
+                <md-radio-button  
+                    ng-value="widgetType.typeId"
+                    flex
+                    class="md-accent" 
+                    aria-label="{{widgetType.name}}">
+
+                    {{widgetType.name}}
+
+                </md-radio-button>
+              </md-grid-tile-header>
+            </md-grid-tile>
+
+          </md-grid-list>
+          </md-radio-group>
+      </div>
+    </md-content>
+ 
+  <md-dialog-actions flex="none" layout="row">
+    <span flex="none">
+      <md-button ng-click="close()" ng-arial="Close">
+        닫기
+      </md-button>
+    </span>
+    <span flex></span>
+    <span flex="none">
+      <md-button ng-click="create()" ng-arial="위젯 생성">
+        생성
+      </md-button>
+    </span>
+  </md-dialog-actions>
+
+</md-dialog>

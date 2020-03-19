@@ -1,0 +1,52 @@
+<div class="app login flex-column align-items-center">
+    <div class="h-50 container">
+        <div class="d-flex flex-row h-100 justify-content-center align-items-center">
+            <div class="col-md-5">
+                <div class="login-logo"></div>
+                <div class="login-title">
+                    <h2>Mobius 포털 로그인</h2>
+                </div>
+                <div class="card-group mb-0">
+                    <div class="card p-4">
+                        <div class="card-block">
+                            <div class="input-group input-group-lg mb-3">
+                                <span class="input-group-addon"><i class="icon-user"></i>
+                                </span>
+                                <input ng-model="formData.login.email" type="text" on-key-enter="login()" class="form-control" placeholder="사용자 이메일">
+                            </div>
+                            <div class="input-group input-group-lg mb-4">
+                                <span class="input-group-addon"><i class="icon-lock"></i>
+                                </span>
+                                <input ng-model="formData.login.password" type="password" on-key-enter="login()" class="form-control" placeholder="비밀번호">
+                            </div>
+                            <button ng-click="login()" type="button" class="btn btn-lg btn-primary w-100">로그인</button>
+                            <!-- <button onclick="javascript:location.href='./auth/login/google'" type="button" class="btn google-login"><img src="../img/google-login-icon.png">Google 계정으로 로그인</button> -->
+                        </div>
+                        <div class="row px-3">
+                            <div class="col-sm-6">
+                                <button ui-sref="signup" type="button" class="btn btn-link px-0">회원가입</button>
+                            </div>
+                            <div class="col-sm-6 text-right">
+                                <button type="button" ui-sref="password-reset" class="btn btn-link px-0">비밀번호 분실</button>
+                            </div>
+                        </div>
+                    </div>
+                    <!--
+                    <div class="card card-inverse card-primary py-5 d-md-down-none" style="width:44%">
+                        <div class="card-block text-center">
+                            <div>
+                                <h2>회원 가입</h2>
+                                <p>Mobius 웹포털에 오신것을 환영합니다.</p>
+                                <button type="button" class="btn btn-primary active mt-3" ui-sref="signup">사용자 가입</button>
+                            </div>
+                        </div>
+                    </div>
+                    -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="h-50 w-100 container">
+        <div ng-include="'../_dashboard/dashboard.html'" class="h-100 dashboard"></div>
+    </div>
+</div>

@@ -1,0 +1,115 @@
+/* You can add global styles to this file, and also import other style files */
+/* @import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css"; */
+@import "~angular-notifier/styles";
+@import "~bootstrap/dist/css/bootstrap.css";
+/* @import "/assets/css/noto-sans-korean.css"; */
+
+* {
+    font-family: 'Noto Sans', 'Noto Sans KR', sans-serif;
+}
+body {
+    margin : 0!important;
+}
+body::after{
+    content : "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-image: url('/assets/images/background1.png'); 
+    background-size: 60%;
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 100%;
+    height: 100%;
+    opacity : 0.2;
+    z-index: -1;    
+}
+.app-container{
+
+    margin: 0 auto;
+    width: 80%;
+    height: 100%;
+}
+
+.mat-flat-button.mat-primary, 
+.mat-raised-button.mat-primary, 
+.mat-fab.mat-primary, 
+.mat-mini-fab.mat-primary{
+    color: white;
+}
+
+.custom-dialog{
+    text-align: center;
+    font-size: 0.9em;
+}
+.custom-dialog
+.mat-form-field {
+    line-height: 1.3em;
+}
+.custom-dialog
+.mat-radio-button {
+    margin: 0 5px 0 5px;
+}
+.custom-dialog
+mat-dialog-actions{
+    display: inline-flex;
+    text-align: center;
+}
+.custom-dialog
+ mat-dialog-actions button{
+    margin: 0 5px 0 5px;
+}
+
+div.center {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+div.nothing-alert {
+    width: 100%;
+    height: 48px;
+    color: #000000de;
+    box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+    border-bottom-color: rgba(0,0,0,.12);
+    background-color: #fff;
+}
+div.nothing-table {
+    border: 5px solid #4a148c;
+    border-radius: 5px;
+}
+
+#tabs .remove-icon .mat-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+#child-view .mat-tab-body .mat-tab-body-content {
+    height: fit-content !important;
+}
+#command-main .mat-tab-label.mat-tab-label-active {
+    background: #20a8d8;
+    color: #fff;
+    opacity: 1;
+}
+#command-main .mat-ink-bar {
+    background-color: #fff;
+}
+#command-main .mat-tab-label {
+    background-color: #fff;
+    color: #454545;
+    height: 41px;
+    font-weight: 600;
+    opacity: 1;
+}
+
+button.info-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 0px;
+    min-width: 0px;
+    line-height: 20px;
+    font-size: 20px;
+}

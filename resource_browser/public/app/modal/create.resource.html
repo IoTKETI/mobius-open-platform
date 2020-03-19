@@ -1,0 +1,66 @@
+<div class="create-resource modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">Create a child resource</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="resource-types">
+            <div class="title">
+              1. Select resource type
+            </div>
+            <div class="resource-type-list">
+              <div class="resource" ng-repeat="type in contentModel" >
+                <label class="radio-inline">
+                  <input type="radio" name="resourceType" ng-model="model.selectedResourceType" ng-value="type.typeCode" ng-change="onResoureceTypeChanged(type.typeCode)">
+                  <img class="resource-item" ng-src="{{type.iconUrl}}"/>
+                </label>
+              </div>
+            </div>
+          </div>
+          <div class="resource-input">
+            <div class="title">
+              2. Fill out resource information
+            </div>
+            <div class="resource-input-form">
+              <!-- ae -->
+              <div ng-show="model.selectedResourceType == '2'">
+                <ae mode="mode" resource="resource"></ae>
+              </div>
+              <!-- container -->
+              <div ng-show="model.selectedResourceType == '3'">
+                <cnt mode="mode" resource="resource"></cnt>
+              </div>
+              <!-- content instance -->
+              <div ng-show="model.selectedResourceType == '4'">
+                <cin mode="mode" resource="resource"></cin>
+              </div>
+              <!-- ts -->
+              <div ng-show="model.selectedResourceType == '25'">
+                <ts mode="mode" resource="resource"></ts>
+              </div>
+              <!-- grp -->
+              <div ng-show="model.selectedResourceType == '9'">
+                <grp mode="mode" resource="resource"></grp>
+              </div>
+              <!-- sub -->
+              <div ng-show="model.selectedResourceType == '23'">
+                <sub mode="mode" resource="resource"></sub>
+              </div>
+              <!-- sd -->
+              <div ng-show="model.selectedResourceType == '24'">
+                <sd mode="mode" resource="resource"></sd>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close(false)" class="btn btn-default" data-dismiss="modal">Cancel</button>
+        <button type="button" ng-click="close(true)" class="btn btn-primary" data-dismiss="modal">Create</button>
+      </div>
+    </div>
+  </div>
+</div>

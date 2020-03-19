@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>명령어 변경</h1>
+<mat-dialog-content class="fields-container" [formGroup]="form">
+    <mat-form-field>
+        <input matInput placeholder="명령어" formControlName="command" required>
+        <mat-error *ngIf="form.controls['command'].hasError('required')">
+            사용할 명령어를 입력해주세요
+        </mat-error>
+        <mat-error *ngIf="form.controls['command'].hasError('pattern')">
+            '_'외의 특수문자를 제외해주세요.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="URL(AE/CON)" formControlName="target" required>
+    </mat-form-field>
+    <div class="radio-mat-group">
+        <label for="">명령어 유형</label>
+        <mat-radio-group formControlName="method" aria-label="기능">
+            <mat-radio-button color="primary" value="get">읽기</mat-radio-button>
+            <mat-radio-button color="primary" value="post">쓰기</mat-radio-button>
+            <mat-radio-button color="primary" value="sub">구독</mat-radio-button>
+        </mat-radio-group>
+        <mat-error *ngIf="form.controls['method'].hasError('required')">
+            기능의 유형을 선택해주세요
+        </mat-error>
+    </div>
+    <mat-form-field>
+        <input matInput placeholder="설명" formControlName="des">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" (click)="onClick()">등록</button>
+    <button mat-raised-button [mat-dialog-close]="false">취소</button>
+</mat-dialog-actions>

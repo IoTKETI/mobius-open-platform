@@ -1,0 +1,10 @@
+<div class="mobius-browser-container" id="mobius-browser-container">
+  <div mobius-browser-items ng-repeat="resourceList in browserData"
+       class="mobius-browser-items"
+       ng-class="selectionDepth == $index ? 'active' : ''"
+       resource-list="resourceList"
+       browse-depth="$index"
+       on-item-selected="onItemSelected"   data-index="{{$index}}" data-sel-depth="{{selectionDepth}}">
+  </div>
+
+</div>

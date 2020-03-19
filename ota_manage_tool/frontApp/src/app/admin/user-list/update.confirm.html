@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>펌웨어 다운로드 블럭 사이즈 변경</h1>
+<mat-dialog-content>
+    <mat-form-field>
+        <input matInput type="number" [(ngModel)]="bufferSize">
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button class="button-primary" (click)="apply()">적용</button>
+    <button mat-raised-button (click)="onNoClick()">취소</button>
+</mat-dialog-actions>

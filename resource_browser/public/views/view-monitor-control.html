@@ -1,0 +1,73 @@
+<div ng-controller="controlPanelController" ng-init="init()">
+
+  <md-content layout-padding class="md-padding md-whiteframe-3dp control-panel-content">
+
+    <div layout-gt-sm="row">
+      <div flex>
+
+        <div layout-gt-sm="column">
+          <div layout-gt-sm="row">
+
+            <md-autocomplete flex="none"
+                             ng-model="resourceHost"
+                             md-no-cache="true"
+                             md-selected-item="resourceHost"
+                             md-items="item in resourceHostFilter(searchHostText)"
+                             md-item-text="item"
+                             md-search-text="searchHostText"
+                             md-floating-label="Target Resource"
+                             ng-disabled="state != 'stopped'">
+              <span md-highlight-text="searchHostText" md-highlight-flags="g">{{ item }}</span>
+            </md-autocomplete>
+
+            <md-autocomplete flex
+                             ng-model="resourcePath"
+                             md-no-cache="true"
+                             md-selected-item="resourcePath"
+                             md-items="item in resourcePathList"
+                             md-item-text="item"
+                             md-search-text="searchText"
+                             md-floating-label="Target Resource"
+                             ng-disabled="state != 'stopped'">
+              <span md-highlight-text="searchText">{{ item }}</span>
+            </md-autocomplete>
+
+          </div>
+        </div>
+        <div class="control_option" layout="row" layout-wrap layout="start center">
+          <div >
+
+            <label>Number of instance</label>
+            <md-radio-group layout="row" ng-model="numberOfInstances" ng-change="onChangeNumberOfInstances(numberOfInstances)">
+              <md-radio-button value=1> 1 Latest </md-radio-button>
+              <md-radio-button value=3> 3 Latest </md-radio-button>
+              <md-radio-button value=5> 5 Latest </md-radio-button>
+            </md-radio-group>
+  
+          </div>
+          <div layout="column">
+              <label>Animation Effect</label>
+              <md-checkbox ng-model="animation" ng-change="onChangeAnimation($event)">{{animation ? 'On' : 'Off'}}</md-checkbox>
+          </div>
+        </div>        
+      </div>
+      <div id="start-stop-button" layout="column" layout-align="center center" flex="none" ng-class="state">
+
+        <md-button class="md-fab md-primary start-button" ng-click="onStartStopButtonClicked()" >
+          <md-icon class="fa fa-play"></md-icon>
+        </md-button>
+        <md-button class="md-fab stop-button" ng-click="onStartStopButtonClicked()">
+          <md-icon class="fa fa-stop"></md-icon>
+        </md-button>
+
+        <span class="button-label"></span>
+
+      </div>
+    </div>
+  </md-content>
+  <div class="expand-button">
+    <md-button ng-click="toggleControlPanel()"  ng-mouseenter="toggleControlPanel(true)" class="md-primary md-default-theme">
+      <span class="fa fa-angle-double-up"></span>
+    </md-button>
+  </div>
+</div>  <!-- container-fluid -->

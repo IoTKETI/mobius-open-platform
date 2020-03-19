@@ -1,0 +1,12 @@
+<div class="jsonView" ng-controller="propertiesPanelController" ng-init="init()">
+<!--
+  <pre id="raw-resource-data">{{rawData | json : 2}}</pre>
+-->
+  <div class="properties-panel-showhide">
+    <span class="btn-success glyphicon glyphicon-transfer" ng-click="toggleShowHide()"></span>
+  </div>
+  <hr />
+  <div class="json-wrapper">
+    <json-formatter json="rawData" open="3"></json-formatter>
+  </div>
+</div>

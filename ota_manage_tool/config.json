@@ -1,0 +1,29 @@
+{
+  "default" : {
+    "node_port" : "8730",        
+    "mobius_url" : "http://203.253.128.161:7579/Mobius",
+    "mqtt_url": "mqtt://203.253.128.161",
+    "mobius_sub_prefix" : "KETI_SNS",
+    "system_name" : "KETI_SNS_AGENT_MANAGER",
+    "portal_url" : "http://203.253.128.161:8881",
+    "jwt": {
+      "JWT_ISSUER" : "SYNCTECHNO",
+      "ACCESS_SUBJECT" : "ACCESS",
+      "REFRESH_SUBJECT" : "REFRESH",
+      "ACCESS_EXP" : "12h",
+      "REFRESH_EXP" : "30d",
+      "SECRET": "Z29f/iImdZ5QrAaHW1xGQqcvaWrLmmQw8pmQGMtYZqBJAL9WLnWa67qyq8H9phVX43plaSWQ/Ab1rPdoBhKS9Q=="
+    },
+    "mongo": {
+      "host": "localhost",
+      "port": "27017",
+      "database": "OTA_Assist",
+      "user": "ota_manager",
+      "password": "ota_manager!@"
+    }
+  },
+  "KJH" : {
+    "mobius_sub_prefix" : "KJH_OTA",
+    "portal_url" : "http://localhost:8881"
+  }
+}

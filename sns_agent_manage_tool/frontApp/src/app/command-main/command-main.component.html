@@ -1,0 +1,32 @@
+<mat-card id="command-main">
+  <mat-card-title><div><i class="fas fa-terminal"></i>에이전트 관리</div><button mat-button (click)="openBotRegisterGuideDialog()" color="primary" class="info-button" title="에이전트 생성 방법"><i class="fas fa-question-circle"></i></button></mat-card-title>
+  <mat-card-content>
+      <div class="container">
+        <div id="tabs">
+          <div class="bot-control">
+            <button mat-button (click)="openAddDialog()"><i class="fas fa-plus"></i>에이전트 추가</button>
+          </div>
+          <ul>
+            <li class="tab-label" *ngFor="let bot of botList,let i = index" 
+            (click)="loadComponent(bot, i)" [ngClass]="{active : bot.clicked}">
+              <div class="bot-item">
+                  <i class="fab fa-telegram-plane"></i>{{bot.name}}
+              </div>
+              <div class="remove-icon">
+                <button mat-button (click)="openDeleteDialog(bot,i)"><i class="fas fa-trash"></i></button>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="nothing-alert center" *ngIf="botList.length === 0">에이전트 등록 후 사용이 가능합니다.</div>
+        <div id="content" [hidden]="botList.length === 0">
+          <div id="noneClick" [ngClass]="{noneSelect : !isClicked(), hide : isClicked()}">대상 에이전트을 선택해주세요</div>
+          <mat-tab-group mat-stretch-tabs id="child-view" [selectedIndex]="0" [ngClass]="{hide : !isClicked()}">
+            <mat-tab label="명령어 관리"><ng-template command-view></ng-template></mat-tab>
+            <mat-tab label="채널 관리"><ng-template bot-view></ng-template></mat-tab>
+          </mat-tab-group>
+        </div>
+      </div>
+      
+  </mat-card-content>
+</mat-card>

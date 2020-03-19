@@ -1,0 +1,22 @@
+<h1 mat-dialog-title>에이전트 등록</h1>
+<mat-dialog-content class="fields-container add-bot-form" [formGroup]="form">
+    <mat-form-field>
+        <input matInput placeholder="API Key" formControlName="token" required>
+        <mat-error *ngIf="form.controls['token'].hasError('required')">
+            에이전트 API 키를 입력해주세요.
+        </mat-error><mat-error *ngIf="form.controls['token'].hasError('invalid')">
+            사용불가능한 API입니다.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field *ngIf="form.controls['name'].valid">
+        <input matInput readonly placeholder="Bot 이름" formControlName="name" required>
+    </mat-form-field>
+    <mat-form-field *ngIf="form.controls['tag'].valid">
+        <input matInput readonly placeholder="Bot 태그" formControlName="tag" required>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" *ngIf="!validToken" (click)="checkValidToken()">API 키 검사</button>
+    <button mat-raised-button color="primary" *ngIf="validToken" (click)="onClick()">등록</button>
+    <button mat-raised-button [mat-dialog-close]="false">취소</button>
+</mat-dialog-actions>

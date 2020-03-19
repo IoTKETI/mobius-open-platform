@@ -1,0 +1,74 @@
+{
+  "default" : {
+    "node" : {
+      "port": "8881"
+    },
+
+    "mongo": {
+      "host": "localhost",
+      "port": "27017",
+      "database": "mobius_webportal",
+      "user": "mobius_webportal_user",
+      "password": "tkdydwk12#$"
+    },
+
+    "email": {
+      "service": "gmail",
+      "sender": "tech.iotocean@gmail.com",
+      "secret": "iotocean7580!"
+    },
+
+    "healthcheck": {
+      "interval_min": 5,
+      "skip_interval_min": 30,
+      "notify_to": [
+        "iyahn@keti.re.kr",
+        "nmsung@keti.re.kr",
+        "sm.jeong@keti.re.kr"
+      ]
+    },
+
+    "security": {
+      "authSecret": "mobiusportal.keti.re.kr"
+    },
+    "cookie" : {
+      "domain" : ".iotocean.org;.iotmobius.com",
+      "acMaxAge" : 3600000,
+      "reMaxAge" : 2592000000
+    },
+    "target": {
+      "host": "http://203.253.128.161",
+      "mqtt": "mqtt://203.253.128.161",
+      "port": "7579",
+      "csebase": "Mobius",
+      "supportingTypes": ["2", "3", "4", "5", "34", "9"],
+      "subscriptionName": "WEBPORTAL_SYSTEM_SUB_test",
+      "serviceName": "WEBPORTAL_SERVICE_test"
+    },
+    "target_back": {
+      "host": "http://localhost",
+      "mqtt": "mqtt://localhost",
+      "port": "7579",
+      "csebase": "Mobius",
+      "supportingTypes": ["2", "3", "4", "5", "34", "9"],
+      "subscriptionName": "WEBPORTAL_SYSTEM_SUB_thkim",
+      "serviceName": "WEBPORTAL_SERVICE_thkim"
+    },
+    "google" : {
+      "client_id": "639590479420-9nmsr0tf13gv7pr08m7snmda6ele32of.apps.googleusercontent.com",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "client_secret": "cTDJlWyYoap4Z4LOSn6ldhuU",
+      "redirect_uris": [
+        "http://localhost:3000/auth/callback"
+      ]
+    },
+    "jwt_option" : {
+      "JWT_ISSUER" : "SYNCTECHNO",
+      "ACCESS_SUBJECT" : "ACCESS",
+      "REFRESH_SUBJECT" : "REFRESH",
+      "ACCESS_EXP" : "12h",
+      "REFRESH_EXP" : "30d",
+      "JWT_SECRET" : "Z29f/iImdZ5QrAaHW1xGQqcvaWrLmmQw8pmQGMtYZqBJAL9WLnWa67qyq8H9phVX43plaSWQ/Ab1rPdoBhKS9Q=="
+    }
+  }
+}

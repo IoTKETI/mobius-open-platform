@@ -1,0 +1,60 @@
+<div class="card device-list-item" >
+  <div class="card-header card-header-inverse" ng-class="headerColorClass(device)">
+    <div class="device-icon-block">
+      <div class="device-icon"  ng-class="headerColorClass(device)">
+        <span class="fa" ng-class="device.deviceInfo.icon"></span>
+      </div>
+    </div>
+
+    <div class="device-info-block">
+      <div class="device-name">
+        <span ng-bind="device.deviceInfo.nickname"></span>
+      </div>
+
+      <div class="resource-name">
+        <i class="fa fa-newspaper" style="margin-right: 5px"></i> <span ng-bind="device.resourceInfo.resourceName"></span>
+      </div>
+
+      <div class="device-owner">
+        <i class="fa fa-user" style="margin-right: 5px"></i>
+        <span ng-if="device.owner.username != null" ng-bind="device.owner.username" title="{{device.owner.email}}"></span>
+        <span ng-if="device.owner.username == null" ng-bind="device.owner.email"></span>
+      </div>
+
+      <div class="device-description">
+        <small ng-bind="device.deviceInfo.description"></small>
+      </div>
+
+
+    </div>
+  </div>  <!-- card header -->
+
+  <div class="card-block">
+    <table class="device-action-table">
+      <tr>
+        <td class="action-button btn-lt">
+          <button class="btn" ng-click="commandHandler('browse', device)"><i class="icon-folder-alt"></i> 데이터 탐색</button>
+        </td>
+        <td class="action-button btn-rt">
+          <button class="btn" ng-click="commandHandler('edit', device)"><i class="icon-info"></i> 정보 </button>
+        </td>
+      </tr>
+      <tr>
+        <td class="action-button btn-lb">
+          <button class="btn" ng-click="commandHandler('edit', device)"><i class="icon-lock"></i> 권한 설정</button>
+        </td>
+        <td class="action-button btn-rb">
+          <div class="button-group dropup">
+            <button type="button" class="btn btn-rb dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="icon-settings"></i> 기타
+            </button>
+            <div class="dropdown-menu dropdown-menu-right">
+              <a class="dropdown-item" ng-click="commandHandler('unregister', device)">디바이스 등록 취소</a>
+              <a class="dropdown-item" ng-click="commandHandler('delete', device)">리소스 삭제</a>
+            </div>
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>  <!-- card block -->
+</div>  <!-- card -->

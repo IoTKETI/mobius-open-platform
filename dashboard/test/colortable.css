@@ -1,0 +1,49 @@
+colortable {
+  /* logo gradient */
+  color: #B1D243;
+  color: #5CA750;
+  color: #707173;
+
+  /* logo green 1 and green 2 */
+  color: #B1D243;
+  color: #78C043;
+
+  /* logo gray */
+  color: #707173;
+
+  /* logo dark */
+  color: #454645;
+
+  /* house icon 1 home part*/
+  color: #7FB64E;
+  color: #B2D343;
+  color: #6D6E71;
+
+  /* house icon 1 V part*/
+  color: #0B9F54;
+  color: #96CA49;
+  color: #6D6E71;
+
+  /* house icon 2 */
+  color: #0B9F54;
+  color: #96CA49;
+}
+
+
+green-custom-palette {
+
+  color : #ebf4ea; /* 50*/
+  color : #cee5cb; /* 100*/
+  color : #aed3a8; /* 200*/
+  color : #8dc185; /* 300*/
+  color : #74b46a; /* 400*/
+  color : #5ca750; /* 500*/
+  color : #549f49; /* 600*/
+  color : #4a9640; /* 700*/
+  color : #418c37; /* 800*/
+  color : #307c27; /* 900*/
+  color : #c5ffbe; /* A100*/
+  color : #96ff8b; /* A200*/
+  color : #68ff58; /* A400*/
+  color : #51ff3f; /* A700*/
+}

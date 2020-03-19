@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>oneM2M Resource Monitor for Mobius</title>
+  <meta charset="utf-8">
+  <link rel='stylesheet' href='./bower_components/noto-sans-kr/styles.css' />
+
+  <style>
+body {
+  background: #161616 ;
+  font-family: 'Noto Sans Korean', sans-serif;
+  font-weight: normal;
+}
+.wrap {
+  width: 100%;
+  height: 100px;
+  margin-top:50px;
+}
+.title {
+    text-align: center;
+    color: white;
+}
+.circle {
+    background-color: rgba(0,0,0,0);
+    border: 15px solid rgba(0,183,229,0.9);
+    opacity: .9;
+    border-right: 15px solid rgba(0,0,0,0);
+    border-left: 15px solid rgba(0,0,0,0);
+    border-radius: 100px;
+    box-shadow: 0 0 35px #2187e7;
+    width: 100px;
+    height: 100px;
+    margin: 0 auto;
+    -moz-animation: spinPulse 1s infinite ease-in-out;
+    -webkit-animation: spinPulse 1s infinite linear;
+}
+
+.circle1 {
+    background-color: rgba(0,0,0,0);
+    border: 10px solid rgba(0,183,229,0.9);
+    opacity: .9;
+    border-left: 10px solid rgba(0,0,0,0);
+    border-right: 10px solid rgba(0,0,0,0);
+    border-radius: 90px;
+    box-shadow: 0 0 15px #2187e7;
+    width: 50px;
+    height: 50px;
+    margin: 0 auto;
+    position: relative;
+    top: -100px;
+    -moz-animation: spinoffPulse 1s infinite linear;
+    -webkit-animation: spinoffPulse 1s infinite linear;
+}
+
+@-moz-keyframes spinPulse {
+    0% {
+        -moz-transform: rotate(160deg);
+        opacity: 0;
+        box-shadow: 0 0 1px #2187e7;
+    }
+
+    50% {
+        -moz-transform: rotate(145deg);
+        opacity: 1;
+    }
+
+    100% {
+        -moz-transform: rotate(-320deg);
+        opacity: 0;
+    };
+}
+
+@-moz-keyframes spinoffPulse {
+    0% {
+        -moz-transform: rotate(0deg);
+    }
+
+    100% {
+        -moz-transform: rotate(360deg);
+    };
+}
+
+@-webkit-keyframes spinPulse {
+    0% {
+        -webkit-transform: rotate(160deg);
+        opacity: 0;
+        box-shadow: 0 0 1px #2187e7;
+    }
+
+    50% {
+        -webkit-transform: rotate(145deg);
+        opacity: 1;
+    }
+
+    100% {
+        -webkit-transform: rotate(-320deg);
+        opacity: 0;
+    };
+}
+
+@-webkit-keyframes spinoffPulse {
+    0% {
+        -webkit-transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(360deg);
+    };
+}
+  </style>
+
+</head>
+<body lang="ko">
+<div class="wrap">
+  <div class="circle"></div>
+  <div class="circle1"></div>
+  <div>
+    <h3 class="title"> Loading ... </h3>
+  </div>
+  <div>
+    <h1 class="title">MOBIUS Resource Monitoring Tool</h1>
+  </div>
+</div>
+  <script>
+    // Load native UI library
+    var gui = require('nw.gui'); //or global.window.nwDispatcher.requireNwGui() (see https://github.com/rogerwang/node-webkit/issues/707)
+
+    // Get the current window
+    var win = gui.Window.get();
+/*
+    var windowWidth = window.localStorage.getItem('window-width');
+    var windowHeight = window.localStorage.getItem('window-height');
+    var windowLeft = window.localStorage.getItem('window-left');
+    var windowTop = window.localStorage.getItem('window-top');
+
+    if( windowWidth && windowHeight )
+      win.resizeTo(parseInt(windowWidth), parseInt(windowHeight));
+
+    if( windowLeft && windowTop )
+      win.moveTo(parseInt(windowLeft), parseInt(windowTop));
+
+
+    win.on('resize', function(w, h) {
+      window.localStorage.setItem('window-width', w);
+      window.localStorage.setItem('window-height', h);
+
+      console.log( "window resized: " + w + ", " + h);
+    });
+    win.on('move', function(x, y) {
+      window.localStorage.setItem('window-left', x);
+      window.localStorage.setItem('window-top', y);
+
+      console.log( "window moved: " + x + ", " + y);
+    });
+*/
+
+    setTimeout( function() {
+      location.href="http://localhost:7575/"
+    }, 1000 );
+  </script>
+<body>
+
+</html>

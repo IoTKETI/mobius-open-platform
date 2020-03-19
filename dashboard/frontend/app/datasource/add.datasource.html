@@ -1,0 +1,26 @@
+<div flex layout="column" ng-controller="datasourceListController" ng-init="init()" >
+
+  <div flex="none" layout="row" class="device-search-filter">
+    <span flex></span>
+    <div flex="none" layout="row" class="device-search-box">
+      <md-icon flex="none" md-font-icon="fas fa-search" ></md-icon>
+      <input flex ng-model="searchKeyword" placeholder="SEARCH"/>
+    </div>
+  </div>
+
+  <md-content flex class="datasource-content">
+
+    <div flex="none" layout="row" layout-wrap>
+
+      <div flex-xl="33" flex-lg="33" flex-md="33" flex-sm="50" flex-xs="100" layout="column" ng-repeat="datasource in datasourceList" style="padding: 5px;">
+
+        <div flex layout="column" dashboard-datasource datasource="datasource" on-edit="showDatasourceGenerator" on-change-status="onDatasourceStatusChanged"></div>
+
+      </div>
+
+    </div>
+
+
+  </md-content>
+
+</div>

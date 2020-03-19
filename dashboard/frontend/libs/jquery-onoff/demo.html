@@ -1,0 +1,177 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>jQuery on-off-switch.js Plugin EXAMPLES</title>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <script src="http://code.jquery.com/jquery-1.12.2.min.js"></script>
+    <script type="text/javascript" src="js/on-off-switch.js"></script>
+    <script type="text/javascript" src="js/on-off-switch-onload.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/on-off-switch.css"/>
+    <link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+    <style type="text/css">
+        body {
+            font-family: 'Open Sans',arial;
+            background-color:#fafafa;
+        }
+        .container { margin:150px auto 50px auto; width:70%}
+    </style>
+</head>
+<body>
+<div id="jquery-script-menu">
+<div class="jquery-script-center">
+<ul>
+<li><a href="http://www.jqueryscript.net/form/Custom-On-Off-Toggle-Switch-Plugin-For-jQuery-on-off-switch-js.html">Download This Plugin</a></li>
+<li><a href="http://www.jqueryscript.net/">Back To jQueryScript.Net</a></li>
+</ul>
+<div class="jquery-script-ads"><script type="text/javascript"><!--
+google_ad_client = "ca-pub-2783044520727903";
+/* jQuery_demo */
+google_ad_slot = "2780937993";
+google_ad_width = 728;
+google_ad_height = 90;
+//-->
+</script>
+<script type="text/javascript"
+src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script></div>
+<div class="jquery-script-clear"></div>
+</div>
+</div>
+<div class="container">
+<h1>jQuery on-off-switch.js Plugin EXAMPLES</h1>
+
+<!-- Demo 1-->
+<h4>With text</h4>
+
+<div class="checkbox-container">
+    <input type="checkbox" id="on-off-switch" name="switch1" checked>
+</div>
+<div id="listener-text">
+
+</div>
+<script type="text/javascript">
+    new DG.OnOffSwitch({
+        el: '#on-off-switch',
+        textOn: 'Sync On',
+        textOff: 'Off',
+        listener:function(name, checked){
+            $("#listener-text").html("Listener called for " + name + ", checked: " + checked);
+        }
+    });
+</script>
+<!-- Demo 2-->
+<h4>Without text and by using &lt;input type="hidden"> instead of &lt;input type="checkbox"></h4>
+<div class="checkbox-container">
+    <!-- value="1" for checked, 0 for unchecked -->
+    <input type="hidden" id="on-off-switch-notext" value="0">
+</div>
+
+<script type="text/javascript">
+    new DG.OnOffSwitch({
+        el: '#on-off-switch-notext'
+    });
+</script>
+<!-- Demo 3 -->
+<h4>With custom color and size</h4>
+<div class="checkbox-container">
+
+    <input type="hidden" id="on-off-switch-custom" value="1">
+
+    <script type="text/javascript">
+        new DG.OnOffSwitch({
+            el: '#on-off-switch-custom',
+            height: 150,
+            trackColorOn:'#F57C00',
+            trackColorOff:'#666',
+            trackBorderColor:'#555',
+            textColorOff:'#fff',
+            textOn:'YES',
+            textOff:'NO'
+        });
+    </script>
+</div>
+<br>
+<!-- Demo 4 -->
+<div class="checkbox-container">
+    <input type="checkbox" id="on-off-switch-custom2" checked>
+</div>
+<script type="text/javascript">
+
+    new DG.OnOffSwitch({
+        el: '#on-off-switch-custom2',
+        height: 100,
+        trackColorOn:'#0288D1',
+        textOn:'Longer',
+        textOff:'No',
+    });
+
+</script>
+
+<!-- Demo 5 automatic onload -->
+<h4>These switches have been created automatically by class names</h4>
+<Table>
+    <tr>
+        <td><input type="checkbox" class="custom-switch" checked name="switch1"></td>
+        <td>Option One</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="custom-switch" name="switch1"></td>
+        <td>Option Two</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="custom-switch" name="switch1"></td>
+        <td>Option Three</td>
+    </tr>
+    <tr>
+        <td><input type="checkbox" class="custom-switch" checked name="switch1" data-textOn="ON" data-textOff="OFF"
+                   data-trackColorOn="#512DA8" data-trackColorOff="#616161" data-textColorOff="#fff"
+                   data-trackBorderColor="#555">
+        </td>
+        <td>Option Four with custom html attributes</td>
+    </tr>
+    <tr>
+        <td colspan="2" id="listener-text-table" style="font-size:0.8em"></td>
+    </tr>
+</Table>
+
+
+<!-- Demo 6 listen to native checkbox updates -->
+<h4>Example of native checkbox listeners</h4>
+<div class="checkbox-container">
+    <input type="checkbox" name="on-off-switch-demo6" class="custom-switch" id="on-off-switch-demo6">
+</div>
+<a href="#" onclick="$('#on-off-switch-demo6').click();return false">Execute $('#on-off-switchdemo6').click()</a>
+<div>
+</div>
+<script type="text/javascript">
+    /* General dashboards for all the switches in demo 5 */
+    new DG.OnOffSwitchAuto({
+        cls:'.custom-switch',
+        textOn:"YES",
+        height:35,
+        textOff:"NO",
+        textSizeRatio:0.35,
+        listener:function(name, checked){
+            document.getElementById("listener-text-table").innerHTML = "Switch " + name + " changed value to " + checked;
+        }
+    });
+</script>
+</div><script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-36251023-1']);
+  _gaq.push(['_setDomainName', 'jqueryscript.net']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+
+</script>
+</body>
+</html>

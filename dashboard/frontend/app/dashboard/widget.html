@@ -1,0 +1,9 @@
+<md-content layout-align="start" style="overflow: scroll;" ng-controller="dashboardController" ng-init="init()">
+
+  <div layout="row" layout-wrap>
+    <div flex="25" ng-repeat="widget in widgetList">
+      <panel-widget flex title="{{widget.title}}" widget="widget" template="app/widget/partials/{{widget.widgetType}}.html" chage-datasource="showDatasourceSelectPopup" class="fixed-height-widget"></panel-widget>
+    </div>
+  </div>
+
+</md-content>
