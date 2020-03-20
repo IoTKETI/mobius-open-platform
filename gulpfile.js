@@ -94,8 +94,10 @@ function startSns() {
 function startRes() {
   return run(`pm2 start ./resource_browser/bin/www --name res`).exec()
 }
-
-gulp.task('serviceStart', gulp.series([startWebportal, startDashboard, startOta, startSns, startRes]));
+function save() {
+  return run('pm2 save').exec();
+}
+gulp.task('serviceStart', gulp.series([startWebportal, startDashboard, startOta, startSns, startRes, save]));
 
 gulp.task('serviceRestart', function(){
   return run("pm2 restart webportal dashboard ota sns").exec()
