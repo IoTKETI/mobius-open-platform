@@ -100,5 +100,5 @@ function save() {
 gulp.task('serviceStart', gulp.series([startWebportal, startDashboard, startOta, startSns, startRes, save]));
 
 gulp.task('serviceRestart', function(){
-  return run("pm2 restart webportal dashboard ota sns").exec()
+  return run("pm2 restart webportal dashboard ota sns res").exec();
 })
