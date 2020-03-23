@@ -69,13 +69,10 @@ function setSelecService(selected) {
 }
 function npmInstall() {
   return new Promise(function(resolve, reject) {
-    gulp.src([
-      './webportal/package.json', 
-      './telegrambotmanagementassistserver/package.json', 
-      './otadevelopmentassistserver/package.json', 
-      './dashboard/package.json',
-      './resource_browser/package.json'
-    ])
+    var packages = Object.keys(PACKAGES).map(key => {
+      return PACKAGES[key].packageLocation;
+    })
+    gulp.src(packages)
     .pipe(install())
     .on('error', reject)
     .pipe(gulp.src("./package.json"))
@@ -145,23 +142,28 @@ function setMobiusURL(){
     var configs = readJSON();
     
     var promises = configs.map(el => {
-      saveConfig(el.config, el.service, host, mqtt, port)
+      el.config = modifyMobiusSetting(el.config, el.service, host, mqtt, port);
+      return saveConfig(el.config, el.service)
     });
     return Promise.all(promises);
   } else {
     return Promise.reject(new Error("변경할 Mobius의 주소 혹은 포트를 찾을 수 없습니다."));
   }
 }
-function saveConfig(source, service, host, mqtt, port) {
+function modifyMobiusSetting(source, service, host, mqtt, port) {
+  var config = source.default;
+  if(!config.mobius) if(!config) return reject(new Error("Invalid CONFIG source")); else return;
+  config.mobius.host = host;
+  
+  config.mobius.mqtt = mqtt;
+
+  config.mobius.port = Number(port);
+
+  return source.default;
+}
+function saveConfig(source, service) {
   return new Promise(function(resolve, reject) {
-    var config = source.default;
-    if(!config.mobius) if(!config) return reject(new Error("Invalid CONFIG source")); else return;
-    config.mobius.host = host;
-    
-    config.mobius.mqtt = mqtt;
-  
-    config.mobius.port = Number(port);
-  
+
     configStr = JSON.stringify(source, null, 2);
     fs.writeFileSync(`${CONFIGS[service].packageLocation}`, configStr, 'utf8', function(err){
       if(err){
@@ -169,6 +171,64 @@ function saveConfig(source, service, host, mqtt, port) {
       } else {
         resolve();
       }
+    })
+  })
+}
+function getPort(service, origin) {
+  while(true) {
+    var port = input.questionInt(`서비스 ${service}의 포트를 ${origin}에서 포트를 입력해주세요 : `);
+    if(!port && port <= 0 ) {
+      console.log("0보다 큰 수를 입력해주세요.");
+      continue;
+    } else {
+      return port;
+    }
+  }
+}
+function setServicePort() {
+  return new Promise(function(resolve, reject) {
+    var json = readJSON();
+    var configs = json.map(el => {
+      return el.config;
+    });
+    var serviceNames = json.map(el => {
+      return el.service;
+    });
+    serviceNames.push('done');
+    var temp = [];
+    while(true) {
+      var choise = input.keyInSelect(serviceNames, "포트번호를 변경할 서비스를 선택해주세요.");
+      var changedConfig = null;
+      switch(choise) {
+        case 0 :
+        case 1 :
+        case 2 :
+        case 3 :
+        case 4 :
+          var cpConfig = JSON.parse(JSON.stringify(configs[choise]));
+          var origin = cpConfig.default.node.port;
+          cpConfig.default.node.port = getPort(serviceNames[choise], origin);
+          changedConfig = cpConfig;
+          break;
+      }
+      if(choise == 5) break;
+      else if(choise === -1) {
+        temp.length = 0;
+        break;
+      } else {
+        console.log(changedConfig);
+        temp.push({
+          service : serviceNames[choise],
+          config : changedConfig
+        })
+      }
+    }
+    var promises = temp.map(el => {
+      console.log(el.config);
+      saveConfig(el.config, el.service);
+    })
+    Promise.all(promises).then(() => {
+      resolve();
     })
   })
 }
@@ -184,8 +244,10 @@ gulp.task('init', function(){
     }
   })
     .then(() => {
-      gulp.src("./")
-      .pipe(gulp.series([setDatabase, npmInstall]))
+      return setServicePort();
+    })
+    .then(() => {
+      return gulp.series([setDatabase, npmInstall])();
     })
     .catch(err => {
       console.error(err);
