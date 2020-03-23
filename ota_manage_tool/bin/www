@@ -14,7 +14,7 @@ var logger = require('../services/logger');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(CONFIG.node_port || '3000');
+var port = normalizePort(CONFIG.node.port || '3000');
 console.log(`OTADevelopmentAssistServer run by ${port} port!`);
 app.set('port', port);
 

@@ -1,7 +1,7 @@
 {
   "default": {
     "node": {
-      "port": "7580"
+      "port": 7580
     },
     "mongo": {
       "host": "localhost",
@@ -38,13 +38,7 @@
     "jwt" : {
       "SECRET" : "Z29f/iImdZ5QrAaHW1xGQqcvaWrLmmQw8pmQGMtYZqBJAL9WLnWa67qyq8H9phVX43plaSWQ/Ab1rPdoBhKS9Q=="
     },
-    "iotplatform_": {
-      "host": "http://203.253.128.161",
-      "mqtt": "mqtt://203.253.128.161",
-      "port": "7579",
-      "csebase": "Mobius"
-    },
-    "iotplatform": {
+    "mobius": {
       "host": "http://203.253.128.161",
       "mqtt": "mqtt://203.253.128.161",
       "port": "7579",
@@ -55,25 +49,5 @@
     },
     "dummy1": "203.253.128.161",
     "dummy3": "localhost"
-  },
-  "production": {
-    "iotplatform": {
-      "host": "http://192.168.1.5",
-      "mqtt": "mqtt://192.168.1.5",
-      "port": "7579",
-      "csebase": "Mobius"
-    }
-  },
-  "synctechno": {
-    "iotplatform": {
-      "host": "http://203.253.128.161",
-      "mqtt": "mqtt://203.253.128.161",
-      "port": "7579",
-      "csebase": "Mobius"
-    }
-  },
-  "KJH" : {
-    "mobius_sub_prefix" : "KJH_DASHBOARD",
-    "portal_url" : "http://localhost:8881"
   }
 }

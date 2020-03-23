@@ -12,7 +12,7 @@ var SERVICE_AE = {
 module.exports = function(){
   return new Promise((resolve, reject) => {
     try{
-      var aeURL = CONFIG.mobius_url+'/'+CONFIG.system_name;
+      var aeURL = `${CONFIG.mobius.host}:${CONFIG.mobius.port}/${CONFIG.mobius.csebase}`+'/'+CONFIG.system_name;
       var target = onem2mModel.getAccessPointInfo(aeURL);
       var parentResourcePath = target.baseUrl + '/' + target.cseName
     

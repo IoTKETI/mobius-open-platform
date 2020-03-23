@@ -1,10 +1,13 @@
 var gulp = require('gulp');
-var git = require('gulp-git');
 var install = require('gulp-install');
 var run = require('gulp-run')
+var input = require('readline-sync');
+var fs = require('fs');
+
+
 var dbSetting = require('./set_mongo');
 
-const SERVICES = {
+const PACKAGES = {
   WEBPORTAL : {
     packageLocation : './webportal/package.json',
   },
@@ -21,6 +24,23 @@ const SERVICES = {
     packageLocation : './resource_browser/package.json'
   }
 }
+const CONFIGS = {
+  WEBPORTAL : {
+    packageLocation : './webportal/bin/config.json',
+  },
+  DASHBOARD : {
+    packageLocation : './dashboard/backend/config.json',
+  },
+  OTA : {
+    packageLocation : './ota_manage_tool/config.json',
+  },
+  SNS : {
+    packageLocation : './sns_agent_manage_tool/config.json',
+  },
+  RES : {
+    packageLocation : './resource_browser/bin/config.json'
+  }
+}
 
 function filterArgvOptions(argv) {
 
@@ -33,13 +53,13 @@ function filterArgvOptions(argv) {
   return options;
 }
 function setAllService() {
-  return Object.keys(SERVICES).map(name => {
-    return SERVICES[name].packageLocation;
+  return Object.keys(PACKAGES).map(name => {
+    return PACKAGES[name].packageLocation;
   });
 }
 function setSelecService(selected) {
   var services = selected.map(el => {
-    if(SERVICES[el]) return SERVICES[el].packageLocation;
+    if(PACKAGES[el]) return PACKAGES[el].packageLocation;
     else throw new Error(`존재하지않는 서비스 입니다. : ${el}`);
   });
   // remove invalid url
@@ -47,7 +67,7 @@ function setSelecService(selected) {
     return el;
   })
 }
-gulp.task('npmInstall', function (){
+function npmInstall() {
   return new Promise(function(resolve, reject) {
     gulp.src([
       './webportal/package.json', 
@@ -61,7 +81,8 @@ gulp.task('npmInstall', function (){
     .pipe(gulp.src("./package.json"))
     .on('end', resolve);
   })
-});
+}
+gulp.task('npmInstall', npmInstall);
 /*
 gulp.task('npmInstall', function (){
   
@@ -80,9 +101,10 @@ gulp.task('npmInstall', function (){
     .on('end', resolve);
   })
 })*/
-gulp.task('setDatabase', function(){
+function setDatabase (){
   return dbSetting();
-})
+}
+gulp.task('setDatabase', setDatabase)
 
 function startWebportal() {
   return run(`pm2 start ./webportal/bin/www --name webportal `).exec()
@@ -101,4 +123,71 @@ gulp.task('serviceStart', gulp.series([startWebportal, startDashboard, startOta,
 
 gulp.task('serviceRestart', function(){
   return run("pm2 restart webportal dashboard ota sns").exec()
+})
+function readJSON(){
+  return Object.keys(CONFIGS).map(key => {
+    var config = require(CONFIGS[key].packageLocation);
+    return {
+      service : key,
+      config : config
+    }
+  })
+}
+function setMobiusURL(){
+  mobiusURL = input.question("please input wanted for Mobius url and port(ex : www.mobius.com:7579) : ");
+
+  regextResult = mobiusURL.match(/(http(s)?\:\/\/)?(www\.)?([\w+\.]+)\:([0-9]{1,9})/);
+  if((regextResult && regextResult.length >= 6) && (regextResult[4] && regextResult[5])) {
+    var host = `http://${regextResult[4]}`;
+    var mqtt = `mqtt://${regextResult[4]}`;
+    var port = Number(regextResult[5]);
+
+    var configs = readJSON();
+    
+    var promises = configs.map(el => {
+      saveConfig(el.config, el.service, host, mqtt, port)
+    });
+    return Promise.all(promises);
+  } else {
+    return Promise.reject(new Error("변경할 Mobius의 주소 혹은 포트를 찾을 수 없습니다."));
+  }
+}
+function saveConfig(source, service, host, mqtt, port) {
+  return new Promise(function(resolve, reject) {
+    var config = source.default;
+    if(!config.mobius) if(!config) return reject(new Error("Invalid CONFIG source")); else return;
+    config.mobius.host = host;
+    
+    config.mobius.mqtt = mqtt;
+  
+    config.mobius.port = Number(port);
+  
+    configStr = JSON.stringify(source, null, 2);
+    fs.writeFileSync(`${CONFIGS[service].packageLocation}`, configStr, 'utf8', function(err){
+      if(err){
+        console.error(err);
+      } else {
+        resolve();
+      }
+    })
+  })
+}
+gulp.task('init', function(){
+  return new Promise(function(resolve, reject){
+    if(input.keyInYN("Would you change Mobius URL? ")) {
+      setMobiusURL()
+        .then(() => {
+          resolve();
+        })
+    }else {
+      resolve();
+    }
+  })
+    .then(() => {
+      gulp.src("./")
+      .pipe(gulp.series([setDatabase, npmInstall]))
+    })
+    .catch(err => {
+      console.error(err);
+    })
 })
