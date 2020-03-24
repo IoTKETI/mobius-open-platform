@@ -239,11 +239,11 @@ function printDomains(mainDomain, subDomains) {
   console.log(`============================================\n${domains.join("\n")}\n============================================`);
 }
 function getServiceAndPort(mainAddress) {
-  return readJSON().map(el => {
-    var url = {};
-    url[el.service] = `${mainAddress}:${el.config.default.node.port}`;
-    return url;
+  var domains = {};
+  readJSON().forEach(el => {
+    domains[el.service] = `${mainAddress}:${el.config.default.node.port}`;
   })
+  return  domains;
 }
 function setAddress() {
   return new Promise(function(resolve, reject) {
@@ -302,10 +302,9 @@ function setAddress() {
             names[choise] = `${subDomains[choise].service} => ${subDomains[choise].subdomain}`;
           }
         }
-        domainList = subDomains.map(el => {
-          var domain = {};
-          domain[el.name] = `${el.subdomain}.${mainAddress}`;
-          return domain;
+        domainList = {};
+        subDomains.forEach(el => {
+          domainList[el.name] = `${el.subdomain}.${mainAddress}`;
         })
       } else {
         domainList = getServiceAndPort(mainAddress);

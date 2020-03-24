@@ -23,7 +23,7 @@ exports.checkRefreshToken = (email, refreshToken) => {
 exports.signOut = (email) => {
     return new Promise((resolve, reject) => {
         HTTP({
-            uri : CONFIG.portal_url+"/auth/logout",
+            uri : CONFIG.domains.WEBPORTAL+"/auth/logout",
             method : 'post',
             headers : {
                 "Accept": "application/json", 

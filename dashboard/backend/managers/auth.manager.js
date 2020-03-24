@@ -195,7 +195,7 @@ try{
     let email = req.query.email;
     // 로그아웃이라면 저장되어 있는 Refresh토큰을 제거한다.
     http({
-      uri : CONFIG.portal_url + "/auth/logout",
+      uri : CONFIG.domains.WEBPORTAL + "/auth/logout",
       method : "post",
       headers : {
         "accept" : "application/json"
