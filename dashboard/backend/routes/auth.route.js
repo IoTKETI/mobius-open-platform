@@ -69,4 +69,12 @@ router.get('/check', authManager.check);
 
 router.delete('/', authManager.userSignOut);
 router.post('/re', authManager.tokenReIssue);
+router.get('/info', function(req, res, next) {
+  var info = {};
+  info.serviceUrl = CONFIG.domains;
+
+  res.status(200).json({
+    info : info
+  })
+})
 module.exports = router;

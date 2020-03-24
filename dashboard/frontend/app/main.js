@@ -338,17 +338,19 @@
 
   function run($rootScope, $location) {
     window.API_BASE_URL = "";
-    $rootScope.serviceUrl = {
-      mobiusState : "http://portal.iotocean.org/#!/dashboard",
-      deviceManage : "http://portal.iotocean.org/#!/device-list",
-      accessProtect : "http://portal.iotocean.org/#!/acp-list/",
-      dataBrowser : "http://portal.iotocean.org/#!/data-browser/",
-      resmon : "http://resmon.iotocean.org",
-      ota : "http://ota.iotocean.org",
-      sns : "http://sns.iotocean.org",
-      dashboard : "http://dashboard.iotocean.org"
+    $rootScope.setServiceURL = function(serviceUrl) {
+      var s = {};
+      s.mobiusState = `http://${serviceUrl.WEBPORTAL}/#!/dashboard"`;
+      s.deviceManage = `http://${serviceUrl.WEBPORTAL}/#!/device-list"`;
+      s.accessProtect = `http://${serviceUrl.WEBPORTAL}/#!/acp-list/"`;
+      s.dataBrowser = `http://${serviceUrl.WEBPORTAL}/#!/data-browser/"`;
+      s.resmon = `http://${serviceUrl.RES}"`;
+      s.ota = `http://${serviceUrl.OTA}"`;
+      s.sns = `http://${serviceUrl.SNS}"`;
+      s.dashboard = `http://${serviceUrl.DASHBOARD}"`;
+      $rootScope.serviceUrl = s;
+      $rootScope.serverUrl = `http://${serviceUrl.WEBPORTAL}`;
     }
-    $rootScope.serverUrl = "http://portal.iotocean.org";
 
 
     if (SVGElement && SVGElement.prototype) {
