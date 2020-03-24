@@ -9,11 +9,8 @@
       "port": "7579",
       "csebase": "Mobius"
     },
-    "mobius_url" : "http://203.253.128.161:7579/Mobius",
-    "mqtt_url": "mqtt://203.253.128.161",
     "mobius_sub_prefix" : "KETI_SNS",
     "system_name" : "KETI_SNS_AGENT_MANAGER",
-    "portal_url" : "portal.iotocean.org",
     "jwt": {
       "JWT_ISSUER" : "SYNCTECHNO",
       "ACCESS_SUBJECT" : "ACCESS",

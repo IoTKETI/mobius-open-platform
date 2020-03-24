@@ -10,7 +10,6 @@
       "user": "dashboard-user",
       "password": "tkdydwk12#$"
     },
-    "portal_url" : "http://203.253.128.161:8881",
     "sendmail": {
       "host": "smtp.gmail.com",
       "port": 465,
