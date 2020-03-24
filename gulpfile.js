@@ -41,11 +41,11 @@ const CONFIGS = {
     packageLocation : './resource_browser/bin/config.json'
   }
 }
-const SUBDOMAINS = [{ service : "Webportal", subdomain : "portal"},
-{ service : "Dashboard", subdomain : "dashboard"},
-{ service : "OTA manage tool", subdomain : "ota"},
-{ service : "SNS agent manage tool", subdomain : "sns"},
-{ service : "Resource Browser", subdomain : "res"}]
+const SUBDOMAINS = [{name : "WEBPORTAL", service : "Webportal", subdomain : "portal"},
+{name : "DASHBOARD", service : "Dashboard", subdomain : "dashboard"},
+{name : "OTA", service : "OTA manage tool", subdomain : "ota"},
+{name : "SNS", service : "SNS agent manage tool", subdomain : "sns"},
+{name : "RES", service : "Resource Browser", subdomain : "res"}]
 
 function filterArgvOptions(argv) {
 
@@ -85,24 +85,7 @@ function npmInstall() {
   })
 }
 gulp.task('npmInstall', npmInstall);
-/*
-gulp.task('npmInstall', function (){
-  
-  if(process.argv.length <= 4) {
-    throw new Error("필요 옵션이 필요합니다.");
-  }
-  var selected = filterArgvOptions(process.argv);
 
-  var packages = selected.find(el => { return el === 'ALL'}) ? setAllService() : setSelecService(selected);
-
-  return new Promise(function(resolve, reject) {
-    gulp.src(packages)
-    .pipe(install())
-    .on('error', reject)
-    .pipe(gulp.src("./package.json"))
-    .on('end', resolve);
-  })
-})*/
 function setDatabase (){
   return dbSetting();
 }
@@ -169,7 +152,7 @@ function modifyMobiusSetting(source, service, host, mqtt, port) {
 
   config.mobius.port = Number(port);
 
-  return source.default;
+  return source;
 }
 function saveConfig(source, service) {
   return new Promise(function(resolve, reject) {
@@ -224,8 +207,8 @@ function setServicePort() {
       }
       if(choise == 5) break;
       else if(choise === -1) {
-        temp.length = 0;
-        break;
+        reject(new Error("사용자가 설치를 중단했습니다."));
+        return;
       } else {
         console.log(changedConfig);
         temp.push({
@@ -243,8 +226,11 @@ function setServicePort() {
     })
   })
 }
-function addressCheck(string) {
+function dnsCheck(string) {
   return /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/.test(string)
+}
+function ipCheck(string) {
+  return /(?!0)(?!.*\.$)((1?\d?\d|25[0-5]|2[0-4]\d)(\.|$)){4}/.test(string)
 }
 function printDomains(mainDomain, subDomains) {
   var domains =  subDomains.map(sub => {
@@ -252,45 +238,91 @@ function printDomains(mainDomain, subDomains) {
   })
   console.log(`============================================\n${domains.join("\n")}\n============================================`);
 }
+function getServiceAndPort(mainAddress) {
+  return readJSON().map(el => {
+    var url = {};
+    url[el.service] = `${mainAddress}:${el.config.default.node.port}`;
+    return url;
+  })
+}
 function setAddress() {
-  var main = null;
-  
-  while(true) {
-    main = input.question("사용할 주 도메인 혹은 IP주소를 입력해주세요.(ex iotocean.org 또는 203.xxx.xxx.105) : ");
-    if(!addressCheck(main)){
-      console.log("유효하지 않은 도메인 또는 IP주소 입니다.");
-    } else {
-      break;
-    }
-  }
+  return new Promise(function(resolve, reject) {
+    try {
+      var mainAddress = null;
+      var domainList = [];
+      var isDomain = input.keyInSelect(["DNS" , "IP Address"], "서비스 주소로 사용할 양식을 선택해주세요");
+      var check = null;
+      console.log(`isDomain ${isDomain}`);
+      switch(isDomain) {
+        case 0 :
+          isDomain = true;
+          check = dnsCheck;
+          break;
+        case 1 : 
+          isDomain = false;
+          check = ipCheck;
+          break;
+        default :
+          reject(new Error("사용자가 설치를 중단했습니다."));
+          return;
+      }
+      while(true) {
+        mainAddress = input.question("서비스 주소를 설정합니다. 도메인의 경우 Nginx 설정과 동일하게 입력해주세요.\n사용할 주 도메인 혹은 IP주소를 입력해주세요.(ex iotocean.org 또는 203.1.2.3) : ");
+        if(check(mainAddress)){
+          break;
+        } else {
+          console.log("올바른 양식의 도메인 또는 IP 주소를 입력해주세요.");
+        }
+      }
+    
+      if(isDomain) {
+        var subDomains = SUBDOMAINS;
+        var names = subDomains.map(el => { return `${el.service} => ${el.subdomain}`});
+        names.push('done');
+        while(true){
+          var choise = input.keyInSelect(names, "서브도메인을 변경할 서비스를 선택해주세요 : ");
+          var replaceDomain = null;
+          switch(choise) {
+            case 0 :
+            case 1 :
+            case 2 : 
+            case 3 : 
+            case 4 :
+            replaceDomain = input.question("사용할 서브도메인을 입력해주세요 : ");
+            subDomains[choise].subdomain = replaceDomain;
+          }
+          if(choise == -1) {// cancel
+            subDomains = SUBDOMAINS;
+            break;
+          }
+          else if(choise === 5) {//done
+            printDomains(mainAddress, subDomains);
+            if(input.keyInYN("서비스 도메인을 위와 같이 사용하시겠습니까?")) break;
+          } else {
+            names[choise] = `${subDomains[choise].service} => ${subDomains[choise].subdomain}`;
+          }
+        }
+        domainList = subDomains.map(el => {
+          var domain = {};
+          domain[el.name] = `${el.subdomain}.${mainAddress}`;
+          return domain;
+        })
+      } else {
+        domainList = getServiceAndPort(mainAddress);
+      }
 
+      var configs = readJSON();
+      configs.map(el => {
+        el.config.default.domains = domainList;
+        saveConfig(el.config, el.service);
+      })
 
-  var subdomains = SUBDOMAINS;
-  var names = subdomains.map(el => { return `${el.service} => ${el.subdomain}`});
-  names.push('done');
-  while(true){
-    var choise = input.keyInSelect(names, "서브도메인을 변경할 서비스를 선택해주세요 : ");
-    var replaceDomain = null;
-    switch(choise) {
-      case 0 :
-      case 1 :
-      case 2 : 
-      case 3 : 
-      case 4 :
-      replaceDomain = input.question("사용할 서브도메인을 입력해주세요 : ");
-      subdomains[choise].subdomain = replaceDomain;
+      resolve();
+        
+    } catch (error) {
+      reject(error);
     }
-    if(choise == -1) {// cancel
-      subdomains = SUBDOMAINS;
-      break;
-    }
-    else if(choise === 5) {//done
-      printDomains(main, subdomains);
-      if(input.keyInYN("위와 같은 도메인으로 사용하시겠습니까?")) break;
-    }
-  }
-
-
+  })
 }
 gulp.task('init', function(){
   return new Promise(function(resolve, reject){
@@ -305,6 +337,9 @@ gulp.task('init', function(){
   })
     .then(() => {
       return setServicePort();
+    })
+    .then(() => {
+      return setAddress();
     })
     .then(() => {
       return gulp.series([setDatabase, npmInstall])();
