@@ -10,11 +10,11 @@ var nodemailer = require('nodemailer');
 
 var schedule = require('node-schedule');
 
-var MQTT_URL = global.CONFIG.target.mqtt;
-var TARGET_IOT_PLATFORM_URL = global.CONFIG.target.host;
-if(global.CONFIG.target.port)
-  TARGET_IOT_PLATFORM_URL += ':' + global.CONFIG.target.port;
-var TARGET_IOT_PLATFORM_CB_NAME = global.CONFIG.target.csebase;
+var MQTT_URL = global.CONFIG.mobius.mqtt;
+var TARGET_IOT_PLATFORM_URL = global.CONFIG.mobius.host;
+if(global.CONFIG.mobius.port)
+  TARGET_IOT_PLATFORM_URL += ':' + global.CONFIG.mobius.port;
+var TARGET_IOT_PLATFORM_CB_NAME = global.CONFIG.mobius.csebase;
 
 var date = new Date(2014, 9, 18, 9, 30, 0);
 /*

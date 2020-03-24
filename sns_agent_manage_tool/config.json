@@ -1,11 +1,16 @@
 {
   "default" : {
-    "node_port" : "7597",        
-    "mobius_url" : "http://203.253.128.161:7579/Mobius",
-    "mqtt_url": "mqtt://203.253.128.161",
+    "node" : {
+      "port" : 7597
+    },     
+    "mobius": {
+      "host": "http://203.253.128.161",
+      "mqtt": "mqtt://203.253.128.161",
+      "port": "7579",
+      "csebase": "Mobius"
+    },
     "mobius_sub_prefix" : "KETI_SNS",
     "system_name" : "KETI_SNS_AGENT_MANAGER",
-    "portal_url" : "portal.iotocean.org",
     "jwt": {
       "JWT_ISSUER" : "SYNCTECHNO",
       "ACCESS_SUBJECT" : "ACCESS",
@@ -21,9 +26,5 @@
       "user": "telebot",
       "password": "telebot!@"
     }
-  },
-  "KJH" : {
-    "mobius_sub_prefix" : "KJH_SNS",
-    "portal_url" : "http://localhost:8881"
   }
 }

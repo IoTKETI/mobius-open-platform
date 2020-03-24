@@ -16,9 +16,9 @@
   "dependencies": {},
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-git": "^2.10.0",
     "gulp-install": "^1.1.0",
     "gulp-run": "^1.7.1",
-    "mongodb": "^3.5.5"
+    "mongodb": "^3.5.5",
+    "readline-sync": "^1.4.10"
   }
 }

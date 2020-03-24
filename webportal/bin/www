@@ -104,5 +104,5 @@ function onListening() {
     : 'port ' + addr.port;
   debug('Listening on ' + bind, 'http://localhost:' + addr.port + '/');
 
-  dbsyncManager.startMqttListener(global.CONFIG.target.mqtt);
+  dbsyncManager.startMqttListener(global.CONFIG.mobius.mqtt);
 }

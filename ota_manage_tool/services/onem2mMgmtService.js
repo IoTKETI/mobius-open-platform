@@ -1,7 +1,7 @@
 var onem2m = require('../lib/onem2m-client');
 
 var OTA_USER_AE_PREFIX = 'OTA_';
-
+const mobiusURL = `${CONFIG.mobius.host}:${CONFIG.mobius.port}/${CONFIG.mobius.csebase}`;
 
 emailParser = (email) => {
     return email.split('@')[0]; // @아래의 id만 가져오기
@@ -9,7 +9,7 @@ emailParser = (email) => {
 }
 
 exports.isExistAE = (aeid) => {
-    var targetUrl = CONFIG.mobius_url
+    var targetUrl = mobiusURL;
     return new Promise((resolve, reject) => {
         try{
             onem2m.Http.GetResource(`${targetUrl}/${aeid}`, "OneM2M_OTA_Service").
@@ -42,7 +42,7 @@ exports.createOrGetAEResource = (email) => {
             };
 
             origin = aeName;
-            var targetUrl = CONFIG.mobius_url
+            var targetUrl = mobiusURL;
             onem2m.Http.CreateResource(targetUrl, aeObject, origin)
             .then( aeResource => {
                 return aeResource;
@@ -71,13 +71,13 @@ exports.createOrGetAEResource = (email) => {
 
 exports.userFiredDeleteAE = (user) => {
     let aeID = user.aeid;
-    let targetUrl = CONFIG.mobius_url;
+    let targetUrl = mobiusURL;;
 
     return onem2m.Http.DeleteResource(`${targetUrl}/${aeID}`, aeID);
 }
 
 exports.createUpdateCIN = (userOrigin, aeid) => {
-    let targetUrl = `${CONFIG.mobius_url}/${aeid}/update`;
+    let targetUrl = `${mobiusURL}/${aeid}/update`;
 
     let cinObj = {
         'm2m:cin' : {

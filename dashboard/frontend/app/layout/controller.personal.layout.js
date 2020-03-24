@@ -17,6 +17,9 @@
 
     $scope.init = function () {
       if(!$rootScope.user){
+        authService.getSysInfo().then(function(info){
+          $rootScope.setServiceURL(info.serviceUrl);
+        })
         authService.getLoginUser().then(function(user){
           $rootScope.user = user;
         })

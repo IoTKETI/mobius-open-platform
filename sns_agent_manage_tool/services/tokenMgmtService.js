@@ -36,7 +36,7 @@ exports.checkValidToken = (token) => {
         checkExpiredToken(token)
         .then(decode => {
             return http({
-                uri : `${CONFIG.portal_url}/auth/re/check`,
+                uri : `${CONFIG.domains.WEBPORTAL}/auth/re/check`,
                 method : "POST",
                 headers : {
                     "Accept": "application/json", 
@@ -66,7 +66,7 @@ exports.requestNewAccessToken = (token) => {
         checkExpiredToken(token)
         .then(decode => {
             return http({
-                uri : `${CONFIG.portal_url}/auth/re/issue`,
+                uri : `${CONFIG.domains.WEBPORTAL}/auth/re/issue`,
                 method : "POST",
                 headers : {
                     "Accept": "application/json", 

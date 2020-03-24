@@ -17,7 +17,7 @@ const botSetter = require('../modules/intializeBotModules');
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(CONFIG.node_port || '3000');
+var port = normalizePort(CONFIG.node.port || '3000');
 console.log(`TelegramBotManagementAssist run by ${port} port!`);
 app.set('port', port);
 

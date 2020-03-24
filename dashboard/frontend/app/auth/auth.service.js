@@ -24,7 +24,8 @@
       "resetPassword": _resetPassword,
       "changePassword": _changePassword,
       "reIssueToken" : _reIssueToken,
-      "getAccessToken" : _getAccessToken
+      "getAccessToken" : _getAccessToken,
+      "getSysInfo" : _getsysInfo
     };
     return services;
 
@@ -364,6 +365,20 @@
               reject(err);
             })
         }
+      })
+    }
+    function _getsysInfo() {
+      return new Promise(function(resolve, reject) {
+        $http({
+          url :  window.API_BASE_URL + '/auth/info',
+          method: 'get'
+        })
+          .then(function(res) {
+            resolve(res.info);
+          })
+          .catch(function(err){
+            reject(err);
+          })
       })
     }
   } //   end of function AuthService()

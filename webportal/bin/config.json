@@ -1,7 +1,7 @@
 {
   "default" : {
     "node" : {
-      "port": "8881"
+      "port": 8881
     },
 
     "mongo": {
@@ -36,7 +36,7 @@
       "acMaxAge" : 3600000,
       "reMaxAge" : 2592000000
     },
-    "target": {
+    "mobius": {
       "host": "http://203.253.128.161",
       "mqtt": "mqtt://203.253.128.161",
       "port": "7579",

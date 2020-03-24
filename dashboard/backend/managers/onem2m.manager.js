@@ -7,12 +7,12 @@ const debug = global.debug;
 var onem2mClient = require('../libs/onem2m-client');
 var onem2mMqtt = require('../libs/onem2m-mqtt');
 
-var TARGET_IOT_PLATFORM_URL = global.CONFIG.iotplatform.host;
-if(global.CONFIG.iotplatform.port)
-  TARGET_IOT_PLATFORM_URL += ':' + global.CONFIG.iotplatform.port;
+var TARGET_IOT_PLATFORM_URL = global.CONFIG.mobius.host;
+if(global.CONFIG.mobius.port)
+  TARGET_IOT_PLATFORM_URL += ':' + global.CONFIG.mobius.port;
 
-var TARGET_IOT_PLATFORM_CB_NAME = global.CONFIG.iotplatform.csebase;
-var MQTT_URL = global.CONFIG.iotplatform.mqtt;
+var TARGET_IOT_PLATFORM_CB_NAME = global.CONFIG.mobius.csebase;
+var MQTT_URL = global.CONFIG.mobius.mqtt;
 
 
 var DASHBOARD_USER_AE_PREFIX = "DSHBD_";
