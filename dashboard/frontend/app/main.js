@@ -12,6 +12,7 @@
     .run(run);
 
 
+
   function config($stateProvider, $urlRouterProvider, $mdThemingProvider, $httpProvider, localStorageServiceProvider, hljsServiceProvider) {
 
     $urlRouterProvider.otherwise('/login');
@@ -336,21 +337,23 @@
   }
 
 
-  function run($rootScope, $location) {
+  function run($rootScope, $location, authService) {
     window.API_BASE_URL = "";
-    $rootScope.setServiceURL = function(serviceUrl) {
-      var s = {};
-      s.mobiusState = `http://${serviceUrl.WEBPORTAL}/#!/dashboard"`;
-      s.deviceManage = `http://${serviceUrl.WEBPORTAL}/#!/device-list"`;
-      s.accessProtect = `http://${serviceUrl.WEBPORTAL}/#!/acp-list/"`;
-      s.dataBrowser = `http://${serviceUrl.WEBPORTAL}/#!/data-browser/"`;
-      s.resmon = `http://${serviceUrl.RES}"`;
-      s.ota = `http://${serviceUrl.OTA}"`;
-      s.sns = `http://${serviceUrl.SNS}"`;
-      s.dashboard = `http://${serviceUrl.DASHBOARD}"`;
-      $rootScope.serviceUrl = s;
-      $rootScope.serverUrl = `http://${serviceUrl.WEBPORTAL}`;
-    }
+    authService.getSysInfo()
+      .then(function(info){
+        var serviceUrl = info.serviceUrl;
+        var s = {};
+        s.mobiusState = `http://${serviceUrl.WEBPORTAL}/#!/dashboard`;
+        s.deviceManage = `http://${serviceUrl.WEBPORTAL}/#!/device-list`;
+        s.accessProtect = `http://${serviceUrl.WEBPORTAL}/#!/acp-list/`;
+        s.dataBrowser = `http://${serviceUrl.WEBPORTAL}/#!/data-browser/"`;
+        s.resmon = `http://${serviceUrl.RES}`;
+        s.ota = `http://${serviceUrl.OTA}`;
+        s.sns = `http://${serviceUrl.SNS}`;
+        s.dashboard = `http://${serviceUrl.DASHBOARD}`;
+        $rootScope.serviceUrl = s;
+        $rootScope.serverUrl = `http://${serviceUrl.WEBPORTAL}`;
+      })
 
 
     if (SVGElement && SVGElement.prototype) {

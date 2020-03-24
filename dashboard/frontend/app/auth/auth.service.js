@@ -374,7 +374,7 @@
           method: 'get'
         })
           .then(function(res) {
-            resolve(res.info);
+            resolve(res.data);
           })
           .catch(function(err){
             reject(err);

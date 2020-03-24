@@ -250,7 +250,6 @@ function setAddress() {
     try {
       var mainAddress = null;
       var domainList = [];
-      var useSub = input.keyInYN("Nginx을 통한 '서브도메인'을 사용하시겠습니까?");
       while(true) {
         mainAddress = input.question("서비스 주소를 설정합니다. 서브 도메인을 사용하는 경우 Nginx 설정과 동일하게 입력해주세요.(ex iotocean.org : ");
         if(dnsCheck(mainAddress)){
@@ -260,6 +259,7 @@ function setAddress() {
         }
       }
     
+      var useSub = input.keyInYN("서브도메인을 설정하시겠습니까?");
       if(useSub) {
         var subDomains = SUBDOMAINS;
         var names = subDomains.map(el => { return `${el.service} => ${el.subdomain}`});

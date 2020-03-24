@@ -73,8 +73,6 @@ router.get('/info', function(req, res, next) {
   var info = {};
   info.serviceUrl = CONFIG.domains;
 
-  res.status(200).json({
-    info : info
-  })
+  res.status(200).json(info)
 })
 module.exports = router;
