@@ -250,32 +250,17 @@ function setAddress() {
     try {
       var mainAddress = null;
       var domainList = [];
-      var isDomain = input.keyInSelect(["DNS" , "IP Address"], "서비스 주소로 사용할 양식을 선택해주세요");
-      var check = null;
-      console.log(`isDomain ${isDomain}`);
-      switch(isDomain) {
-        case 0 :
-          isDomain = true;
-          check = dnsCheck;
-          break;
-        case 1 : 
-          isDomain = false;
-          check = ipCheck;
-          break;
-        default :
-          reject(new Error("사용자가 설치를 중단했습니다."));
-          return;
-      }
+      var useSub = input.keyInYN("Nginx을 통한 '서브도메인'을 사용하시겠습니까?");
       while(true) {
-        mainAddress = input.question("서비스 주소를 설정합니다. 도메인의 경우 Nginx 설정과 동일하게 입력해주세요.\n사용할 주 도메인 혹은 IP주소를 입력해주세요.(ex iotocean.org 또는 203.1.2.3) : ");
-        if(check(mainAddress)){
+        mainAddress = input.question("서비스 주소를 설정합니다. 서브 도메인을 사용하는 경우 Nginx 설정과 동일하게 입력해주세요.(ex iotocean.org : ");
+        if(dnsCheck(mainAddress)){
           break;
         } else {
-          console.log("올바른 양식의 도메인 또는 IP 주소를 입력해주세요.");
+          console.log("올바른 양식의 도메인을 입력해주세요.");
         }
       }
     
-      if(isDomain) {
+      if(useSub) {
         var subDomains = SUBDOMAINS;
         var names = subDomains.map(el => { return `${el.service} => ${el.subdomain}`});
         names.push('done');
@@ -313,6 +298,9 @@ function setAddress() {
       var configs = readJSON();
       configs.map(el => {
         el.config.default.domains = domainList;
+        if(el.service === 'WEBPORTAL') {
+          el.config.default.cookie.domain = `.${mainAddress}`
+        }
         saveConfig(el.config, el.service);
       })
 
