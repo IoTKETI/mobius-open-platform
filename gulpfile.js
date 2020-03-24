@@ -41,6 +41,11 @@ const CONFIGS = {
     packageLocation : './resource_browser/bin/config.json'
   }
 }
+const SUBDOMAINS = [{ service : "Webportal", subdomain : "portal"},
+{ service : "Dashboard", subdomain : "dashboard"},
+{ service : "OTA manage tool", subdomain : "ota"},
+{ service : "SNS agent manage tool", subdomain : "sns"},
+{ service : "Resource Browser", subdomain : "res"}]
 
 function filterArgvOptions(argv) {
 
@@ -131,7 +136,7 @@ function readJSON(){
   })
 }
 function setMobiusURL(){
-  mobiusURL = input.question("please input wanted for Mobius url and port(ex : www.mobius.com:7579) : ");
+  mobiusURL = input.question("변경할 Mobius 주소(IP)와 포트를 입력해주세요(예 : www.mobius.com:7579) : ");
 
   regextResult = mobiusURL.match(/(http(s)?\:\/\/)?(www\.)?([\w+\.]+)\:([0-9]{1,9})/);
   if((regextResult && regextResult.length >= 6) && (regextResult[4] && regextResult[5])) {
@@ -168,6 +173,7 @@ function saveConfig(source, service) {
     fs.writeFileSync(`${CONFIGS[service].packageLocation}`, configStr, 'utf8', function(err){
       if(err){
         console.error(err);
+        reject(err);
       } else {
         resolve();
       }
@@ -232,9 +238,58 @@ function setServicePort() {
     })
   })
 }
+function addressCheck(string) {
+  return /(?:[a-z0-9](?:[a-z0-9-]{0,61}[a-z0-9])?\.)+[a-z0-9][a-z0-9-]{0,61}[a-z0-9]/.test(string)
+}
+function printDomains(mainDomain, subDomains) {
+  var domains =  subDomains.map(sub => {
+    return `${sub.service} : ${sub.subdomain}.${mainDomain}`;
+  })
+  console.log(`============================================\n${domains.join("\n")}\n============================================`);
+}
+function setAddress() {
+  var main = null;
+  
+  while(true) {
+    main = input.question("사용할 주 도메인 혹은 IP주소를 입력해주세요.(ex iotocean.org 또는 203.xxx.xxx.105) : ");
+    if(!addressCheck(main)){
+      console.log("유효하지 않은 도메인 또는 IP주소 입니다.");
+    } else {
+      break;
+    }
+  }
+
+
+  var subdomains = SUBDOMAINS;
+  var names = subdomains.map(el => { return `${el.service} => ${el.subdomain}`});
+  names.push('done');
+  while(true){
+    var choise = input.keyInSelect(names, "서브도메인을 변경할 서비스를 선택해주세요 : ");
+    var replaceDomain = null;
+    switch(choise) {
+      case 0 :
+      case 1 :
+      case 2 : 
+      case 3 : 
+      case 4 :
+      replaceDomain = input.question("사용할 서브도메인을 입력해주세요 : ");
+      subdomains[choise].subdomain = replaceDomain;
+    }
+    if(choise == -1) {// cancel
+      subdomains = SUBDOMAINS;
+      break;
+    }
+    else if(choise === 5) {//done
+      printDomains(main, subdomains);
+      if(input.keyInYN("위와 같은 도메인으로 사용하시겠습니까?")) break;
+    }
+  }
+
+
+}
 gulp.task('init', function(){
   return new Promise(function(resolve, reject){
-    if(input.keyInYN("Would you change Mobius URL? ")) {
+    if(input.keyInYN("Mobius URL을 변경하시겠습니까? ")) {
       setMobiusURL()
         .then(() => {
           resolve();
