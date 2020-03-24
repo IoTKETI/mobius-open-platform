@@ -115,13 +115,18 @@ function startDashboard() {
   return run(`pm2 start ./dashboard/backend/www --name dashboard`).exec();
 }
 function startOta() {
-  return run(`pm2 start ./otadevelopmentassistserver/bin/www --name ota`).exec()
+  return run(`pm2 start ./ota_manage_tool/bin/www --name ota`).exec()
 }
 function startSns() {
-  return run(`pm2 start ./telegrambotmanagementassistserver/bin/www --name sns`).exec()
+  return run(`pm2 start ./sns_agent_manage_tool/bin/www --name sns`).exec()
 }
-
-gulp.task('serviceStart', gulp.series([startWebportal, startDashboard, startOta, startSns]));
+function startRes() {
+  return run(`pm2 start ./resource_browser/bin/www --name res`).exec()
+}
+function save() {
+  return run('pm2 save').exec();
+}
+gulp.task('serviceStart', gulp.series([startWebportal, startDashboard, startOta, startSns, startRes, save]));
 
 gulp.task('serviceRestart', function(){
   return run("pm2 restart webportal dashboard ota sns").exec()
