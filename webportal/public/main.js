@@ -5,18 +5,23 @@
     .module('mobiusPortal', ['ui.router', 'pascalprecht.translate', 'ncy-angular-breadcrumb', 'angularModalService', 'ngTagsInput', 'chart.js', 'toastr', 'angularMoment', 'jsonFormatter', 'ngCookies', 'angular-jwt'])
     .config(config)
     .service('alertService', AlertService)
-    .run(function($rootScope, amMoment){
-      $rootScope.domain = ".iotocean.org;.iotmobius.com";
-      $rootScope.serviceUrl = {
-        mobiusState : "http://portal.iotocean.org/#!/dashboard",
-        deviceManage : "http://portal.iotocean.org/#!/device-list",
-        accessProtect : "http://portal.iotocean.org/#!/acp-list/",
-        dataBrowser : "http://portal.iotocean.org/#!/data-browser/",
-        resmon : "http://resmon.iotocean.org",
-        ota : "http://ota.iotocean.org",
-        sns : "http://sns.iotocean.org",
-        dashboard : "http://dashboard.iotocean.org"     
-      }
+    .run(function($rootScope, amMoment, authService){
+      authService.getSysInfo()
+        .then(function(info){
+          var serviceUrl = info.serviceUrl;
+          var s = {};
+          s.mobiusState = `http://${serviceUrl.WEBPORTAL}/#!/dashboard`;
+          s.deviceManage = `http://${serviceUrl.WEBPORTAL}/#!/device-list`;
+          s.accessProtect = `http://${serviceUrl.WEBPORTAL}/#!/acp-list/`;
+          s.dataBrowser = `http://${serviceUrl.WEBPORTAL}/#!/data-browser/"`;
+          s.resmon = `http://${serviceUrl.RES}`;
+          s.ota = `http://${serviceUrl.OTA}`;
+          s.sns = `http://${serviceUrl.SNS}`;
+          s.dashboard = `http://${serviceUrl.DASHBOARD}`;
+          $rootScope.serviceUrl = s;
+          $rootScope.serverUrl = `http://${serviceUrl.WEBPORTAL}`;          
+          $rootScope.domain = ".iotocean.org;.iotmobius.com";
+        })
       amMoment.changeLocale('ko')
     })
   ;

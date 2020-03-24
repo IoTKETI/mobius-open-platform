@@ -301,4 +301,10 @@ router.post('/re/token', function(req, res, next){
       res.status(err.status || 500).send(err);
     })
 })
+
+router.get('/info', function(req, res, next) {
+  var info = {};
+  info.serviceUrl = CONFIG.domains;
+  res.status(200).json(info);
+})
 module.exports = router;

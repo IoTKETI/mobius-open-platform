@@ -121,18 +121,23 @@
       }
     }
 
-    function run($rootScope, $location) {
+    function run($rootScope, $location, resmonService) {
 
-      $rootScope.serviceUrl = {
-        mobiusState : "http://portal.iotocean.org/#!/dashboard",
-        deviceManage : "http://portal.iotocean.org/#!/device-list",
-        accessProtect : "http://portal.iotocean.org/#!/acp-list/",
-        dataBrowser : "http://portal.iotocean.org/#!/data-browser/",
-        resmon : "http://resmon.iotocean.org",
-        dashboard : "http://dashboard.iotocean.org",
-        ota : "http://ota.iotocean.org",
-        sns : "http://sns.iotocean.org"
-      }
+      resmonService.getSysInfo()
+        .then(function(info){
+          var serviceUrl = info.serviceUrl;
+          var s = {};
+          s.mobiusState = `http://${serviceUrl.WEBPORTAL}/#!/dashboard`;
+          s.deviceManage = `http://${serviceUrl.WEBPORTAL}/#!/device-list`;
+          s.accessProtect = `http://${serviceUrl.WEBPORTAL}/#!/acp-list/`;
+          s.dataBrowser = `http://${serviceUrl.WEBPORTAL}/#!/data-browser/"`;
+          s.resmon = `http://${serviceUrl.RES}`;
+          s.ota = `http://${serviceUrl.OTA}`;
+          s.sns = `http://${serviceUrl.SNS}`;
+          s.dashboard = `http://${serviceUrl.DASHBOARD}`;
+          $rootScope.serviceUrl = s;
+          $rootScope.serverUrl = `http://${serviceUrl.WEBPORTAL}`;
+        })
 
       $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
         console.log("STATE CHANG START : ", fromState, toState, fromParams, toParams, options);

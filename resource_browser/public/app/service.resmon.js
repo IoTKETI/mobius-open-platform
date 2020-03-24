@@ -374,7 +374,8 @@
       "setInstanceDisplayCount": setInstanceDisplayCount,
       "getInstanceDisplayCount": getInstanceDisplayCount,
       "setAnimation": setAnimation,
-      "getAnimation": getAnimation
+      "getAnimation": getAnimation,
+      "getSysInfo" : _getSysInfo
     };
     return services;
 
@@ -534,6 +535,20 @@
     }
     function getAnimation(){
 
+    }
+    function _getSysInfo() {
+      return new Promise(function(resolve, reject) {
+        $http({
+          url : "/info",
+          method : "get"
+        })
+          .then(function(res){
+            resolve(res.data);
+          })
+          .catch(function(err){
+            reject(err);
+          })
+      })
     }
   }
 

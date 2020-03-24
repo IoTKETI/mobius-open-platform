@@ -18,7 +18,7 @@
     "loginUser" : "/auth/user",
     "reIssueToken" : "/auth/re/token",
     "resetPassword" : "/auth/password/reset-token",
-    "changePassword" : "/auth/password"
+    "changePassword" : "/auth/password",
   }
 
   function AuthService($http, $rootScope, alertService, $cookies, jwtHelper) {
@@ -32,7 +32,8 @@
       "checkPassword": _checkPassword,
       "requestResetPassword": _requestResetPassword,
       "changePassword": _changePassword,
-      "getAccessToken" : _getAccessToken
+      "getAccessToken" : _getAccessToken,
+      "getSysInfo" : _getSysInfo
     };
     return services;
 
@@ -379,6 +380,20 @@
               reject(err);
             })
         }
+      })
+    }
+    function _getSysInfo() {
+      return new Promise(function(resolve, reject){
+        $http({
+          url : window.API_BASE_URL + "/auth/info",
+          method : 'get'
+        })
+        .then(function(res){
+          resolve(res.data);
+        })
+        .catch(function(err){
+          reject(err);
+        })
       })
     }
   } //   end of function AuthService()
