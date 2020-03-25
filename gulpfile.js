@@ -41,11 +41,13 @@ const CONFIGS = {
     packageLocation : './resource_browser/bin/config.json'
   }
 }
-const SUBDOMAINS = [{name : "WEBPORTAL", service : "Webportal", subdomain : "portal"},
-{name : "DASHBOARD", service : "Dashboard", subdomain : "dashboard"},
-{name : "OTA", service : "OTA manage tool", subdomain : "ota"},
-{name : "SNS", service : "SNS agent manage tool", subdomain : "sns"},
-{name : "RES", service : "Resource Browser", subdomain : "res"}]
+const SUBDOMAINS = [
+  {name : "WEBPORTAL",  service : "Webportal",              subdomain : "portal"},
+  {name : "DASHBOARD",  service : "Dashboard",              subdomain : "dashboard"},
+  {name : "OTA",        service : "OTA manage tool",        subdomain : "ota"},
+  {name : "SNS",        service : "SNS agent manage tool",  subdomain : "sns"},
+  {name : "RES",        service : "Resource Browser",       subdomain : "res"}
+];
 
 function filterArgvOptions(argv) {
 
@@ -123,29 +125,34 @@ function readJSON(){
     }
   })
 }
+const ValidIpAddressRegex = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
+
+const ValidHostnameRegex = /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/;
 function setMobiusURL(){
-  mobiusURL = input.question("변경할 Mobius 주소(IP)와 포트를 입력해주세요(예 : www.mobius.com:7579) : ");
+  var mobiusURL;
+  var in_port;
+  while(true){
+    mobiusURL = input.question("변경할 Mobius의 주소를 입력해주세요(예 : www.mobius.com or 192.168.0.1) : ");
+    in_port= input.question("Mobius의 포트 번호를 입력해주세요 : ")
 
-  regextResult = mobiusURL.match(/(http(s)?\:\/\/)?(www\.)?([\w+\.]+)\:([0-9]{1,9})/);
-  if((regextResult && regextResult.length >= 6) && (regextResult[4] && regextResult[5])) {
-    var host = `http://${regextResult[4]}`;
-    var mqtt = `mqtt://${regextResult[4]}`;
-    var port = Number(regextResult[5]);
+    if((ValidIpAddressRegex.test(mobiusURL) || ValidHostnameRegex.test(mobiusURL)) && !isNaN(in_port)) break;
+    else console.log("대상 Mobius의 주소 또는 포트번호가 잘못 입력되었습니다.");
+  } 
+  
+  var host = `http://${mobiusURL}`;
+  var mqtt = `mqtt://${mobiusURL}`;
+  var port = Number(in_port);
 
-    var configs = readJSON();
-    
-    var promises = configs.map(el => {
-      el.config = modifyMobiusSetting(el.config, el.service, host, mqtt, port);
-      return saveConfig(el.config, el.service)
-    });
-    return Promise.all(promises);
-  } else {
-    return Promise.reject(new Error("변경할 Mobius의 주소 혹은 포트를 찾을 수 없습니다."));
-  }
+  var configs = readJSON();
+  
+  configs.forEach(el => {
+    el.config = modifyMobiusSetting(el.config, el.service, host, mqtt, port);
+    saveConfig(el.config, el.service)
+  });
 }
 function modifyMobiusSetting(source, service, host, mqtt, port) {
   var config = source.default;
-  if(!config.mobius) if(!config) return reject(new Error("Invalid CONFIG source")); else return;
+  if(!config.mobius) if(!config) return reject(new Error("Invalid CONFIG source")); else return source;
   config.mobius.host = host;
   
   config.mobius.mqtt = mqtt;
@@ -155,22 +162,17 @@ function modifyMobiusSetting(source, service, host, mqtt, port) {
   return source;
 }
 function saveConfig(source, service) {
-  return new Promise(function(resolve, reject) {
-
-    configStr = JSON.stringify(source, null, 2);
-    fs.writeFileSync(`${CONFIGS[service].packageLocation}`, configStr, 'utf8', function(err){
-      if(err){
-        console.error(err);
-        reject(err);
-      } else {
-        resolve();
-      }
-    })
+  configStr = JSON.stringify(source, null, 2);
+  fs.writeFileSync(`${CONFIGS[service].packageLocation}`, configStr, 'utf8', function(err){
+    if(err){
+      console.error(err);
+      throw new Error(err);
+    }
   })
 }
 function getPort(service, origin) {
   while(true) {
-    var port = input.questionInt(`서비스 ${service}의 포트를 ${origin}에서 포트를 입력해주세요 : `);
+    var port = input.questionInt(`서비스 ${service}에 할당할 포트 번호를 입력해주세요(기본값 : ${origin}) : `);
     if(!port && port <= 0 ) {
       console.log("0보다 큰 수를 입력해주세요.");
       continue;
@@ -188,7 +190,7 @@ function setServicePort() {
     var serviceNames = json.map(el => {
       return el.service;
     });
-    serviceNames.push('done');
+    serviceNames.push('next');
     var temp = [];
     while(true) {
       var choise = input.keyInSelect(serviceNames, "포트번호를 변경할 서비스를 선택해주세요.");
@@ -210,7 +212,6 @@ function setServicePort() {
         reject(new Error("사용자가 설치를 중단했습니다."));
         return;
       } else {
-        console.log(changedConfig);
         temp.push({
           service : serviceNames[choise],
           config : changedConfig
@@ -218,7 +219,6 @@ function setServicePort() {
       }
     }
     var promises = temp.map(el => {
-      console.log(el.config);
       saveConfig(el.config, el.service);
     })
     Promise.all(promises).then(() => {
@@ -251,7 +251,7 @@ function setAddress() {
       var mainAddress = null;
       var domainList = [];
       while(true) {
-        mainAddress = input.question("서비스 주소를 설정합니다. 서브 도메인을 사용하는 경우 Nginx 설정과 동일하게 입력해주세요.(ex iotocean.org : ");
+        mainAddress = input.question("서비스 주소를 설정합니다. \n서브 도메인을 사용하는 경우 Nginx 설정과 동일하게 입력해주세요.(ex iotocean.org : ");
         if(dnsCheck(mainAddress)){
           break;
         } else {
@@ -263,7 +263,7 @@ function setAddress() {
       if(useSub) {
         var subDomains = SUBDOMAINS;
         var names = subDomains.map(el => { return `${el.service} => ${el.subdomain}`});
-        names.push('done');
+        names.push('next');
         while(true){
           var choise = input.keyInSelect(names, "서브도메인을 변경할 서비스를 선택해주세요 : ");
           var replaceDomain = null;
@@ -280,7 +280,7 @@ function setAddress() {
             subDomains = SUBDOMAINS;
             break;
           }
-          else if(choise === 5) {//done
+          else if(choise === 5) {//next
             printDomains(mainAddress, subDomains);
             if(input.keyInYN("서비스 도메인을 위와 같이 사용하시겠습니까?")) break;
           } else {
@@ -298,9 +298,10 @@ function setAddress() {
       var configs = readJSON();
       configs.map(el => {
         el.config.default.domains = domainList;
-        if(el.service === 'WEBPORTAL') {
-          el.config.default.cookie.domain = `.${mainAddress}`
-        }
+        
+        if(!el.config.default.cookie) el.config.default.cookie = {};
+        el.config.default.cookie.domain = `.${mainAddress}`;
+
         saveConfig(el.config, el.service);
       })
 
@@ -311,27 +312,52 @@ function setAddress() {
     }
   })
 }
-gulp.task('init', function(){
-  return new Promise(function(resolve, reject){
-    if(input.keyInYN("Mobius URL을 변경하시겠습니까? ")) {
-      setMobiusURL()
-        .then(() => {
-          resolve();
-        })
-    }else {
-      resolve();
+function changeMobius() {
+  return new Promise(function(_resolve, _reject) {
+    try {
+      if(input.keyInYN("Mobius URL을 변경하시겠습니까? ")) {
+        setMobiusURL();
+        _resolve();
+      } else {
+        _resolve();
+      }
+    } catch (error) {
+      _reject(error);  
     }
   })
-    .then(() => {
-      return setServicePort();
-    })
-    .then(() => {
-      return setAddress();
-    })
-    .then(() => {
-      return gulp.series([setDatabase, npmInstall])();
-    })
-    .catch(err => {
-      console.error(err);
-    })
+}
+gulp.task('domainList', function(){
+  var json = readJSON();
+
+  var domain = json[0].config.default.domains;
+  if(!domain){ 
+    console.error("플랫폼 설정이 완료되지 않았습니다. 'gulp init'으로 설정을 마쳐주세요");
+    return;
+  } else {
+    var mainDomain = json[0].config.default.cookie ? json[0].config.default.cookie.domain : null;
+    if(mainDomain) console.log(`Main Domain : ${mainDomain}`);
+    Object.keys(domain).forEach(el => {
+      console.log(`${el} : ${domain[el]}`)
+    });
+
+  }
+})
+gulp.task('init', function(){
+  return new Promise(function(resolve, reject){
+      changeMobius()
+      .then(() => {
+        return setServicePort();
+      })
+      .then(() => {
+        return setAddress();
+      })
+      .then(() => {
+        resolve();
+        return gulp.series([setDatabase, npmInstall])();
+      })
+      .catch(err => {
+        console.error(err);
+        reject(err);
+      })
+  })
 })
