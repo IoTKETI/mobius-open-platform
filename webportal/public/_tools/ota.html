@@ -1,0 +1,87 @@
+<!-- <div class="animated fadeIn" ng-init="init()">
+  <div class="row">
+
+    <div class="col-sm-6">
+      <form name="search_resource">
+
+        <div class="card select-resource">
+          <div class="card-header">
+            버전정보 조회
+          </div>
+          <div class="card-block">
+            <div class="form-group">
+              <label class="form-control-label" for="resource_name">리소스 이름(rn)</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-newspaper"></i></span>
+                <input ng-model="formData.aeResourceName" ng-required="true" type="text" id="resource_name" name="resource_name" class="form-control" placeholder="리소스 이름">
+              </div>
+              <span class="help-block">리소스 이름('rn')을 입력한 다음 버전 조회 버튼을 선택하세요.</span>
+            </div>
+            <div class="form-group">
+              <label class="form-control-label" >펌웨어 버전</label>
+              <div class="input-group-addon">
+                <input class="version-number-field" type="number" min="0" ng-model="formData.version[0]" class="form-control" placeholder="1">.
+                <input class="version-number-field" type="number" min="0" ng-model="formData.version[1]" class="form-control" placeholder="0">.
+                <input class="version-number-field" type="number" min="0" ng-model="formData.version[2]" class="form-control" placeholder="0">.
+                <input class="version-number-field" type="number" min="0" ng-model="formData.version[3]" class="form-control" placeholder="0">
+              </div>
+              <span class="help-block">조회된 펌웨어 버전으로 초기화됩니다. 새로운 버전으로 수정 가능합니다.</span>
+            </div>
+          </div>
+          <div class="card-footer ota-command">
+            <button ng-click="getFirmwareVersion()" type="button" class="btn btn-primary-40">
+               <i class="fa fa-info-circle" ></i> 1. 버전 조회
+            </button>
+          </div>
+        </div>
+      </form>
+
+    </div>
+    <div class="col-sm-6">
+      <form name="firmware-upload">
+
+        <div class="card select-resource">
+          <div class="card-header">
+            펌웨어 업로드 / 업그레이드
+          </div>
+          <div class="card-block">
+            <div class="form-group">
+              <label class="form-control-label" for="resource_name">펌웨어 이미지 파일</label>
+              <div class="input-group">
+                <input type="text" class="form-control" ng-model="formData.uploadFilePath" placeholder="이미지 파일을 선택하세요" disabled>
+                <span class="input-group-btn">
+                  <label class="btn btn-default" for="my-file-selector">
+                    <input id="my-file-selector" onchange="angular.element(this).scope().fileNameChanged(this)" type="file" style="display:none;" accept=".hex"/>
+                    <div>파일 선택</div>
+                  </label>
+                </span>
+
+              </div>
+              <span class="help-block">업로드할 펌웨어 이미지 파일을 선택하세요.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-control-label" for="resource_name">패스 코드</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                <input ng-model="formData.passCode" ng-required="true" type="password" class="form-control" placeholder="pass code">
+              </div>
+              <span class="help-block">디바이스 펌웨어 업그레이드를 위한 패스 코드를 입력하세요.</span>
+            </div>
+          </div>
+          <div class="card-footer ota-command">
+            <button ng-click="getFirmwareVersion()" type="button" class="btn btn-primary-40">
+              <i class="fa fa-upload" ></i> 2. 이미지 업로드
+            </button>
+            <button ng-click="getFirmwareVersion()" type="button" class="btn btn-primary-40">
+              <i class="fa fa-microchip" ></i> 3. 펌웨어 업그레이드
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+
+  </div>
+</div> -->
+
+<iframe src="http://localhost:8881/ota/" flex></iframe>

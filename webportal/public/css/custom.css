@@ -1,0 +1,765 @@
+html, body {
+  height: 100%;
+}
+.app-body {
+  min-height: calc(100vh - 100px);
+}
+
+body {
+  font-family: "Noto Sans Korean", "Helvetica Neue", "Helvetica", "Arial", "sans-serif" !important;
+}
+
+
+
+
+/* Turn on custom 8px wide scrollbar */
+::-webkit-scrollbar {
+  width: 10px; /* 1px wider than Lion. */
+  /* This is more usable for users trying to click it. */
+  background-color: rgba(0,0,0,0);
+  -webkit-border-radius: 100px;
+}
+/* hover effect for both scrollbar area, and scrollbar 'thumb' */
+::-webkit-scrollbar:hover {
+  background-color: rgba(0, 0, 0, 0.09);
+}
+
+/* The scrollbar 'thumb' ...that marque oval shape in a scrollbar */
+::-webkit-scrollbar-thumb:vertical {
+  /* This is the EXACT color of Mac OS scrollbars.
+     Yes, I pulled out digital color meter */
+  background: rgba(0,0,0,0.5);
+  -webkit-border-radius: 100px;
+  background-clip: padding-box;
+  border: 2px solid rgba(0, 0, 0, 0);
+  min-height: 10px; /*Prevent it from getting too small */
+}
+::-webkit-scrollbar-thumb:vertical:active {
+  background: rgba(0,0,0,0.61); /* Some darker color when you click it */
+  -webkit-border-radius: 100px;
+}
+
+
+
+
+
+
+
+
+
+
+
+.movetoback {
+  padding: 5px 10px 5px 10px !important;
+  margin: -6px 5px -3px 5px !important;
+}
+
+.button-group {
+  position: relative;
+  vertical-align: middle;
+}
+.card.volume-index {
+  min-height: 140px;
+}
+.sidebar .nav .nav-item {
+  height: 45px;
+}
+.sidebar .nav .nav-title {
+  font-size: 16px;
+  /* border-top: 1px solid #21a8d9; */
+  border-bottom: 1px solid #21a8d9;
+  margin-bottom: 10px;
+  color: #21a8d9;
+}
+
+.breadcrumb {
+  border-radius: 0 !important;
+  background-color: white !important;
+  font-weight: 500;
+}
+.breadcrumb::after {
+  display: block !important;
+  content: "" !important;
+  clear: both !important;
+}
+
+/*  vertical switch elements size and position */
+.switch.vertical {
+  position: relative;
+  display: inline-block;
+  vertical-align: top;
+  width: 24px;
+  height: 32px;
+  cursor: pointer; }
+.switch.vertical .switch-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0; }
+.switch.vertical .switch-label {
+  position: relative;
+  display: block;
+  height: inherit;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  border: 1px solid #d1d4d7;
+  border-radius: 0;
+  transition: opacity .15s ease-out; }
+.switch.vertical .switch-handle {
+  position: absolute;
+  padding: 2px;
+  left: 0 !important;
+  width: 100% !important;
+  height: 50% !important;
+  border: 0;
+  border-radius: 0;
+  background-color: transparent;
+  transition: top .15s ease-out; }
+.switch.vertical .switch-handle::after {
+  content: '';
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 1px solid #d1d4d7;}
+.switch.vertical.switch-text {
+  width: 24px;
+  height: 48px; }
+.switch.vertical.switch-text .switch-label::before,
+.switch.vertical.switch-text .switch-label::after {
+  content: '';
+  width: 100%;
+  height: 50% }
+.switch.vertical.switch-text .switch-label::before {
+  top: 0; }
+.switch.vertical.switch-text .switch-label::after {
+  top: 50% }
+.switch.vertical.switch-text .switch-handle {
+  font-size: 10pt;
+  font-weight: 500;}
+.switch.vertical.switch-text .switch-handle::after {
+  font-weight: 500;
+  text-align: center;
+  content: '';}
+
+/*  vertical switch elements position and colors according to checked status */
+.switch.vertical .switch-label {
+  background-color: white;}
+.switch.vertical .switch-handle {
+  top: 50%;}
+.switch.vertical .switch-handle::after {
+  background-color: lightgray;}
+
+.switch.vertical .switch-input:checked ~ .switch-label {
+  background-color: lightgray;}
+.switch.vertical .switch-input:checked ~ .switch-handle {
+  left: 0;
+  top: 0;}
+.switch.vertical .switch-input:checked ~ .switch-handle::after {
+  background-color: white;}
+
+.switch.vertical.switch-text .switch-handle::after {
+  color: white;
+  content: attr(data-off);}
+.switch.vertical.switch-text .switch-input:checked ~ .switch-handle::after {
+  color: darkgray;
+  content: attr(data-on);}
+
+
+/*  vertical text switch elements position and size  according size class */
+.switch.vertical.switch-xs {
+  width: 16px;
+  height: 24px;}
+.switch.vertical.switch-xs.switch-text {
+  width: 16px;
+  height: 32px;}
+.switch.vertical.switch-sm {
+  width: 20px;
+  height: 28px; }
+.switch.vertical.switch-sm.switch-text {
+  width: 20px;
+  height: 40px; }
+
+.switch.vertical.switch-md {
+  width: 24px;
+  height: 32px;}
+.switch.vertical.switch-md.switch-text {}
+
+.switch.vertical.switch-lg {
+  width: 28px;
+  height: 36px; }
+.switch.vertical.switch-lg.switch-text {
+  width: 28px;
+  height: 48px; }
+
+.switch.vertical.switch-xs.switch-text .switch-handle {
+  font-size: 7pt !important;}
+.switch.vertical.switch-sm.switch-text .switch-handle {
+  font-size: 7pt !important;}
+.switch.vertical.switch-md.switch-text .switch-handle {
+  font-size: 10pt !important;}
+.switch.vertical.switch-lg.switch-text .switch-handle {
+  font-size: 12pt !important;}
+
+
+
+.switch.vertical.switch-success .switch-label {
+  border-color: #79c447;}
+.switch.vertical.switch-success .switch-handle::after {
+  border-color: #dcdcdc;
+  background-color: #dcdcdc;}
+.switch.vertical.switch-success .switch-input:checked ~ .switch-label {
+  border-color: #79c447;
+  background-color: #79c447;}
+.switch.vertical.switch-success.switch-text .switch-input:checked ~ .switch-handle::after {
+  color: #61a434;}
+
+.switch.vertical.switch-warning .switch-label {
+  border-color: #fabb3d;}
+.switch.vertical.switch-warning .switch-handle::after {
+  border-color: #dcdcdc;
+  background-color: #dcdcdc;}
+.switch.vertical.switch-warning .switch-input:checked ~ .switch-label {
+  border-color: #fabb3d;
+  background-color: #fabb3d;}
+.switch.vertical.switch-warning.switch-text .switch-input:checked ~ .switch-handle::after {
+  color: #f9aa0b;}
+
+.card.ac-rule-card {
+  height: 150px;
+}
+.card.ac-rule-card .ac-rule-origin-name {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.card.ac-rule-card .acr-acor {
+  font-size: 10pt;
+  font-weight: 500;
+  color: #22a8d9;
+  height: 19px;
+  margin-left: 20px;
+  margin-right: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.card.ac-rule-card .ac-rule-origin {
+  color: #20a8d8;
+}
+
+ul.list.list-collapsable {
+  padding: 0;
+}
+
+ul.list.list-collapsable li.list-item {
+  list-style: none;
+  position: relative;
+  margin: 5px 2px 8px 2px;
+  border: 1px solid lightgray;
+  padding: 2px 5px 2px 5px;
+  box-shadow: 1px 1px 4px 0 rgba(145, 145, 145, 0.5);
+}
+
+ul.list.list-collapsable li.list-item .list-column {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+ul.list.list-collapsable li.list-header {
+  background-color: #eeeeee73;
+  border: 1px solid #d3d3d300;
+  color: #5f5d5d;
+  font-weight: 500;
+}
+ul.list.list-collapsable li.list-item .list-content {
+  padding: 15px 5px 15px 5px;
+  position: relative;
+}
+ul.list.list-collapsable li.list-item.expanded .list-content {
+  box-shadow: 1px 1px 4px 0 rgba(145, 145, 145, 0.5);
+  margin-top: 5px;
+}
+
+ul.list.list-collapsable li.list-item.expanded .list-collapsed-content {
+  /* border-top: 10px solid #26a8d9; */
+  height: auto;
+  visibility: visible;
+  opacity: 1;
+  padding: 25px 4px 10px 10px;
+}
+ul.list.list-collapsable li.list-item .list-collapsed-content {
+
+  height: 0;
+  overflow: hidden;
+
+  visibility: hidden;
+  opacity: 0;
+  transition: .4s;
+
+  padding: 0;
+
+}
+
+
+.create-acp-modal tags-input .tags .tag-item,
+.column-label     tags-input .tags .tag-item {
+  background: #b1b1b1c4;
+  border: 1px solid #b1b1b1c4;
+  border-radius: 4px;
+  color: #00000096;
+}
+
+ul.list.list-collapsable li.list-item button.list-expand-button {
+  width: 40px;
+  height: 40px;
+  background-color: lightgray;
+  border-radius: 50%;
+  color: white;
+  position: relative;
+  text-align: center;
+  outline: none;
+  float: right;
+  margin: auto 10px auto 0;
+  font-size: 20pt;
+  padding: 0;
+  border: 0;
+}
+ul.list.list-collapsable li.list-item.expanded button.list-expand-button {
+  background-color: #26a8d9;
+}
+ul.list.list-collapsable li.list-item button.list-expand-button:hover {
+  box-shadow: 0 0 8px 3px rgba(145, 145, 145, 0.5);
+}
+
+
+ul.list.list-collapsable li.list-item.expanded {
+  margin-left: 0;
+  margin-right: 0;
+  border: 4px solid #26a8d9;
+  border-radius: 4px;
+}
+
+.acop-container {
+  min-width: 116px;
+  width: 100%;
+}
+
+ul.list.acp-list .list-column.column-selection {
+  width: 40px;  }
+ul.list.acp-list .list-column.column-name {
+  width: 30%;  }
+ul.list.acp-list .list-column.column-label {
+  width: 55%;  }
+
+button.acp-delete-button {
+  color: darkgray;
+  border-radius: 50%;
+  position: absolute;
+  padding: 0;
+  margin: 0;
+  width: 30px;
+  height: 30px;
+  font-size: 13pt;
+  right: 2px;
+  top: 32px;
+  outline: 0;
+}
+button.acp-delete-button:hover,
+button.acp-delete-button:focus {
+  color: #ffa40e;
+  border-color: #ffa40e;
+  border-radius: 50%;
+  outline: 0;
+}
+
+button.acp-add-button {
+  color: #0c5480;
+  width: 100%;
+}
+
+.btn.btn-primary-40 {
+  background-color: #20a8d8;
+  margin-top:0px;
+}
+.btn-primary-40 {
+  color: #fff;
+  background-color: #20a8d8;
+  border-color: #20a8d8; }
+.btn-primary-40:hover {
+  color: #fff;
+  background-color: #1985ac;
+  border-color: #187fa3; }
+.btn-primary-40:focus, .btn-primary-40.focus {
+  box-shadow: 0 0 0 2px rgba(32, 168, 216, 0.5); }
+.btn-primary-40.disabled, .btn-primary-40:disabled {
+  background-color: #20a8d8;
+  border-color: #20a8d8; }
+.btn-primary-40:active, .btn-primary-40.active
+.show > .btn-primary-40.dropdown-toggle {
+  color: #fff;
+  background-color: #1985ac;
+  background-image: none;
+  border-color: #187fa3; }
+
+.device-list-item .device-icon-block {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-right: 1px solid white;
+  padding: 0;
+  font-size: 30px;
+  background-color: white;
+  border-radius: 50%;
+  color: black;
+  margin: 15px 50px 0 50px;
+  box-shadow: 1px 1px 4px 0 rgba(145, 145, 145, 0.5);
+}
+
+.device-list-item .device-icon {
+  position: absolute;
+  width: 50px;
+  height: 50px;
+  padding: 4px;
+  font-size: 30px;
+  border-radius: 50%;
+  color: white;
+  margin: 15px;
+}
+.card.device-list-item {
+  height: 300px;
+}
+.device-list-item .device-info-block {
+  margin-top: 20px;
+  height: 85px;
+}
+.device-list-item .card-header {
+  height: 220px;
+}
+.device-list-item .card-block {
+  height: 80px;
+  margin: 0px;
+  padding: 0px;
+}
+.device-list-item .device-info-block .device-name,
+.device-list-item .device-info-block .resource-name,
+.device-list-item .device-info-block .device-owner {
+  display: block;
+}
+.device-list-item .device-info-block:hover .device-name,
+.device-list-item .device-info-block:hover .resource-name,
+.device-list-item .device-info-block:hover .device-owner {
+  display: none;
+}
+.device-list-item .device-info-block .device-description {
+  display: none;
+}
+.device-list-item .device-info-block:hover .device-description{
+  display: block;
+}
+
+.device-list-item .action-button button.btn {
+  outline: 0;
+  border: 0;
+  border-radius: 0;
+  background-color: white;
+  color: #2699ca;
+  text-align: left;
+}
+
+.device-list-item .action-button button.btn,
+.device-list-item .action-button .button-group,
+.device-list-item .action-button .button-group button.btn {
+  width: 100%;
+  height: 100%;
+}
+
+.device-list-item td.action-button {
+  border: 1px solid lightgray;
+  height: 40px;
+}
+.device-list-item .action-button.btn-lt {
+  border-left: 0 !important;
+  border-top: 0 !important;
+}
+.device-list-item .action-button.btn-lb {
+  border-left: 0 !important;
+  border-bottom: 0 !important;
+}
+.device-list-item .action-button.btn-rt {
+  border-right: 0 !important;
+  border-top: 0 !important;
+}
+.device-list-item .action-button.btn-rb {
+  border-right: 0 !important;
+  border-top: 0 !important;
+}
+
+
+
+.device-list-item .action-button button.btn:hover,
+.device-list-item .action-button button.btn:focus {
+  background-color: #e8e8e8;
+  color: #909090;
+}
+
+.device-list-item .action-buttons {
+  text-align: right;
+  height: 20px;
+}
+
+
+table.device-action-table {
+  width: 100%;
+  font-size: 0.8em;
+}
+.device-list-item .action-buttons button {
+  outline: none;
+}
+.device-list-item .device-name {
+  clear: both;
+  font-size: 13pt;
+  padding: 8px 0 2px 5px;
+  font-weight: 500;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
+  margin-bottom: 10px;
+}
+.device-list-item .resource-name ,
+.device-list-item .device-owner {
+  font-size: 9pt;
+  height: 20px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: left;
+  margin: 0px 5px;
+}
+
+.device-list-item .device-description {
+  font-size: 11pt;
+  overflow: hidden;
+  height: 50px;
+  border-top: 0;
+  border-top: 0;
+  padding-top: 4px;
+  color: white;
+}
+
+
+
+.edit-device-info .device-icon-box {
+  width: 100px;
+  height: 75px;
+  border: none;
+  border-right: 1px solid white;
+  padding: 0;
+  font-size: 30px;
+  background-color: transparent;
+  border-radius: 0;
+}
+.edit-device-info .device-icon-box .dropdown-menu {
+  width: 380px;
+}
+.edit-device-info .device-icon-box .icon-selection {
+  border: none;
+  margin-left: 4px;
+}
+.device-info-box {
+  float: left;
+  margin-left:  20px;
+}
+.edit-device-info .device-info-box .device-name {
+  font-size: 18pt;
+  font-weight: 500;
+  margin-bottom: 10px;
+}
+.edit-device-info .device-info-box .device-owner {
+  font-size: 11pt;
+}
+.edit-device-info .action-buttons {
+  text-align: right;
+  height: 20px;
+}
+.edit-device-info .action-buttons button {
+  outline: none;
+}
+.edit-device-info .save-button {
+  float: right;
+}
+.edit-device-info .save-button button {
+  padding: 1px !important;
+  font-size: 28pt;
+  width: 60px;
+  height: 60px;
+  border: 1px solid white;
+  border-radius: 5px;
+  margin-top: 10px;
+}
+.edit-device-info .device-owner {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.edit-device-info .device-icon-box button.dropdown-toggle {
+  font-size: 32pt;
+  outline: none !important;
+  padding: 0 10px 0 10px !important;
+  margin-top: 5px;
+}
+.edit-device-info .device-icon-box button.dropdown-toggle:after {
+  font-size: 14pt;
+}
+.edit-device-info .device-icon-box button.dropdown-toggle:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+  color: white;
+}
+.edit-device-info .device-icon-box button.dropdown-toggle:hover {
+  outline: none !important;
+  border: 1px solid white !important;
+  box-shadow: none !important;
+  color:  white;
+}
+.edit-device-info .input-group label {
+  color: gray;
+  font-size: 14px;
+  font-weight: 500;
+}
+.resource-info-card.card .card-block h5 {
+  color: darkgray;
+}
+
+.acp-item-block .card-header {
+  height: 65px;
+}
+
+.acp-item-block .acp-name {
+  font-size: 11pt;
+  border-bottom: 1px solid #9e9e9ea1;
+  padding-bottom: 2px;
+}
+.acp-item-block .acp-lbl {
+  margin-top: 4px;
+  font-size: 10pt;
+}
+.acp-item-block .acop-container {
+  display: inline;
+  width: auto !important;
+}
+
+.ac-rule-card .acop-block {
+  width: 140px;
+}
+
+.modal.confirm-message-modal .confirm-message {
+  line-height: 2em;
+  display: block;
+  min-height: 30px;
+}
+
+.modal.confirm-message-modal .prompt-message {
+  line-height: 2em;
+  display: block;
+  min-height: 30px;
+  margin-top: 10px
+}
+
+
+.col-fixed-210 {
+  width: 210px;
+  float: left;
+  margin: 10px;
+}
+
+
+.no-data {
+  color: darkgray;
+  text-align: center;
+}
+
+.version-number-field {
+  width: 40px;
+  display: inline;
+  text-align: center;
+}
+
+.card-footer.ota-command {
+  text-align: right;
+}
+
+.card-footer.ota-command button {
+  font-size: 12pt;
+  margin: 5px;
+}
+.card-footer.ota-command button .fa {
+  font-size: 14pt;
+  margin-right: 5px;
+}
+
+
+label.form-control-label {
+  font-weight: 500;
+  font-size: 15px;
+}
+
+.password-validation {
+  font-size: 10pt;
+  color: green;
+  margin-top: -10px;
+  margin-bottom: 10px;
+  padding-left: 50px;
+}
+
+
+.under-construction {
+  margin-top: 50px;
+  position: relative;
+  overflow: hidden;
+  height: 600px;
+}
+.under-construction-box {
+  width: 400px;
+  height: 150px;
+  position: absolute;
+  margin: 0 auto;
+  left: 0;
+  right: 0;
+}
+.under-construction-image {
+  float: left;
+  width: 100px;
+  height: 100px;
+  background-image: url("../img/under-construction.png");
+  background-size: contain;
+  background-position: center;
+}
+.under-construction-text {
+  text-align: center;
+  padding: 10px;
+  margin-left: 110px;
+  color: #56534f;
+  font-size: 14pt;
+  font-weight: 500;
+}
+.card.ac-rule-card .card-block {
+  overflow: auto;
+}
+
+.card.acp-item-block {
+  height: 200px;
+}
+
+.card-block.acr-list-block {
+  overflow: auto;
+  height: 135px;
+}
+
+
+.user-agree-link {
+  text-decoration: underline !important;
+}

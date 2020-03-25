@@ -1,0 +1,89 @@
+@import '~@angular/material/theming';
+@include mat-core();
+
+$mat-portal: (
+    50 : #e4f5fa,
+    100 : #bce5f3,
+    200 : #90d4ec,
+    300 : #63c2e4,
+    400 : #41b5de,
+    500 : #20a8d8,
+    600 : #1ca0d4,
+    700 : #1897ce,
+    800 : #138dc8,
+    900 : #337ab7,
+    990 : #286090,
+    A100 : #ebf7ff,
+    A200 : #b8e2ff,
+    A400 : #85cdff,
+    A700 : #6bc3ff,
+    contrast: (
+        50 : #000000,
+        100 : #000000,
+        200 : #000000,
+        300 : #000000,
+        400 : #000000,
+        500 : #000000,
+        600 : #ffffff,
+        700 : #ffffff,
+        800 : #ffffff,
+        900 : #ffffff,
+        A100 : #000000,
+        A200 : #000000,
+        A400 : #000000,
+        A700 : #000000,
+    )
+);
+
+$my-app-primary :   mat-palette($mat-portal, 900);//mat-palette($mat-purple, 900);
+$my-app-primaryhover : mat-palette($mat-portal, 900);
+$my-app-accent :    mat-palette($mat-pink, 500,900, A100);
+$my-app-warn :      mat-palette($mat-deep-orange);
+$my-app-theme: mat-light-theme($my-app-primary, $my-app-accent, $my-app-warn);
+$my-app-row-hover : mat-palette($mat-portal, A200);
+$my-app-row-highlight : mat-palette($mat-portal, A700);
+@include angular-material-theme($my-app-theme);
+
+.primaryColorBG{
+    background: linear-gradient(to right, mat-color($mat-portal, 500), mat-color($mat-portal, 600)) !important;
+}
+.mat-flat-button.mat-primary, 
+.mat-raised-button.mat-primary, 
+.mat-fab.mat-primary, 
+.mat-mini-fab.mat-primary {
+    color: #fff;
+}
+.mat-flat-button.mat-primary:hover, 
+.mat-raised-button.mat-primary:hover, 
+.mat-fab.mat-primary:hover, 
+.mat-mini-fab.mat-primary:hover {
+    background-color: mat-color($mat-portal, 990);
+}
+.alternate-theme {
+    $alternate-primary: mat-palette($mat-light-blue);
+    $alternate-accent:  mat-palette($mat-yellow, 400);
+
+    $alternate-theme: mat-light-theme($alternate-primary, $alternate-accent);
+
+    @include angular-material-theme($alternate-theme);
+}
+
+mat-row:hover {
+    background-color: mat-color($my-app-row-hover);
+}
+mat-row:hover mat-cell {
+    // color: #fff;
+    font-weight: 500;
+}
+
+.mat-row.highlighted {
+    background-color: mat-color($my-app-row-highlight);
+}
+.mat-row.highlighted .mat-cell {
+    color: #fff;
+    font-weight: 600;
+}
+.mat-row.highlighted .mat-checkbox-frame {
+    border-color: #fff;
+    transition: none;
+}

@@ -1,0 +1,47 @@
+.startstop-button {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  border: white 3px solid;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: border 0.1s ease-in-out;
+  background-color: #539688;
+}
+.startstop-button:hover {
+  border: #333 3px solid;
+}
+.startstop-button:hover .bar {
+  background-color: #333;
+}
+.startstop-button .bar {
+  display: inline-block;
+  position: absolute;
+  top: 10px;
+  left: 0;
+  width: 3px;
+  height: 20px;
+  border-radius: 3px;
+  background-color: white;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+  transition: background 0.1s ease-in-out, -webkit-transform 0.4s ease-in-out;
+  transition: transform 0.4s ease-in-out, background 0.1s ease-in-out;
+  transition: transform 0.4s ease-in-out, background 0.1s ease-in-out, -webkit-transform 0.4s ease-in-out;
+}
+.startstop-button.pause .bar-1 {
+  -webkit-transform: translateX(13.5px) translateY(0px) rotate(0deg);
+  transform: translateX(13.5px) translateY(0px) rotate(0deg);
+}
+.startstop-button.pause .bar-2 {
+  -webkit-transform: translateX(24px) translateY(0px) rotate(0deg);
+  transform: translateX(24px) translateY(0px) rotate(0deg);
+}
+.startstop-button.play .bar-1 {
+  -webkit-transform: translateX(20px) translateY(-5px) rotate(-55deg);
+  transform: translateX(20px) translateY(-5px) rotate(-55deg);
+}
+.startstop-button.play .bar-2 {
+  -webkit-transform: translateX(20px) translateY(5px) rotate(-125deg);
+  transform: translateX(20px) translateY(5px) rotate(-125deg);
+}

@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en"  ng-app="dashboard">
+<head>
+  <meta charset="utf-8">
+
+	<title>DASHBOARD Portal</title>
+  <meta app-version="V1.0_R20200113-02" />
+
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="viewport" content="width=device-width, user-scalable=no">
+
+	<!--<link rel="icon" href="images/favicon.ico" type="image/x-icon" />-->
+
+  <link href="normalize.css/normalize.css" rel="stylesheet" />
+  <link href="app/common/reset.css" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css?family=Noto+Sans|Noto+Serif" rel="stylesheet" />
+
+
+  <!--  Font awesome  -->
+  <!--<link rel="stylesheet" href="@fortawesome/fontawesome-free/css/all.min.css">-->
+
+  <!--  flag icon css -->
+  <link rel="stylesheet" href="flag-icon-css/css/flag-icon.css" />
+
+  <!-- jQuery, Angular.js, UI Router, Angular-material -->
+  <link rel="stylesheet" href="angular-material/angular-material.min.css" />
+
+  <script src="jquery/dist/jquery.min.js"></script>
+  <script src="lodash/lodash.min.js"></script>
+  <script src="angular/angular.min.js"></script>
+  <script src="bluebird/js/browser/bluebird.js"></script>
+  <script src="@uirouter/angularjs/release/angular-ui-router.min.js"></script>
+  <script src="angular-aria/angular-aria.js"></script>
+  <script src="angular-animate/angular-animate.min.js"></script>
+  <script src="angular-messages/angular-messages.js"></script>
+  <script src="angular-material/angular-material.js"></script>
+  <script src="angular-jwt/dist/angular-jwt.js"></script>
+  <script src="angular-cookies/angular-cookies.js"></script>
+  <script src="angular-local-storage/dist/angular-local-storage.min.js"></script>
+  <script src="socket.io-client/dist/socket.io.js"></script>
+  <script src="jwt-decode/build/jwt-decode.js"></script>
+  <script src="ngdraggable/ngDraggable.js"></script>
+
+  <link rel="stylesheet" href="smooth-scrollbar/dist/smooth-scrollbar.css">
+  <script src="smooth-scrollbar/dist/smooth-scrollbar.js"></script>
+  <script src="angular-smooth-scrollbar/dist/angular-smooth-scrollbar.js"></script>
+
+  <link rel="stylesheet" href="material-steppers/dist/material-steppers.css" />
+  <script src="material-steppers/dist/material-steppers.js"></script>
+
+  <!--  Font awesome  -->
+  <!--<script src="@fortawesome/fontawesome-free/js/all.js" ></script>-->
+  <link rel="stylesheet" href="@fortawesome/fontawesome-free/css/all.css" />
+
+  <script src="blockly/blockly_compressed.js"></script>
+  <script src="blockly/blocks_compressed.js"></script>
+  <script src="blockly/javascript_compressed.js"></script>
+  <script src="blockly/msg/js/en.js"></script>
+
+  <script src="d3/dist/d3.js"></script>
+
+  <script src="d3-time/dist/d3-time.js"></script>
+  <script src="d3-time-format/dist/d3-time-format.js"></script>
+
+  <link rel="stylesheet" href="libs/c3-0.7.10/c3.css" />
+  <script src="libs/c3-0.7.10/c3.js"></script>
+  <script src="c3-angular/c3-angular.js"></script>
+
+  <link rel="stylesheet" href="libs/highlight/styles/googlecode.css"/>
+  <script src="libs/highlight/highlight.pack.js"></script>
+  <script src="angular-highlightjs/angular-highlightjs.js"></script>
+
+
+
+  <link type="text/css" rel="stylesheet" href="app/common/styles.css">
+  <link type="text/css" rel="stylesheet" href="app/layout/layout.css">
+
+  <link type="text/css" rel="stylesheet" href="app/intro/style.intro.css">
+  <link type="text/css" rel="stylesheet" href="app/datasource/style.datasource.css">
+
+
+  <!-- angular controllers -->
+  <script src="app/main.js"></script>
+
+  <!-- angular services -->
+  <script src="app/common/service.notification.js"></script>
+  <script src="app/common/service.api.js"></script>
+  <script src="app/auth/auth.service.js"></script>
+
+  <script src="app/services/tokenInjector.js"></script>
+
+
+
+  <script src="app/auth/auth.controller.js"></script>
+  <script src="app/intro/controller.intro.js"></script>
+  <script src="app/user/controller.user.js"></script>
+  <script src="app/datasource/directive.datasource.js"></script>
+  <script src="app/datasource/controller.datasource.js"></script>
+  <script src="app/datasource/controller.datasource.list.js"></script>
+
+  <!-- angular directives -->
+  <script src="app/common/directives.js"></script>
+  <script src="app/directive/dropmenu.js"></script>
+
+  <script src="app/layout/controller.public.layout.js"></script>
+  <script src="app/layout/controller.personal.layout.js"></script>
+
+
+  <script src="app/dashboard/controller.dashboard.js"></script>
+
+
+
+  <script src="app/widget/directive.panel.widget.js"></script>
+
+  <script src="app/widget/partials/GaugeController.js"></script>
+
+  <script src="app/widget/partials/ControlPanelController.js"></script>
+  <script src="app/widget/partials/DataTableController.js"></script>
+  <script src="app/widget/partials/MessagesController.js"></script>
+  <script src="app/widget/partials/LineController.js"></script>
+  <script src="app/widget/partials/ProfileController.js"></script>
+  <script src="app/widget/partials/SearchController.js"></script>
+  <script src="app/widget/partials/TableController.js"></script>
+  <script src="app/widget/partials/TodoController.js"></script>
+  <script src="app/widget/partials/UsageController.js"></script>
+  <script src="app/widget/partials/VisitorsController.js"></script>
+  <script src="app/widget/partials/WarningsController.js"></script>
+  <script src="app/widget/partials/ButtonController.js"></script>
+
+
+  <script src="app/services/CountriesService.js"></script>
+  <script src="app/services/MessagesService.js"></script>
+  <script src="app/services/NavService.js"></script>
+  <script src="app/services/PerformanceService.js"></script>
+  <script src="app/services/TableService.js"></script>
+  <script src="app/services/TodoListService.js"></script>
+  <script src="app/services/WidgetDataService.js"></script>
+
+
+
+</head>
+<body class="" ng-cloak layout="column" ng-controller="mainController" ng-init="init()" md-theme="dashboard">
+  <!-- <div style="position:absolute; right:10px; bottom:10px; background-color:rgba(0,0,0,0.5); z-index:100;">
+    <span hide show-xs>xs</span>
+    <span hide show-sm>sm</span>
+    <span hide show-md>md</span>
+    <span hide show-lg>lg</span>
+    <span hide show-xl>xl</span>
+  </div> -->
+  <div flex layout="column" class="wrapper" ui-view></div>
+</body>
+</html>

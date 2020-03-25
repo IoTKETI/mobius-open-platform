@@ -1,0 +1,211 @@
+.datasource-list-item {
+  min-width: 200px;
+  padding: 5px;
+}
+
+
+
+
+.blocklyToolboxDiv {
+  min-width: 200px;
+}
+
+.blocklyTreeRow {
+  padding: 20px 0;
+  margin: 0;
+  border-bottom: 1px solid white;
+
+  color: #828282;
+
+  font-size: 14px;
+  font-weight: 500;
+  font-stretch: 100%;
+  line-height: 40px;
+  letter-spacing: 0.14px;
+}
+
+#blocklyContainer {
+  padding: 15px;
+}
+
+
+
+.dashboard-datasource {
+  background-color: #A9CE34;
+  height: 100px;
+  min-width: 217px;
+}
+
+.dashboard-datasource.inactive {
+  background-color: rgba(255,255,255,0.5);
+  color: darkgray;
+}
+.dashboard-datasource.inactive .dashboard-datasource-center {
+  color: darkgray;
+}
+.dashboard-datasource-left {
+  width: 80px;
+  background-color: rgba(255,255,255,0.5);
+}
+
+
+.dashboard-datasource-center md-input-container.md-accent label,
+.dashboard-datasource-center md-input-container.md-accent input {
+  color: white !important;
+}
+
+
+.dashboard-datasource-startstop {
+  margin-top: 7px;
+  width: 50px;
+  height: 50px;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 50% 0 0 0;
+  vertical-align: middle;
+  padding: 15px 5px 5px 15px;
+}
+
+
+.dashboard-datasource-left .datasource-icon {
+  width: 42px;
+  height: 42px;
+  border: 1px solid white;
+  border-radius: 50%;
+  margin: 5px 15px;
+  text-align: center;
+}
+
+.dashboard-datasource-left .datasource-icon img {
+  width: 34px;
+  height: 34px;
+  margin: 4px;
+}
+
+.dashboard-datasource-left .datasource-actions md-icon {
+  color: white;
+}
+
+.dashboard-datasource-left .datasource-actions .md-button.md-icon-button {
+  margin: 0 !important;
+}
+
+.dashboard-datasource-startstop md-icon {
+  font-size: 25px;
+  color: white;
+}
+
+
+
+
+
+.dashboard-datasource-info {
+  height: 60px;
+  margin: 0px 0 10px;
+  border: 1px solid white;
+}
+
+.dashboard-datasource-info.inactive {
+  background-color: rgba(147, 147, 147, 0.57);
+}
+
+.dashboard-datasource-info .dashboard-datasource-left .datasource-icon {
+  margin: 15px 15px;
+}
+
+.dashboard-datasource-info .dashboard-datasource-center {
+  font-size: 15px;
+  padding: 5px;
+  color: white;
+  vertical-align: middle;
+  outline: none;
+  cursor: pointer;
+}
+
+.dashboard-datasource-info .dashboard-datasource-startstop {
+  margin: 6px 2px 2px;
+  width: 150px;
+  height: 50px;
+  background-color: rgba(255,255,255,0.5);
+  border-radius: 15px 0 0 0;
+  vertical-align: middle;
+  padding: 5px;
+}
+
+.dashboard-datasource-info .dashboard-datasource-startstop md-icon {
+  font-size: 20px;
+  color: white;
+}
+
+.dashboard-datasource-info .dashboard-datasource-startstop button.md-button.md-accent md-icon {
+  font-size: 20px;
+  color: orange;
+}
+
+.dashboard-datasource-info .dashboard-datasource-startstop .md-button.md-icon-button {
+  margin: 0 !important;
+}
+
+
+
+g.blocklyError path.blocklyPath {
+  stroke: red !important;
+  stroke-width: 3px !important;
+}
+g.blocklyError path.blocklyPathLight {
+  display: none !important;
+}
+
+
+.datasource-icon > md-icon {
+  color:  white;
+  font-size: 25px;
+  line-height: 38px;
+}
+
+.dashboard-datasource-left .md-button.md-icon-button md-icon {width: 40px;height: 40px;font-size: 25px;line-height: 25px;margin-top: 7px;}
+
+.dashboard-datasource-left .md-button.md-icon-button {
+    width: 70px;
+    height: 70px;
+}
+
+
+.size-selection-block {
+  margin: 0;
+  background-color: rgba(0,0,0,0.87);
+  padding: 10px;
+}
+
+.size-button {
+  width: 40px;
+  height: 30px;
+  border: 1px solid darkgray;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 13px 4px;
+  display: inline-block;
+  color: #444444;
+  outline: none;
+  height: 40px;
+  margin: 1px;
+  border-radius: 4px;
+}
+
+.size-button.current {
+  background-color: orange !important;
+}
+.size-button.mouseover {
+  background-color: lightgray;
+}
+
+
+#codeViewer {
+  width: 350px;
+}
+
+#codeViewer pre,
+#codeViewer code {
+    height: 100%;
+    font-size: 0.9em;
+    box-sizing: border-box;
+}

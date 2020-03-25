@@ -1,0 +1,79 @@
+<div class="cmd-add-dialog">
+    <div class="add-form">
+        <h1 mat-dialog-title>명령어 등록</h1>
+        <mat-dialog-content class="fields-container">
+            <div [formGroup]="form">
+                <mat-form-field>
+                    <input matInput placeholder="명령어" formControlName="command" required>
+                    <mat-error *ngIf="form.controls['command'].hasError('required')">
+                        사용할 명령어를 입력해주세요
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['command'].hasError('pattern')">
+                        '_'외의 특수문자를 제외해주세요.
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="URL(AE/CON)" formControlName="target" required>
+                    <mat-error *ngIf="form.controls['target'].hasError('required')">
+                        대상을 입력해주세요.
+                    </mat-error>
+                    <mat-error *ngIf="form.controls['target'].hasError('pattern')">
+                        'AE/CON' 형식에 맞추어 입력해주세요.
+                    </mat-error>
+                </mat-form-field>
+                <div class="radio-mat-group">
+                    <label for="">명령어 유형</label>
+                    <mat-radio-group formControlName="method" aria-label="기능">
+                        <mat-radio-button color="primary" value="get">읽기</mat-radio-button>
+                        <mat-radio-button color="primary" value="post">쓰기</mat-radio-button>
+                        <mat-radio-button color="primary" value="sub">구독</mat-radio-button>
+                    </mat-radio-group>
+                    <mat-error *ngIf="form.controls['method'].hasError('required')">
+                        기능의 유형을 선택해주세요
+                    </mat-error>
+                </div>
+                <mat-form-field>
+                    <input matInput placeholder="설명" formControlName="des">
+                </mat-form-field>
+            </div>
+        </mat-dialog-content>
+        <mat-dialog-actions>
+            <button mat-raised-button color="primary" (click)="onClick()">등록</button>
+            <button mat-raised-button [mat-dialog-close]="false">취소</button>
+        </mat-dialog-actions>
+    </div>
+    <div class="guide-area">
+        <div *ngIf="form.controls['method'].value == 'get'">
+            <h3>읽기</h3>
+            <ul>
+                <li>읽기 명령어는 '/명령어' 형태로 사용이 가능합니다.</li>
+                <li>명령어를 입력하면 등록된 URL의 최신 데이터를 출력합니다.</li>
+            </ul>
+            <div class="guide-imaeg"><img src="assets/images/guide/command-get-short.gif" alt=""></div>
+        </div>
+        <div *ngIf="form.controls['method'].value == 'post'">
+            <h3>쓰기</h3>
+            <ul>
+                <li>쓰기 명령어는 '/명령어 데이터' 형태로 사용이 가능합니다.</li>
+                <li>명령어와 데이터를 입력하면 등록된 URL에 데이터를 생성합니다. </li>
+                <li>쓰기 명령어는 에이전트 관리자의 인증 후 사용이 가능합니다.</li>
+            </ul>
+            <div class="guide-imaeg"><img src="assets/images/guide/command-post-deny-short.gif" alt=""></div>
+            <ul>
+                <li>인증 받지 못한 채널은 쓰기 명령어를 사용할 수 없습니다.</li>
+                <li>인증은 '/request' 명령어를 통해 신청이 가능하며</li>
+                <li>인증을 받는 즉시 알림으로 확인할 수 있습니다.</li>
+            </ul>
+            <div class="guide-imaeg"><img src="assets/images/guide/command-post-done-short.gif" alt=""></div>
+        </div>
+        <div *ngIf="form.controls['method'].value == 'sub'">
+            <h3>구독</h3>
+            <ul>
+                <li>구독 명령어는 '/명령어' 형태로 사용이 가능합니다.</li>
+                <li>구독 시 등록된 URL에 새로운 데이터가 생성될 때 데이터를 출력합니다.</li>
+                <li>구독 취소는 '/stop_구독명령어' 형태로 취소할 수 있습니다.<br>ex) /stop_alert</li>
+            </ul>
+            <div class="guide-imaeg"><img src="assets/images/guide/command-sub-short.gif" alt=""></div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,24 @@
+#!/usr/bin/env node
+
+const xstring = require('./libs/xstring.js');
+
+var app = require('../app');
+
+
+var server = app.listen(app.get('port'), function() {
+  debug.log('http://localhost:' + server.address().port);
+});
+
+
+
+var PushMessageManager = require('./managers/push.message.manager.js');
+//
+global.pushMessageManager = new PushMessageManager(server);
+global.pushMessageManager.start();
+
+
+
+
+process.on('unhandledRejection', function(reason, p){
+  debug.log('Unhandled Rejection at: Promise', p, 'reason:', reason);
+});

@@ -1,0 +1,49 @@
+<div class="update-resource modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">하위 리소스 생성</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="resource-input">
+            <div class="title">
+              2. 리소스 정보 입력
+            </div>
+            <div class="resource-input-form">
+              <!-- ae -->
+              <div ng-show="model.selectedResourceType == '2'">
+                <ae></ae>
+              </div>
+              <!-- container -->
+              <div ng-show="model.selectedResourceType == '3'">
+                <cnt></cnt>
+              </div>
+              <!-- ts -->
+              <div ng-show="model.selectedResourceType == '25'">
+                <ts></ts>
+              </div>
+              <!-- grp -->
+              <div ng-show="model.selectedResourceType == '9'">
+                <grp></grp>
+              </div>
+              <!-- sub -->
+              <div ng-show="model.selectedResourceType == '23'">
+                <sub></sub>
+              </div>
+              <!-- sd -->
+              <div ng-show="model.selectedResourceType == '24'">
+                <sd></sd>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close(false)" class="btn btn-default" data-dismiss="modal">취소</button>
+        <button type="button" ng-click="close(true)" class="btn btn-primary" data-dismiss="modal">생성</button>
+      </div>
+    </div>
+  </div>
+</div>

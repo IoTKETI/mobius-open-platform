@@ -1,0 +1,63 @@
+.login-page{
+    height: 100%;
+    width: 100%;
+}
+
+.login-spacer{
+    height: 20vh;
+}
+
+.login-container{
+    margin: auto;
+    width: 300px;
+    padding: 2vh;
+    background-color: #fff;
+    box-shadow: 5px 5px 15px grey;
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+}
+
+#login-fab {
+	border-radius: 50%;
+    height: 56px;
+    margin: auto;
+    min-width: 56px;
+    width: 56px;
+    overflow: hidden;
+    background: #020950; /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #020950, #002342); /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #020950, #002342); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    box-shadow: 0 1px 1.5px 0 rgba(0,0,0,.12), 0 1px 1px 0 rgba(0,0,0,.24);
+    margin-top: -35px;
+    text-align: center;
+    left: 0;
+    right: 0;
+}
+
+#lock-icon{
+    line-height: 56px;
+    color: #fff;
+}
+.card-heading{
+    text-align: center;
+    color: rgba(0, 0, 0, 0.51);
+}
+
+.buttons .login{
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+}
+
+.buttons .login > button{
+    width: 100%;
+}
+
+.buttons .register{
+    display: flex;
+    padding-top: 2vh;
+    padding-bottom: 2vh;
+    justify-content: space-between;
+}

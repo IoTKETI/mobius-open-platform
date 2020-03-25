@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>
+    <%= title %>
+  </title>
+  <link rel='stylesheet' href='/stylesheets/style.css' />
+</head>
+
+<body>
+  <h1>
+    <%= title %>
+  </h1>
+  <form action="/user" method="POST">
+    <input type="email" name="email">
+    <input type="password" name="password">
+    <input type="text" name="name">
+    <input type="text" name="token">
+    <input type="submit" value="확인">
+  </form>
+  <p>
+    <h1>명령어 추가 하기</h1>
+    <form action="/bot" method="POST">
+      <input type="email" name="email" placeholder="email">
+      <input type="text" name="command" placeholder="commandName">
+      <input type="text" name="target" placeholder="targetAE">
+      <input type="number" name="params" value="0">
+      <input type="radio" name="method" value="get">get
+      <input type="radio" name="method" value="post">post
+      <input type="text" name="name" placeholder="Command Name">
+      <textarea name="des" placeholder="Description"></textarea>
+      <input type="submit" value="확인">
+    </form>
+  </p>
+  <p>
+    <form action="/bot/activity" method="GET">
+      <input type="text" name="botID" placeholder="botID">
+      <input type="text" name="command" placeholder="command">
+      <input type="submit" value="수행">
+    </form>
+  </p>
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+<div class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">권한 규칙 추가</h4>
+      </div>
+      <div class="modal-body">
+        <form name="create_acp">
+
+          <div class="row">
+
+            <div class="form-group col-sm-12">
+              <label class="form-control-label">접근 권한 (<smal ng-bind="acop"></smal>)</label>
+              <div class="input-group">
+                <table class="table acop_table">
+                  <tr>
+                    <td>Create</td>
+                    <td>Read</td>
+                    <td>Update</td>
+                    <td>Delete</td>
+                    <td>Notify</td>
+                    <td>Discovery</td>
+                  </tr>
+                  <tr>
+                    <td>
+                      <label class="switch switch-text switch-success">
+                        <input type="checkbox" class="switch-input" ng-model="formData.acOperation[0]">
+                        <span class="switch-label" data-on="C" data-off="C"></span>
+                        <span class="switch-handle"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <label class="switch switch-text switch-success">
+                        <input type="checkbox" class="switch-input" ng-model="formData.acOperation[1]">
+                        <span class="switch-label" data-on="R" data-off="R"></span>
+                        <span class="switch-handle"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <label class="switch switch-text switch-success">
+                        <input type="checkbox" class="switch-input" ng-model="formData.acOperation[2]">
+                        <span class="switch-label" data-on="U" data-off="U"></span>
+                        <span class="switch-handle"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <label class="switch switch-text switch-success">
+                        <input type="checkbox" class="switch-input" ng-model="formData.acOperation[3]">
+                        <span class="switch-label" data-on="D" data-off="D"></span>
+                        <span class="switch-handle"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <label class="switch switch-text switch-warning">
+                        <input type="checkbox" class="switch-input" ng-model="formData.acOperation[4]">
+                        <span class="switch-label" data-on="N" data-off="N"></span>
+                        <span class="switch-handle"></span>
+                      </label>
+                    </td>
+                    <td>
+                      <label class="switch switch-text switch-warning">
+                        <input type="checkbox" class="switch-input" ng-model="formData.acOperation[5]">
+                        <span class="switch-label" data-on="D" data-off="D"></span>
+                        <span class="switch-handle"></span>
+                      </label>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+              <span class="help-block">사용자에게 허가 하고자 하는 접근권한을 설정하세요.</span>
+            </div>
+
+            <div class="form-group col-sm-12">
+              <label class="form-control-label" for="ac_origin">승인 ID</label>
+              <div class="input-group">
+                <input ng-model="formData.acOriginId" on-key-enter="addAcor()" required ng-required="true" type="text" id="ac_origin" class="form-control" placeholder="사용자 또는 리소스 ID">
+                <span class="input-group-btn">
+                  <button class="btn btn-default" type="button" ng-click="addAcor()"><i class="fa fa-user-plus"></i> 추가</button>
+                </span>
+              </div>
+              <span class="help-block">권한을 추가하고자 하는 사용자 또는 리소스의 ID를 입력하세요.</span>
+              <div class="row acor_list">
+                <div class="col-md-6 acor-list-item" ng-repeat="acor in formData.acOrigins" >
+                  <div class="acor-list-item-content">
+                    <div class="acor-info">
+                      <i ng-if="userNameTable[acor] != null" class="fa fa-user"></i>
+                      <i ng-if="userNameTable[acor] == null" class="fa fa-microchip"></i>
+                      <span ng-bind="acor"></span>
+                    </div>
+                    <div class="acor-delete-button">
+                      <button class="btn" ng-click="deleteAcor($index)"><i class="fa fa-trash-alt"></i></button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="dismissModal()" class="btn btn-default" data-dismiss="modal">취소</button>
+        <button type="button" ng-click="addAcrule()" class="btn btn-primary-40" data-dismiss="modal">규칙 추가</button>
+      </div>
+    </div>
+  </div>
+</div>

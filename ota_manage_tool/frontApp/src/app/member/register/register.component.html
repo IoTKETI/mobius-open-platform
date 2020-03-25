@@ -1,0 +1,51 @@
+<div class="join-page">
+  <div class="join-spacer"></div>
+  <div class="join-container">
+    <div id="join-fab" class="mdl-color--accent mdl-color-text--white">
+      <i id="join-icon" class="material-icons">account_circle</i>
+    </div>
+    <h2 class="card-heading">
+      회원가입
+    </h2>
+    <form class="join-form" [formGroup]="formModel" novalidate>
+      <mat-form-field >
+        <input matInput #email type="email" placeholder="Email" formControlName="email" (blur)="checkEmail()">
+        <mat-error *ngIf="formModel.controls['email'].hasError('email')">
+          Email 양식에 맞게 입력해주세요
+        </mat-error>
+        <mat-error *ngIf="formModel.controls['email'].hasError('required')">
+          Email을 입력해주세요
+        </mat-error>
+        <mat-error *ngIf="formModel.controls['email'].hasError('overlap')">
+          이미 사용중인 Email입니다.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field >
+        <input matInput type="text" placeholder="Name" formControlName="name">
+        <mat-error *ngIf="formModel.controls['name'].hasError('required')">
+          이름을 입력해주세요.
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" name="password" placeholder="Password" formControlName="password">
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput type="password" name="repeatPwd" (blur)="equalValidator()" placeholder="Repeat Password" formControlName="repeatPassword">
+        <mat-error *ngIf="formModel.controls['repeatPassword'].hasError('equal')">
+          입력한 패스워드가 일치하지 않습니다.
+        </mat-error>
+      </mat-form-field>
+    </form>
+    <div class="buttons">
+      <div class="join">
+        <button mat-raised-button class="button-primary" (click)="userSignUP()">Join</button>
+      </div>
+      <div class="register">
+        <button mat-button (click)="backLogin()">
+            <i class="material-icons">arrow_back_ios</i>
+            Back
+        </button>
+      </div>      
+    </div>
+  </div>
+</div>

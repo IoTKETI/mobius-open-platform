@@ -1,0 +1,130 @@
+mat-card {
+    margin-top: 1em;
+}
+mat-card-title {
+    display: flex;
+    align-content: center;
+    color: #333;
+    background-color: #f8f9fa;
+    border: 1px solid #ddd;
+    padding-left: 10px;
+    padding: 8px;
+    font-size: 17px;
+    font-weight: 400;
+}
+mat-card-title i.fas{
+    margin-right: .3em;
+}
+
+.noneSelect{
+    height: 100%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.hide{
+    display: none;
+}
+#noneSelect:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+  }
+.container {
+    max-height: 100%;
+    display: flex;
+    flex-direction: row;
+    border: 1px solid #ddd;
+}
+#tabs{
+    width: 25vw;
+    border-radius: 0px;
+    border-right: 1px solid #ddd;
+}
+#content{
+    background-color: white;
+    width: 100%;
+}
+
+#tabs ul{
+    margin: 0;
+    padding: 8px;
+    list-style: none;
+}
+
+#tabs ul li{
+    line-height: 2em;
+    padding: 0 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.1em;
+    background: #66c2f0;
+    color: #fff;
+}
+#tabs ul li.active{
+    font-weight: bold;
+    color: #ffffff;
+    background-color: #20a8d8;
+}
+#tabs ul li:hover{
+    transition: all 0.1s;
+    background: #66c2f0;
+}
+
+#tabs ul li .bot-item {
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    display: flex;
+    align-content: center;
+}
+#tabs ul li .bot-item i{
+    margin-right: 15px;
+    font-size: 1.4em;
+    display: flex;
+    align-items: center;
+}
+#tabs .bot-control {
+    border-radius: 0px;
+    border-bottom: 1px solid;
+    border-color: #ddd;
+}
+#tabs .bot-control button {
+    width: 100%;
+    min-height: 40px;
+    color: #1897ce;
+    background-color: white;
+    font-size: 1.2em;
+    line-height: 32px;
+    border-radius: 0px;
+}
+#tabs .bot-control button .title {
+    display: inline-block;
+    width: 0px;
+    overflow: hidden;
+    transition : width .1s ease-in;
+}
+#tabs .bot-control button:hover .title,
+#tabs .bot-control button:active .title {
+    width: 100px;
+    transition : width .1s ease-in;
+}
+#tabs .bot-control button i {
+    margin-right: 5px;
+}
+#tabs div.remove-icon {
+    width: 40px;
+    max-width: 40px;
+    height: 40px;
+    display: flex;
+}
+#tabs div.remove-icon button {
+    min-width: 0px;
+    min-height: 0px;
+    font-size: 1em;
+    width: 100%;
+    padding: 0px;
+}

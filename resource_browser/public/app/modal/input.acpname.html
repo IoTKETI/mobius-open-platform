@@ -1,0 +1,26 @@
+<div class="input-acpname modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header bg-primary">
+        <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">ACP Originator</h4>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="resource-input">
+            <div class="title">
+              Input ACP Originator
+            </div>
+            <div class="acpname-input-form">
+              <input type="text" ng-model="acpName" />
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="close(false)" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" ng-click="close(true)" class="btn btn-primary" data-dismiss="modal">Apply</button>
+      </div>
+    </div>
+  </div>
+</div>

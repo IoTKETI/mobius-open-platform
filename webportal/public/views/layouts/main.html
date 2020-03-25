@@ -1,0 +1,27 @@
+<!-- Navbar -->
+<div ng-include="'_navbar/navbar.html'"></div>
+
+<div class="app-body">
+
+    <!-- Main content -->
+    <main class="main">
+
+        <!-- Breadcrumb -->
+        <ol class="breadcrumb" breadcrumb>
+          <ncy-breadcrumb></ncy-breadcrumb>
+        </ol>
+
+        <div class="container-fluid" style="min-height: calc(100vh - 240px); position: relative" layout="row" layout-wrap>
+            <ui-view flex></ui-view>
+        </div>
+        <!-- /.conainer-fluid -->
+    </main>
+
+
+    <!-- Aside Menu -->
+    <div ng-include="'views/layouts/aside.html'"></div>
+
+</div>
+
+<!-- Footer -->
+<div ng-include="'views/layouts/footer.html'"></div>

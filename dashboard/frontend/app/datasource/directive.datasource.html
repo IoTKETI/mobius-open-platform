@@ -1,0 +1,28 @@
+<div flex layout="row" class="dashboard-datasource" ng-class="datasource.status">
+  <div flex="none" layout="column" class="dashboard-datasource-left">
+    <div class="datasource-icon">
+      <md-icon md-font-icon="fas" ng-class="datasource.datasourceType"></md-icon>
+    </div>
+    <div layout="row" class="datasource-actions">
+      <md-button class="md-icon-button"  ng-click="delete()">
+        <md-icon md-font-icon="fas fa-trash-alt"></md-icon>
+      </md-button>
+      <md-button class="md-icon-button"  ng-click="gotoEditor()">
+        <md-icon md-font-icon="fas fa-cog"></md-icon>
+      </md-button>
+    </div>
+  </div>
+  <div flex class="dashboard-datasource-center" ng-click="gotoEditor()">
+    <p ng-bind="datasource.description"></p>
+  </div>
+  <div flex="none" class="dashboard-datasource-right">
+    <div class="dashboard-datasource-startstop">
+      <md-button ng-if="datasource.status == 'inactive'" class="md-icon-button" ng-click="toggleStatus()">
+        <md-icon md-font-icon="fas fa-play"></md-icon>
+      </md-button>
+      <md-button ng-if="datasource.status == 'active'" class="md-icon-button" ng-click="toggleStatus()">
+        <md-icon md-font-icon="fas fa-pause" ></md-icon>
+      </md-button>
+    </div>
+  </div>
+</div>

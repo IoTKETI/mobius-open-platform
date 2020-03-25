@@ -1,0 +1,31 @@
+<md-dialog aria-label="Mango (Fruit)">
+  <form ng-cloak>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>Resource properties</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="close()">
+          <md-icon md-font-icon="fa fa-times" aria-label="Close dialog"></md-icon>
+        </md-button>
+      </div>
+    </md-toolbar>
+
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <div class="json-wrapper">
+          <json-formatter json="resourceData" open="3"></json-formatter>
+        </div>
+      </div>
+    </md-dialog-content>
+
+    <md-dialog-actions layout="row">
+      <md-button ng-click="close()" class="md-primary">
+        DELETE
+      </md-button>
+      <span flex></span>
+      <md-button ng-click="close()" class="md-primary">
+        CLOSE
+      </md-button>
+    </md-dialog-actions>
+  </form>
+</md-dialog>

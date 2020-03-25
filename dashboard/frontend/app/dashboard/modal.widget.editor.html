@@ -1,0 +1,61 @@
+<md-dialog class="device-detail" aria-label="Detail of thing" md-theme="dashboard">
+  <md-toolbar class="bd-shadow">
+    <h2>Data source 선택</h2>
+  </md-toolbar>
+
+  <md-card-content ng-if="widget.widgetType == 'button'">
+
+    <md-input-container>
+      <label>oneM2M Resource</label>
+      <input ng-model="widget.datasource.widgetData.path">
+    </md-input-container>
+
+    <md-input-container>
+      <label>Value</label>
+      <input ng-model="widget.datasource.widgetData.value">
+    </md-input-container>
+
+  </md-card-content>
+
+  <md-card-content ng-if="widget.widgetType != 'button'">
+
+    <div style="min-height: 200px; overflow: scroll">
+
+      <md-radio-group ng-model="data.selectedDatasourceId">
+
+        <div flex-xl="33" flex-lg="33" flex-md="33" flex-sm="50" flex-xs="100" layout="row" ng-repeat="datasource in datasourceList" style="padding: 5px;">
+          <md-radio-button ng-value="datasource.datasourceId" aria-label="{{datasource.description}}">
+            <div flex layout="row" class="dashboard-datasource" ng-class="datasource.status" style="height:60px;">
+              <div flex="none" layout="column" class="dashboard-datasource-left">
+                <div class="datasource-icon">
+                  <md-icon md-font-icon="fas" ng-class="datasource.datasourceType"></md-icon>
+                </div>
+              </div>
+              <div flex class="dashboard-datasource-center" ng-click="gotoEditor()">
+                <p ng-bind="datasource.description"></p>
+              </div>
+            </div>
+          </md-radio-button>
+        </div>
+      </md-radio-group>
+
+    </div>
+
+  </md-card-content>
+
+  <md-dialog-actions layout="row">
+    <span flex="none">
+      <md-button ng-click="close()" ng-arial="Close">
+        Close
+      </md-button>
+    </span>
+    <span flex></span>
+    <span flex="none">
+      <md-button ng-click="save()" ng-disabled="data.datasourceId == data.selectedDatasourceId ? true : false" ng-arial="Apply changes">
+        Save
+      </md-button>
+    </span>
+    
+  </md-dialog-actions>
+
+</md-dialog>

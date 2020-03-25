@@ -1,0 +1,169 @@
+<div class="animated fadeIn" ng-init="init()">
+  <div class="row">
+
+    <div class="col-md-12">
+      <div smartwizard id="smartwizard" class="sw-main sw-theme-arrows">
+        <ul class="nav nav-tabs step-anchor">
+          <li class="nav-item active"><a class="nav-link">oneM2M 리소스<br /><small>대상 oneM2M 리소스 선택</small></a></li>
+          <li class="nav-item "><a class="nav-link">디바이스<br /><small>디바이스 정보 입력</small></a></li>
+        </ul>
+        <div class="sw-container tab-content">
+          <div class="step-content row">
+
+            <div class="col-sm-6">
+              <div class="card select-resource">
+                <div class="card-header">
+                  oneM2M 리소스 검색
+                </div>
+                <div class="card-block">
+                  <form name="search_resource">
+                    <div class="form-group">
+                      <label class="form-control-label" for="resource_name">리소스 이름(rn)</label>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-newspaper"></i></span>
+                        <input ng-model="formData.findResource.aeName" on-key-enter="findMobiusResource()" required ng-required="true" type="text" id="resource_name" name="resource_name" class="form-control" placeholder="리소스 이름">
+                      </div>
+                      <span class="help-block">리소스 이름('rn')을 입력하세요.</span>
+                    </div>
+                    <div class="form-group">
+                      <label class="form-control-label" for="application_id">AE ID(aei)</label>
+                      <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-barcode"></i></span>
+                        <input ng-model="formData.findResource.aeId" on-key-enter="findMobiusResource()" required ng-required="true" type="text" id="application_id" name="application_id" class="form-control" placeholder="AE ID(aei)">
+                      </div>
+                      <span class="help-block">AE ID('aei')를 입력하세요. 일반적으로 제품에 인쇄된 'serial number'를 의미합니다.</span>
+                    </div>
+                    <div class="form-group form-actions">
+                      <button ng-click="findMobiusResource()" ng-disabled="search_resource.$invalid" type="button" class="btn btn-default search-resource" style="float: right;">
+                        <i class="fa fa-search"></i> 검색
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+
+            </div>
+            <div class="col-sm-6">
+
+              <div class="card select-resource">
+                <div class="card-header">
+                  선택된 리소스 정보
+                </div>
+                <div class="card-block">
+
+                  <div ng-if="selectedAe">
+                    <div class="resource-info resource-name">
+                      <i class="fa fa-newspaper"></i> <span ng-bind="selectedAe.rn"></span>
+                    </div>
+
+                    <div class="resource-info">
+                      <div class="resource-info-title"><i class="fa fa-caret-right"></i> 어플리케이션 ID(api):</div>
+                      <div ng-bind="selectedAe.api" class="resource-info-value"></div>
+                    </div>
+
+                    <div class="resource-info">
+                      <div class="resource-info-title"><i class="fa fa-caret-right"></i> 레이블(lbl):</div>
+                      <div class="resource-info-value">
+                        <span class="label label-info" ng-repeat="lbl in selectedAe.lbl" ng-bind="lbl"></span>
+                      </div>
+                    </div>
+
+                    <div class="resource-info">
+                      <div class="resource-info-title"><i class="fa fa-caret-right"></i> AE ID(aei):</div>
+                      <div ng-bind="selectedAe.aei" class="resource-info-value"></div>
+                    </div>
+
+                    <div class="resource-info">
+                      <div class="resource-info-title"><i class="fa fa-caret-right"></i> 생성일(ct):</div>
+                      <div ng-bind="selectedAe.ct" class="resource-info-value"></div>
+                    </div>
+
+                  </div>
+                  <div ng-if="selectedAe == null" class="text-center" style="color: darkgray">
+                    <h3>선택된 리소스가 없습니다.</h3>
+                    <br /><br />
+                    <h5>리소스 이름과 AE ID를 입력하여 등록하고자 하는 디바이스 리소스를 검색 후 다음 단계로 진행하세요.</h5>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-content row">
+
+
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-header">
+                  디바이스 아이콘
+                </div>
+                <div class="card-block">
+                  <div class="device-icon fa" ng-class="newDevice.deviceInfo.icon"></div>
+
+                  <div class="icon-selection" >
+                    <ul class="icon-selection-list">
+                      <li class="icon-selection-item" ng-repeat="icon in iconList">
+                        <div ng-click="selectDeviceIcon(icon)" class="device-icon fa" ng-class="icon"></div>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="col-sm-6">
+              <div class="card">
+                <div class="card-header">
+                  디바이스 정보
+                </div>
+                <div class="card-block">
+
+                  <form name="device_info">
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label class="form-control-label" for="nickname">별명</label>
+                          <input ng-model="newDevice.deviceInfo.nickname" on-key-enter="addNewDevice()" required ng-required="true" type="text" class="form-control" id="nickname" placeholder="디바이스 별명">
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="row">
+                      <div class="col-sm-12">
+                        <div class="form-group">
+                          <label class="form-control-label" for="description">설명</label>
+                          <textarea ng-model="newDevice.deviceInfo.description" id="textarea-input" id="description" rows="4" class="form-control" placeholder="설명"></textarea>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <div class="col-sm-12">
+                        <label class="form-control-label" for="ota">OTA(On The Air update) 지원 여부</label>
+                        <label class="switch switch-text switch-info-outline-alt">
+                          <input ng-model="newDevice.deviceInfo.otaFeature" id="ota" type="checkbox" class="switch-input" checked>
+                          <span class="switch-label" data-on="Yes" data-off="No"></span>
+                          <span class="switch-handle"></span>
+                        </label>
+                      </div>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <nav class="navbar btn-toolbar sw-toolbar">
+          <div class="btn-group navbar-btn sw-btn-group pull-right" role="group">
+            <button ng-click="showPrevStep()" class="btn btn-lg btn-primary-40 sw-btn-prev" type="button">이전</button>
+            <button ng-if="showNextButton()" ng-click="showNextStep()" class="btn btn-lg btn-primary-40 sw-btn-next" type="button">다음</button>
+            <button ng-if="showRegisterButton()" ng-click="addNewDevice()" class="btn btn-lg btn-warning sw-btn-finish" type="button">등록</button>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+  <!--/.row-->
+</div>

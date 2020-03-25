@@ -1,0 +1,59 @@
+<html>
+<head>
+  <title>test Ws mqtt.js</title>
+</head>
+<body>
+<script>
+var p1 = new Promise(function(f,r){
+    setTimeout(function(){
+        console.log("p1");
+        f("yay");
+    }, 100);
+
+});
+
+var p2 = new Promise(function(f,r){
+    setTimeout(function(){
+        console.log("p2");
+        r(new Error("boo"));
+    }, 200);
+
+})
+
+var p3 = new Promise(function(f,r){
+    setTimeout(function(){
+        console.log("p3");
+        r(new Error("yay"));
+    }, 300);
+
+});
+
+var p4 = new Promise(function(f,r){
+    setTimeout(function(){
+        console.log("p4");
+        f("yay");
+    }, 400);
+
+});
+
+
+Promise.all([p1,p2, p3, p4]).then(function(p){
+    console.log("All Results:",p);
+    alert( 'all results: ' + p );
+}).error(function(e){
+    console.log("All Error:",e);
+    alert( 'all error: ' + p );
+});
+
+Promise.join(p1,p2, p3, p4, function(r1, r2, r3, r4){
+  var ary = [r1, r2, r3, r4];
+  console.log("join Results:" + ary);
+    alert( 'join results: ' + ary );
+});
+
+
+
+
+    </script> 
+</body>
+</html>

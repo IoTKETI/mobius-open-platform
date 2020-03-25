@@ -1,0 +1,39 @@
+<div class="modal fade create-acp-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">접근 권한 정책(ACP) 생성</h4>
+      </div>
+      <div class="modal-body">
+        <form name="create_acp">
+
+          <div class="row">
+
+            <div class="form-group col-sm-12">
+              <label class="form-control-label" for="resource_name">ACP 리소스 이름</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-newspaper"></i></span>
+                <input ng-model="formData.acpResource.rn" on-key-enter="createAcp()" required ng-required="true" type="text" id="resource_name" name="resource_name" class="form-control" placeholder="리소스 이름(rn)">
+              </div>
+              <span class="help-block">생성하고자 하는 ACP 리소스의 이름을 입력하세요('rn').</span>
+            </div>
+
+            <div class="form-group col-sm-12">
+              <label class="form-control-label" for="resource_name">레이블(lbl)</label>
+              <div class="input-group">
+                <span class="input-group-addon"><i class="fa fa-tags"></i></span>
+                <tags-input class="form-control" use-strings="true" ng-model="formData.acpResource.lbl" placeholder="레이블 입력 후 <enter> 또는 ','를 입력하세요" add-on-enter="true" add-on-comma="true" ></tags-input>
+              </div>
+              <span class="help-block">생성하고자 하는 ACP에 대한 레이블('lbl')을 입력하세요, 레이블 입력 후 <enter> 또는 ','를 입력하세요.</span>
+            </div>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="dismissModal()" class="btn btn-default" data-dismiss="modal">No</button>
+        <button type="button" ng-click="createAcp()" class="btn btn-primary-40" data-dismiss="modal">Yes</button>
+      </div>
+    </div>
+  </div>
+</div>

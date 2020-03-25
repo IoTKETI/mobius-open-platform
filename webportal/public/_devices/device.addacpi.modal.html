@@ -1,0 +1,80 @@
+<div class="modal fade add-acpi-modal">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" ng-click="close(false)" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h4 class="modal-title">접근권한 선택</h4>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-sm-6">
+            <div class="card">
+              <div class="card-header">
+                권한 정책 목록
+              </div>
+              <div class="card-block">
+                <div ng-repeat="acp in acpList">
+                  <div class="acp-item" ng-class="acpItemClass(acp)" ng-click="selectAcp(acp)">
+                    <label style="font-weight: normal">
+                      <div class="acp-item-checkbox">
+                        <input type="checkbox" ng-model="acp.selected" ng-disabled="isExsists(acp)" />
+                      </div>
+                      <div class="acp-item-name" >
+                        <span ng-bind="acp.rn"></span>
+                      </div>
+                    </label>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-6">
+
+            <div ng-if="acp == null" class="card">
+              <div class="card-header">
+                권한 정책 상세정보
+              </div>
+              <div class="card-block">
+                <small style="text-align: center">
+                  왼편의 권한정책을 클릭하면 선택된 권한 정책에 대한 상세정보를 확인할 수 있습니다.
+                </small>
+              </div>
+            </div>
+            <div ng-if="acp != null" class="card acp-item-block">
+              <div class="card-header">
+                <div class="acp-name">
+                  <div ng-bind="acp.rn"></div>
+                </div>
+                <div class="acp-lbl">
+                  <small ng-bind="acp.lbl"></small>
+                </div>
+              </div>
+              <div class="card-block">
+                <div class="acp-acr-list row">
+                  <div class="col-sm-12">
+                    <div ng-repeat="acr in acp.pv.acr">
+                      <acop acr="acr" acp="acp"></acop>
+
+                      <div class="acr-acor">
+                        <span ng-bind="acr.acor[0]"></span>
+                        <span ng-if="acr.acor.length > 1" ng-bind="acr.acor.length"></span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" ng-click="dismissModal()" class="btn btn-default" data-dismiss="modal">취소</button>
+        <button type="button" ng-click="applyAcpSelection()" class="btn btn-primary-40" data-dismiss="modal">적용</button>
+      </div>
+    </div>
+  </div>
+</div>

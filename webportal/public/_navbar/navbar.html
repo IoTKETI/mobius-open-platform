@@ -1,0 +1,74 @@
+<header class="app-header navbar" ng-controller="navbarController" ng-init="init()">
+    <a class="navbar-brand" ui-sref="home"></a>
+    <ul class="nav navbar-nav d-md-down-none">
+      <li class="nav-item">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">서비스</a>
+        <div class="dropdown-menu dropdown-menu">
+  <!--
+          <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+          <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
+  -->
+          <div class="service-map">
+            <ul>
+              <li>
+                  <a href="" class="menu-element" ui-sref="main.dashboard"><div class="img-button mobius-status"></div><span class="menu-label">Mobius 상태 조회</span></a>
+              </li>
+              <li>
+                  <a href="" class="menu-element" ui-sref="main.device.device-list"><div class="img-button device-manage"></div><span class="menu-label">디바이스 관리</span></a>
+              </li>
+              <li>
+                  <a href="" class="menu-element" ui-sref="main.acp.acp-list({acpId: ''})"><div class="img-button access-protect"></div><span class="menu-label">접근 권한 관리</span></a>
+              </li>
+              <li>
+                  <a href="" class="menu-element" ui-sref="main.data-browser({deviceId: ''})"><div class="img-button data-search"></div><span class="menu-label">데이터 탐색기</span></a>
+              </li>
+            </ul>
+            <ul>
+              <li>
+                  <a ng-href="{{serviceUrl.resmon}}" class="menu-element"><div class="img-button resmon"></div><span class="menu-label">리소스 브라우저</span></a>
+              </li>
+              <li>
+                  <a ng-href="{{serviceUrl.dashboard}}" class="menu-element"><div class="img-button dashboard"></div><span class="menu-label">대시보드</span></a>
+
+              </li>
+              <li>
+                  <a ng-href="{{serviceUrl.ota}}" class="menu-element"><div class="img-button ota"></div><span class="menu-label">OTA 관리기</span></a>
+
+              </li>
+              <li>
+                  <a ng-href="{{serviceUrl.sns}}" class="menu-element"><div class="img-button agent"></div><span class="menu-label">에이전트 관리기</span></a>
+              </li>
+            </ul>
+          </div>
+          <!-- <a ng-click="logout()"><i class="fa fa-lock"></i> Logout</a> -->
+        </div>
+      </li>
+    </ul>
+    <ul class="nav navbar-nav ml-auto d-md-down-none">
+      <li ng-if="loginuser == null" class="nav-item dropdown">
+        <a class="nav-link" ui-sref="login" role="button">login</a>
+      </li>
+      <li ng-if="loginuser != null" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+          <span class="img-avatar" >
+            <i class="fas fa-user"></i>
+          </span>
+
+          <span ng-if="loginuser.username != null" class="d-md-down-none" ng-bind="loginuser.username" title="{{loginuser.email}}"></span>
+          <span ng-if="loginuser.username == null" class="d-md-down-none" ng-bind="loginuser.email" title="{{loginuser.email}}"></span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+
+          <div class="dropdown-header text-center">
+              <strong>Account</strong>
+          </div>
+<!--
+          <a class="dropdown-item" href="#"><i class="fa fa-user"></i> Profile</a>
+          <a class="dropdown-item" href="#"><i class="fa fa-wrench"></i> Setting</a>
+-->
+          <a class="dropdown-item" ng-click="logout()"><i class="fa fa-lock"></i> Logout</a>
+        </div>
+      </li>
+
+    </ul>
+</header>

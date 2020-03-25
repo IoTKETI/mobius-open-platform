@@ -1,29 +1,30 @@
-# README #
+# Service Install
+## VERSION : 0.1
 
-This README would normally document whatever steps are necessary to get your application up and running.
+## 1. Install Gulp
+>$> npm install gulp-cli -g  
+>...  
+>$> npm install gulp --save-dev
 
-### What is this repository for? ###
+## 2. Pull Repositories
+>$> gulp updateSubmodule
 
-* Quick summary
-* Version
-* [Learn Markdown](https://bitbucket.org/tutorials/markdowndemo)
+## 3. Install npm libraries
+>$> gulp installNPM
 
-### How do I get set up? ###
+## 4. Set Databases
+>$> gulp setDatabase
 
-* Summary of set up
-* Configuration
-* Dependencies
-* Database configuration
-* How to run tests
-* Deployment instructions
 
-### Contribution guidelines ###
 
-* Writing tests
-* Code review
-* Other guidelines
+# Service Start
 
-### Who do I talk to? ###
+## Start PM2 
+>$> gulp startPm2
+***
 
-* Repo owner or admin
-* Other community or team contact
+## Check appliations 
+>$> pm2 list
+
+
+## 

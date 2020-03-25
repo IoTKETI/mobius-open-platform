@@ -1,0 +1,52 @@
+
+.content-container{
+    width: 100%;
+    height: 100%;
+    display: inline-flex;
+}
+
+.content-container>:nth-child(1){
+    flex : 1;
+}
+.content-container>:nth-child(2){
+    flex : 0.15;
+    text-align: center;
+}
+.content-container>:nth-child(3){
+    flex: 1;
+}
+.mid-btn{
+    margin: auto;
+}
+mat-card.mat-card {
+    box-shadow: none;
+}
+mat-table {
+    box-shadow: none !important;
+}
+.mat-card-title{
+    text-align: center;
+}
+
+.mat-column-checked{
+    flex: 0 0 100px;
+}
+
+.btn {
+    padding: 10px 0 10px 0;
+}
+
+.btn a i{
+    font-size: 2em;
+}
+
+.btn a i:hover{
+    -webkit-transition: color 0.1s;
+    -moz-transition: color 0.1s;
+    -o-transition: color 0.1s;
+    transition: color 0.1s;
+}
+
+.btn-disabled{
+    opacity: 0.1;
+}

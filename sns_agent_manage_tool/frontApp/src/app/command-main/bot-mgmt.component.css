@@ -1,0 +1,69 @@
+.cmd-container{
+  width: 95%;
+  height: 100%;
+  padding: 15px;
+  margin: 0 auto;
+}
+/*
+mat-cell{
+  display:flex !important;
+  justify-content:center !important;
+}*/
+.mat-column-checked{
+  flex: 0 0 100px;
+}/*
+mat-header-cell {
+  display:flex;
+  justify-content:center;
+}*/
+
+.cmd-functions{
+  font-size: 2em;
+}
+.cmd-functions a{
+  margin: 10px;
+}
+.addCmd a i{
+  -webkit-transition: -webkit-all .2s ease-in-out;
+  transition: all .2s ease-in-out;
+}
+.addCmd a i:hover{
+  -webkit-transform: rotate(90deg);
+  transform: rotate(90deg);
+}
+.selected{
+  opacity: 1;
+  transition: all 0.1s;
+  visibility: visible;
+}
+.selected a i:hover{
+  transition: color .1s;
+}
+.notSelected{
+  transition: all 0.1s;
+  opacity: 0;
+  visibility: hidden;
+}
+
+mat-row:hover{
+  /* background-color: #E4F5FD; */
+}
+.mat-column-control a{
+  font-size: 1.3em;
+}
+.mat-column-control a:hover{
+  transition: color .1s;
+}
+
+.mat-table{
+  box-shadow: 0 2px 1px -1px rgba(0,0,0,.2), 0 1px 1px 0 rgba(0,0,0,.14), 0 1px 3px 0 rgba(0,0,0,.12);
+}
+
+.add-bot-form .mat-form-field {
+  width: 100%;
+}
+
+.mat-dialog-title {
+  display: flex !important;
+  flex-direction: row;
+}

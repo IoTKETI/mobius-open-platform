@@ -1,0 +1,59 @@
+<md-content flex layout="column" class="monitor-tree md-padding md-whiteframe-3dp" ng-controller="resourceTreeController" ng-init="init()">
+  <div flex id="resource-tree-view" style="overflow: scroll;">&nbsp;
+
+    <div id="property-popup-container">
+      <div ng-repeat="resourceData in selectedResourceList"
+           layout="column"
+           drag-box data="resourceData"
+           class="popup-property" ng-style="propertyPopupPosition(resourceData)"
+           ng-class="propertyPopupClass(resourceData)" >
+        <md-toolbar flex="none" class="draggable-area">
+          <div class="md-toolbar-tools">
+            <div flex>
+              <div class="resource-icon" ng-style="propertyPopupIcon(resourceData)"></div>
+              <h4 class="resource-name" ng-bind="resourceData.name"></h4>
+            </div>
+            <md-button flex="none" class="md-icon-button" ng-click="closePropertyPopup(resourceData)">
+              <md-icon md-font-icon="fa fa-times" aria-label="Close dialog"></md-icon>
+            </md-button>
+          </div>
+        </md-toolbar>
+
+        <md-dialog-content flex style="padding: 20px; border-bottom: 1px solid #539688; overflow: scroll; user-select: auto;">
+          <div class="md-dialog-content">
+            <div class="json-wrapper">
+              <json-formatter json="resourceData.data" open="3"></json-formatter>
+            </div>
+          </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row" flex="none">
+          <md-button flex="none" ng-disabled="!resourceData.popupDeleteAuthority" ng-click="deleteResource(resourceData)" class="md-accent">
+            DELETE
+          </md-button>
+          <div flex></div>
+          <md-button flex="none"  ng-click="closePropertyPopup(resourceData)" class="md-primary">
+            CLOSE
+          </md-button>
+        </md-dialog-actions>
+      </div>
+    </div>
+
+
+  </div>
+
+  <div class="lock-size" layout="row" layout-align="center center">
+    <md-button aria-label="menu" class="md-icon-button" ng-click="zoomOut()" ng-disabled="canZoomOut()">
+      <i class="fa fa-search-minus"></i>
+    </md-button>
+    <md-button aria-label="menu" class="md-icon-button" ng-click="zoomReset()" ng-disabled="canZoomReset()">
+      <i class="fa fa-sync"></i>
+    </md-button>
+    <md-button aria-label="menu" class="md-icon-button" ng-click="zoomIn()" ng-disabled="canZoomIn()">
+      <i class="fa fa-search-plus"></i>
+    </md-button>
+  </div>
+
+
+</md-content>
+

@@ -1,0 +1,78 @@
+<div flex layout="column" class="root-layout public" ng-class="hasBGImage" ng-controller="publicLayoutController" ng-init="init()" >
+
+
+  <!--  top tool bar -->
+  <md-toolbar layout="row" class="bg-dashboard-green1" layout-align="left center">
+
+    <!-- logo & menu -->
+      <!-- about, customer support, shopping -->
+
+    <div layout="row" class="logo-and-menu">
+      <a class="logo" herf="http://localhost:8881/home"></a>
+    </div>
+    <div flex>
+      <md-button class="dropdown-menu dropdown">
+        대시보드
+      </md-button>
+      <div class="drop-menu service-map" layout="column">
+        <ul>
+          <li>
+              <a href="http://localhost:8881/" class="menu-element"><div class="img-button mobius-status"></div><span class="menu-label">Mobius 상태 조회</span></a>
+          </li>
+          <li>
+              <a href="http://localhost:8881/" class="menu-element"><div class="img-button device-manage"></div><span class="menu-label">디바이스 관리</span></a>
+          </li>
+          <li>
+              <a href="http://localhost:8881/" class="menu-element" ui-sref="main.acp.acp-list({acpId: ''})"><div class="img-button access-protect"></div><span class="menu-label">접근 권한 관리</span></a>
+          </li>
+          <li>
+              <a href="http://localhost:8881/" class="menu-element" ui-sref="main.data-browser({deviceId: ''})"><div class="img-button data-search"></div><span class="menu-label">데이터 탐색기</span></a>
+          </li>
+        </ul>
+        <ul>
+          <li>
+              <a href="" class="menu-element"><div class="img-button resmon"></div><span class="menu-label">리소스 브라우저</span></a>
+          </li>
+          <li>
+              <a href="" class="menu-element"><div class="img-button dashboard"></div><span class="menu-label">대시보드</span></a>
+  
+          </li>
+          <li>
+              <a href="" class="menu-element"><div class="img-button ota"></div><span class="menu-label">OTA 관리기</span></a>
+  
+          </li>
+          <li>
+              <a href="" class="menu-element"><div class="img-button agent"></div><span class="menu-label">에이전트 관리기</span></a>
+          </li>
+        </ul>  
+      </div>
+    </div>
+
+    <div class="account-button" ng-if="user">
+      <a class="menu-button dropdown-menu dropdown">
+        <span class="img-avatar" >
+          <i class="fas fa-user"></i>
+        </span>
+        <span>{{user.u_n ? user.u_n : 'KETI'}}</span>
+      </a>
+      <div class="drop-menu account_menu">
+        <div class="dropdown-header">
+          <strong>Account</strong>
+        </div>
+        <ul>
+          <li><a ng-click="onClickLogout()"><i class="fa fa-lock"></i> Logout</a></li>
+        </ul>
+      </div>
+    </div>
+    <!-- <div flex="none" layout="row" class="tool-actions">
+      <md-button class="md-button-ripple" aria-label="More" ng-click="gotoSignin()">SIGN IN</md-button>
+    </div> -->
+
+  </md-toolbar>
+  <!--  contents -->
+  <div flex layout="column" ui-view="content"></div>
+
+  <md-conrent class="loading-spinner" ng-if="!user">
+    <md-progress-circular class="md-primary" md-mode="indeterminate" md-diameter="100"></md-progress-circular>
+  </md-conrent>
+</div>

@@ -1,0 +1,143 @@
+mat-row:hover mat-cell {
+    font-weight: 600;
+    color: #1b1b1b;
+}
+
+mat-cell button{
+    font-size: 1.5em;
+    padding: 0 10px 0 10px;
+}
+mat-cell button > .mat-button-wrapper {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+
+.addAE a i{
+    color: #000428;
+}
+
+.addAE a i:hover{
+    color : #004e92;
+}
+
+.ae-functions{
+    margin : 1em 0 1em 0;
+}
+.ae-functions a{
+    margin: 10px 5px 5px 10px;
+}
+.ae-functions .fas{
+    font-size: 2.0em;
+}
+.ae-functions .fas:hover{
+    color: #004e92;
+}
+.notSelected{
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.3s linear, opacity 0.3s linear;
+    /* display: none; */
+}
+
+.selected{
+    visibility: visible;
+    opacity: 1;
+    transition: visibility 0.3s linear, opacity 0.3 linear;
+}
+
+.patch-patching{
+    width: 100%;
+    text-align: left;
+}
+.patch-patching i{
+    color: #000428;
+    font-size: 1.5em;
+}
+.patch-success{
+    width: 100%;
+    text-align: left;
+}
+.patch-success i{
+    color: #00a86b;
+    font-size: 1.5em;
+}
+
+.mat-row.new {
+    background: #E8F5E9;
+}
+.mat-row.new mat-cell {
+    color: #1B5E20;
+}
+
+.mat-row.fail {
+    background: #FFEBEE;
+}
+.mat-row.fail mat-cell {
+    color: #800000;
+}
+
+progress-bar{
+    width: 95%;
+}
+
+.cell-line {
+    width: 100%;
+}
+
+.cell-line-one{
+    width : 100%;
+}
+.cell-line-two{
+    width : 100%;
+}
+
+.mat-cell{
+    font-size: 1em;
+}
+
+.mat-header-cell{
+    font-size: 1em;
+    font-weight: 600
+}
+
+.mat-column-checked{
+    flex: 0 0 3em;
+}
+
+.mat-column-control{
+    flex: 1 0; 
+    max-width: 8em;
+}
+
+.mat-column-aeid .cell-content,
+.mat-column-tag .cell-content,
+.mat-column-fileName .cell-content{
+    display: block;
+    text-align: left;
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.mat-column-patch .cell-progressbar{
+    width: 85%;
+    text-align: left;
+}
+
+.emptyMessage {
+    height: 50px;
+    font-size: 1.3em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #fff;
+}
+mat-row.highlighted button {
+    color: #fff !important;
+}
+mat-row:hover button {
+    color: #1b1b1b !important;
+}

@@ -1,0 +1,41 @@
+{
+  "name": "telegrambotmanagementassistserver",
+  "version": "1.2.2",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www",
+    "test": "mocha "
+  },
+  "dependencies": {
+    "atob": "^2.1.2",
+    "cookie-parser": "~1.4.3",
+    "cors": "^2.8.5",
+    "crypto-js": "^3.1.9-1",
+    "dateformat": "^3.0.3",
+    "debug": "^2.6.9",
+    "ejs": "~2.5.7",
+    "express": "~4.16.0",
+    "http-errors": "~1.6.2",
+    "jsonwebtoken": "^8.3.0",
+    "moment": "^2.22.2",
+    "mongoose": "^5.3.11",
+    "morgan": "~1.9.0",
+    "mqtt": "^3.0.0",
+    "node-telegram-bot-api": "^0.30.0",
+    "onem2m_client": "^1.0.58",
+    "socket.io": "^2.2.0",
+    "socket.io-client": "^2.2.0",
+    "underscore": "^1.9.1",
+    "util": "^0.12.1",
+    "uuid": "^3.3.3",
+    "winston": "^3.1.0",
+    "winston-daily-rotate-file": "^3.5.1"
+  },
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "mocha": "^5.2.0"
+  }
+}

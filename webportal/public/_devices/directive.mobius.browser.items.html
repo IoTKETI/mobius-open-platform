@@ -1,0 +1,22 @@
+<div class="resource-list browser-items">
+  <ul ng-if="resourceList.resources.length > 0">
+    <li class="resource-item" ng-class="resourceItemClass(item)" ng-repeat="item in resourceList.resources" ng-click="onItemSelected(browseDepth, item)">
+      <div class="resource-type" ng-class="item.resourceType"></div>
+      <div class="resource-name" ng-bind="item.resourceName.ellipsis(22)" title="{{item.resourceName}}"></div>
+      <div ng-if="item.resourceType == 'cin-con'" class="resource-name"  title="{{item.resourceName}}">
+        <span ng-bind="item.content.ellipsis(22)"></span>
+        <span class="time-ago" am-time-ago="item.updatedAt"></span>
+      </div>
+      <div ng-if="item.resourceType != 'cin'" class="children-caret"><i class="fa fa-caret-right"></i></div>
+    </li>
+  </ul>
+
+  <div ng-if="resourceList.cinContent">
+    <json-formatter json="resourceList.cinContent" open="3"></json-formatter>
+  </div>
+
+  <div ng-if="resourceList.resources.length == 0">
+    <div class="no-data">리소스가 존재하지 않습니다</div>
+  </div>
+
+</div>

@@ -1,0 +1,236 @@
+/**
+ * Dashboard theme
+ */
+
+ md-toolbar.md-dashboard-theme:not(.md-menu-toolbar) {
+  background: none;
+  background-color: #20a8d8;
+  height: 55px;
+  min-height: 0px;
+  padding: 0px;
+ }
+
+
+
+/**
+ * Login
+ */
+
+ md-card.login-form md-card-actions a {
+   text-decoration: underline;
+ }
+
+ .loading-spinner {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: #565656ad;
+  top: 0px;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 100;
+ }
+.loading-spinner md-progress-circular svg path {
+  stroke: #ffffffd5;
+}
+
+ /**
+  * Widget create dialog
+  */
+.widget-create-popup {
+  height: 60%;
+  width: 50%;
+}
+
+.widget-create-popup md-toolbar {
+  background-color: #4A4A4A !important;
+  color: white !important;
+  font-size: 16px;
+}
+
+.widget-create-popup .widget-info {
+}
+
+.widget-create-popup .widget-type-image {
+  width: 95%;
+}
+.widget-create-popup md-grid-tile-header {
+  background-color: rgba(0, 0, 0, 0.6);
+  height: 20px;
+  font-size: 11px;
+  font-weight: bold;
+  padding-top: 4px;
+}
+.widget-create-popup md-grid-tile-header md-radio-button {
+  margin-bottom: 0;
+  margin-left: 5px;
+  font-size: 13px;
+}
+.widget-create-popup md-grid-tile-header md-radio-button .md-container .md-on,
+.widget-create-popup md-grid-tile-header md-radio-button .md-container .md-off {
+  height: 15px;
+  width: 15px;
+  border-color: rgba(255,255,255,0.54);
+}
+.widget-create-popup md-grid-tile-header md-radio-button.md-checked .md-container .md-off {
+  border-color: rgba(255,171,64,0.87);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+md-toolbar.bg-toolbar-transparent {
+  background: transparent !important;
+}
+
+md-input-container.no-error-spacer{
+  margin: 0;
+}
+md-input-container.no-error-spacer .md-errors-spacer{
+  display: none;
+}
+
+.toolbar-button {
+  min-width: 20px; }
+
+.share-label {
+  vertical-align: middle;
+  margin-left: 10px; }
+
+
+.widget-progress {
+  width: 95% !important;
+  margin-left: 5px;
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  border-top: 1px solid #dadada;
+}
+
+.widget-progress span.title-text{
+  font-size: 14px;
+  padding-top: 15px;
+  font-style: italic;
+  opacity: 0.8;
+}
+.widget-progress h2.value-text{
+  font-size: 30px;
+  font-style: italic;
+}
+
+
+.capitalize {
+  text-transform: capitalize; }
+
+.img-circle {
+  height: 50px;
+  border-radius: 50%;
+  margin: 0 10px; }
+
+.messages {
+  position: relative; }
+.messages-content {
+  height: 100vh; }
+
+.notifications-label {
+  width: 16px;
+  height: 16px;
+  line-height: 16px;
+  text-align: center;
+  border-radius: 50%;
+  position: absolute;
+  font-size: 12px;
+  top: 2px;
+  right: 2px;
+  background-color: #E75753; }
+
+.panel-widget {
+  background-color: white; }
+.panel-widget-toolbar {
+  box-shadow: none;
+  background-color: #4A4A4A;
+  margin: 0; }
+.panel-widget-tittle {
+  color: #FFFFFF; }
+
+.options {
+  -webkit-transition: all linear 0.5s;
+  transition: all linear 0.5s; }
+
+.options.ng-hide {
+  opacity: 0; }
+
+.fixed-height-widget {
+  height: 240px; }
+
+.donut-chart-title {
+  text-align: center; }
+
+md-backdrop.md-sidenav-backdrop {
+  position: fixed; }
+
+.material-icons {
+  vertical-align: middle; }
+
+.material-icons.md-18 {
+  font-size: 18px; }
+
+.material-icons.md-24 {
+  font-size: 24px; }
+
+.material-icons.md-36 {
+  font-size: 36px; }
+
+.material-icons.md-48 {
+  font-size: 48px; }
+
+.nvd3.nv-pie .nv-pie-title {
+  fill: #444444;
+  font-weight: 600;
+  font-size: 22px !important; }
+
+.nvtooltip {
+  background-color: transparent;
+  border: none;
+  font-weight: 600; }
+
+.orange .md-bar2 {
+  background-color: orange; }
+
+.orange .md-container {
+  background-color: #ffecc9; }
+
+panel-widget {
+    height: 100%;
+    padding-top: 25px;
+    overflow: hidden;
+}
+md-grid-tile-header.panel-widget-toolbar > figcaption {
+  width: 100%;
+}
+
+.new-widget-button {
+  border-radius: 5px;
+  margin-right: 0;
+  padding: 0 30px;
+  background-color: #707173 !important;
+  color: white !important;
+}
+
+.new-widget-button md-icon {
+  color: white !important;
+}

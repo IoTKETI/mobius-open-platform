@@ -1,0 +1,42 @@
+<div class="functions">
+  <span [ngClass]="selection.hasValue() ? 'selected' : 'notSelected'">
+    <a (click)="clickRemove()"><i class="fas fa-trash"></i></a>
+  </span>
+</div>
+
+<mat-table [dataSource]="userList" class="mat-elevation-z8" style="width: 100%; text-align: center;">
+  <ng-container matColumnDef="checked">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox color="primary"
+        (change)="$event ? masterToggle() : null"
+        [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-checkbox color="primary" *ngIf="!row.admin"
+        (click)="$event.stopPropagation()" 
+        (change)="$event ? selection.toggle(row) : null" 
+        [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef>Email.</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.email}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef>Name.</mat-header-cell>
+    <mat-cell *matCellDef="let element">{{element.name}}</mat-cell>
+  </ng-container>
+  <ng-container matColumnDef="control">
+    <mat-header-cell *matHeaderCellDef>Control</mat-header-cell>
+    <mat-cell *matCellDef="let element;let row;let i = index;">
+        <a (click)="clickRemove(row, i)" title="채널 제거"  *ngIf="!element.admin">
+            <i class="fas fa-trash"></i>
+        </a>
+    </mat-cell>
+  </ng-container>
+  <mat-header-row *matHeaderRowDef="displayedColumn"></mat-header-row>
+  <mat-row *matRowDef="let row; columns : displayedColumn;" [ngClass]="{highlighted : selection.isSelected(row)}" (click)=" row.admin ? '' : selection.toggle(row)"></mat-row>
+</mat-table>

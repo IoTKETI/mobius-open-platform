@@ -1,0 +1,203 @@
+<div class="animated fadeIn" ng-controller="dashboardController" ng-init="init()">
+
+
+  <div class="row" ng-if="loginuser != null" >
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-warning" style="color: white">
+          사용자 정보
+        </div>
+        <div class="card-block">
+
+          <div class="row">
+            <div class="col-sm-6 col-lg-3">
+
+              <div class="card">
+                <div class="card-block p-3 clearfix">
+                  <i class="fa fa-user bg-primary p-3 font-2xl mr-3 float-left"></i>
+                  <div class="h5 text-primary mb-0 mt-2"><span ng-bind="loginuser.username"></span></div>
+                  <div class="text-muted text-uppercase font-weight-bold font-xs"><span class="time-ago" am-time-ago="loginuser.lastLoginTime"></span>에 마지막 로그인</div>
+                </div>
+              </div>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-6 col-lg-3">
+              <div class="card volume-index">
+                <div class="card-block">
+                  <div class="h4 m-0"><span ng-bind="userIndex.userDevices | number"></span> 개</div>
+                  <div>사용자 디바이스 수</div>
+                  <div class="progress progress-xs my-3">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <small class="text-muted">현재 <span ng-bind="userIndex.userDevices | number"></span>개의 디바이스가 등록되어 관리되고 있음.</small>
+                </div>
+              </div>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-6 col-lg-3">
+              <div class="card volume-index">
+                <div class="card-block">
+                  <div class="h4 m-0"><span ng-bind="userIndex.sharedDevices | number"></span> 개</div>
+                  <div>공유받은 디바이스 수</div>
+                  <div class="progress progress-xs my-3">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <small class="text-muted">현재 <span ng-bind="userIndex.sharedDevices | number"></span>개의 디바이스가 나에게 공유되어 접근할 수 있음.</small>
+                </div>
+              </div>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-6 col-lg-3">
+              <div class="card volume-index">
+                <div class="card-block">
+                  <div class="h4 m-0"><span ng-bind="userIndex.userAcps"></span> 개</div>
+                  <div>접근 권한 설정 수</div>
+                  <div class="progress progress-xs my-3">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <small class="text-muted">총 <span ng-bind="userIndex.userAcps | number"></span>개의 "접근 권한" 정책을 관리하고 있음.</small>
+                </div>
+              </div>
+            </div>
+            <!--/.col-->
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header card-info" style="color: white">
+          Mobius 정보
+        </div>
+        <div class="card-block">
+
+
+          <div class="row">
+            <div class="col-sm-6 col-lg-3">
+              <div class="card volume-index">
+                <div class="card-block">
+                  <div class="h4 m-0"><span ng-bind="volumeIndex.numberOfUsers | number"></span> 명</div>
+                  <div>가입자 수</div>
+                  <div class="progress progress-xs my-3">
+                    <div class="progress-bar bg-success" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <small class="text-muted"><span ng-bind="volumeIndex.numberOfUsers | number"></span>명의 사용자가 웹포털에 가입되어 있음.</small>
+                </div>
+              </div>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-6 col-lg-3">
+              <div class="card volume-index">
+                <div class="card-block">
+                  <div class="h4 m-0"><span ng-bind="trafficData.averageDate | number"></span> /일</div>
+                  <div>일평균 요청 처리</div>
+                  <div class="progress progress-xs my-3">
+                    <div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <small class="text-muted">하루에 평균 <span ng-bind="trafficData.averageDate | number"></span>건의 요청이 처리되었음.</small>
+                </div>
+              </div>
+            </div>
+            <!--<div class="col-sm-6 col-lg-3">-->
+              <!--<div class="card volume-index">-->
+                <!--<div class="card-block">-->
+                  <!--<div class="h4 m-0"><span ng-bind="trafficData.peakData | number"></span> /일</div>-->
+                  <!--<div>최대 요청 처리</div>-->
+                  <!--<div class="progress progress-xs my-3">-->
+                    <!--<div class="progress-bar bg-info" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>-->
+                  <!--</div>-->
+                  <!--<small class="text-muted"><span ng-bind="trafficData.peakDate | date : 'yyyy년 M월 d일'"></span>에 <span ng-bind="trafficData.peakData | number"></span>건의 요청 처리되었음.</small>-->
+                <!--</div>-->
+              <!--</div>-->
+            <!--</div>-->
+            <!--/.col-->
+            <div class="col-sm-6 col-lg-3">
+              <div class="card volume-index">
+                <div class="card-block">
+                  <div class="h4 m-0"><span ng-bind="volumeIndex.numberOfAEs | number"></span> 개</div>
+                  <div>누적 생성 AE 수</div>
+                  <div class="progress progress-xs my-3">
+                    <div class="progress-bar bg-warning" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <small class="text-muted">총 <span ng-bind="volumeIndex.numberOfAEs | number"></span>개의 AE 생성성되어 활용되고 있음.</small>
+                </div>
+              </div>
+            </div>
+            <!--/.col-->
+            <div class="col-sm-6 col-lg-3">
+              <div class="card volume-index">
+                <div class="card-block">
+                  <div class="h4 m-0"><span ng-bind="totalCBSString()"></span></div>
+                  <div>저장 데이터 크기</div>
+                  <div class="progress progress-xs my-3">
+                    <div class="progress-bar bg-danger" role="progressbar" style="width: 25%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                  </div>
+                  <small class="text-muted">총 <span ng-bind="totalCBSString()"></span>의 데이터가 저장되어 있음.</small>
+                </div>
+              </div>
+            </div>
+            <!--/.col-->
+          </div>
+          <!--/.row-->
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="card">
+                <div class="card-header">
+                  접속량
+                </div>
+                <div class="card-block">
+                  <div class="row">
+                    <div class="col-md-8 px-4">
+                      <div class="chart-wrapper" style="height:370px">
+                        <canvas class="chart chart-line" chart-data="trafficData.data" chart-labels="trafficData.labels" chart-legend="false" chart-series="trafficData.series" chart-click="onClick" chart-options="trafficData.options" chart-colors="trafficData.colors"></canvas>
+                      </div>
+                    </div>
+                    <div class="col-md-4 px-4">
+                      <div class="card card-outline-primary" style="margin-top:20px;">
+                        <div class="card-header">
+                          프로토콜별 접속요청
+                        </div>
+                        <div class="card-block">
+                          <canvas id="doughnut" class="chart chart-doughnut" chart-data="trafficData.protocol.data" chart-labels="trafficData.protocol.labels" chart-colors="trafficData.colors">
+                          </canvas>
+
+                          <table class="table table-bordered" style="font-size:0.7rem; margin-top:30px;">
+                            <tr>
+                              <th><i class="fa fa-square" style="color: #375E97"></i> HTTP</th>
+                              <td><span class="right" ng-bind="protocolPercentage(0) | number"></span>%</td>
+
+                              <th><i class="fa fa-square" style="color: #FB6542"></i> MQTT</th>
+                              <td><span class="right" ng-bind="protocolPercentage(1) | number"></span>%</td>
+                            </tr>
+                            <tr>
+                              <th><i class="fa fa-square" style="color: #FFBB00"></i> CoAP</th>
+                              <td><span class="right" ng-bind="protocolPercentage(2) | number"></span>%</td>
+
+                              <th><i class="fa fa-square" style="color: #3F681C"></i> Websocket</th>
+                              <td><span class="right" ng-bind="protocolPercentage(3) | number"></span>%</td>
+                            </tr>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!--/.card-->
+            </div>
+          </div>
+          <!--/.row-->
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</div>

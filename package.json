@@ -1,0 +1,24 @@
+{
+  "name": "integratedmultiplatform",
+  "version": "0.0.1",
+  "description": "KETI Integration Multiplatform",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://kimjinhyeok@bitbucket.org/synctechnoinc/integratedmultiplatform.git"
+  },
+  "author": "KETI",
+  "license": "MIT",
+  "homepage": "https://bitbucket.org/synctechnoinc/integratedmultiplatform#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-install": "^1.1.0",
+    "gulp-run": "^1.7.1",
+    "mongodb": "^3.5.5",
+    "readline-sync": "^1.4.10"
+  }
+}

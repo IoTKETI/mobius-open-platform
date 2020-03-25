@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html ng-app="onem2mResourceMonitor">
+<head>
+  <meta charset="utf-8"/>
+
+  <title>oneM2M Resource Monitor for Mobius</title> 
+  <meta app-version="V2.0-r201800906-01" />
+
+  <link rel="shortcut icon" type="image/ico" href="./icons/keti.onem2m.resmon.ico"/>
+  <link rel="shortcut icon" type="image/png" href="./icons/keti.onem2m.resmon_32x32.png"/>
+
+
+  <link rel='stylesheet' href='./stylesheets/style.css' />
+  <link rel='stylesheet' href='./bower_components/fontawesome/web-fonts-with-css/css/fontawesome-all.css' />
+
+  <script src="bower_components/jquery/dist/jquery.js"></script>
+  <style>
+    iframe {
+      width: 100% !important;
+      height: 100% !important;
+      border: 5px solid rgba(0, 150, 136, 0.35);
+      box-sizing: border-box;
+    }
+
+    iframe:hover {
+      border-color: rgb(0,150,136);
+    }
+
+    .md-toolbar-tools {
+      display: block;
+      background-color: rgb(0,150,136);
+      color: rgb(255,255,255);
+      width: 100%;
+    }
+
+    .navbar-brand {
+      float: left;
+      height: 30px;
+      padding: 15px 15px;
+      font-size: 18px;
+      line-height: 20px;
+    }
+
+    .navbar-brand {
+      background-color: white;
+      border-radius: 10px;
+    }
+    .navbar-brand {
+      background-image: url(../images/keti-logo.png);
+      background-repeat: no-repeat;
+      background-size: contain;
+      background-position: center;
+      margin-top: 15px;
+      margin-left: 10px;
+      width: 204px;
+      margin-right: 40px;
+    }
+
+    .nav-title {
+      color: white;
+      font-size: 41px;
+      display: inline-block;
+      line-height: 75px;
+      margin-top: 10px;
+      font-weight: 400;
+    }
+    .frame {
+      /*border: 2px solid rgba(113, 107, 128, 0.31);*/
+      box-sizing: border-box;
+
+      position: relative;
+    }
+    /*.frame.lt, .frame.lb {*/
+      /*padding-right: 1px;*/
+    /*}*/
+    /*.frame.lt, .frame.rt {*/
+      /*padding-bottom: 1px;*/
+    /*}*/
+
+    #main-container {
+      height: 100vh;
+      padding-top: 85px;
+      box-sizing: border-box;
+    }
+
+    #screenselector {
+      display: block;
+      float: right;
+      margin: 35px 30px 0 0;
+    }
+
+    .screen-select-button {
+      background-repeat: no-repeat;
+      background-size: contain;
+      border-radius: 5px;
+      border: 2px solid transparent;;
+      width: 30px;
+      height: 30px;
+      margin-top: 10px;
+      display: block;
+      float: left;
+      cursor: pointer;
+
+    }
+    .screen-select-button.all {
+      background-image: url('./images/multi/btn-expand-all.png');
+      margin-right: 10px;
+    }
+    .screen-select-button.left {
+      background-image: url('./images/multi/btn-expand-left.png');
+    }
+    .screen-select-button.right {
+      background-image: url('./images/multi/btn-expand-right.png');
+    }
+    .screen-select-button.top {
+      background-image: url('./images/multi/btn-expand-top.png');
+    }
+    .screen-select-button.bottom {
+      background-image: url('./images/multi/btn-expand-bottom.png');
+      margin-right: 10px;
+
+    }
+    .screen-select-button.tl {
+      background-image: url('./images/multi/btn-expand-lt.png');
+    }
+    .screen-select-button.tr {
+      background-image: url('./images/multi/btn-expand-rt.png');
+    }
+    .screen-select-button.bl {
+      background-image: url('./images/multi/btn-expand-lb.png');
+    }
+    .screen-select-button.br {
+      background-image: url('./images/multi/btn-expand-rb.png');
+    }
+
+
+    #screenselector.left .screen-select-button.left,
+    #screenselector.right .screen-select-button.right,
+    #screenselector.top .screen-select-button.top,
+    #screenselector.bottom .screen-select-button.bottom,
+
+    #screenselector.tl .screen-select-button.tl,
+    #screenselector.tr .screen-select-button.tr,
+    #screenselector.bl .screen-select-button.bl,
+    #screenselector.br .screen-select-button.br,
+
+    #screenselector.all .screen-select-button.all {
+      border: 2px solid #ff2f03;
+    }
+
+    #main-container.tl .expand-button,
+    #main-container.tr .expand-button,
+    #main-container.bl .expand-button,
+    #main-container.br .expand-button {
+      display: none;
+    }
+
+
+    .screen-select-button:hover {
+      border-top: 0;
+      padding-bottom: 2px;
+      border-bottom: 2px solid white;
+      border-radius: 0;
+
+    }
+
+    .expand-button {
+      font-size: 20px;
+
+      cursor: pointer;
+
+      position: absolute;
+      bottom: 10px;
+      left: 10px;
+
+      width: 20px;
+      height: 20px;
+      opacity: 60%;
+    }
+  </style>
+  <script>
+    $( document ).ready(function() {
+      console.log( "ready!" );
+    });
+
+    function selectFrame(selection) {
+
+      var css = {
+        "top": {"width": "100%", "height": "50%" },
+        "bottom": {"width": "100%", "height": "50%" },
+
+        "tl": {"width": "50%", "height": "100%" },
+        "tr": {"width": "50%", "height": "100%" },
+        "bl": {"width": "50%", "height": "100%" },
+        "br": {"width": "50%", "height": "100%" }
+      };
+
+
+      switch(selection) {
+        case 'left':
+          css.tl.width = "100%";  css.tr.width = "0";
+          css.bl.width = "100%";  css.br.width = "0";
+          break;
+
+        case 'right':
+          css.tl.width = "0";  css.tr.width = "100%";
+          css.bl.width = "0";  css.br.width = "100%";
+          break;
+
+
+        case 'top':
+          css.top.height = "100%";
+          css.bottom.height = "0";
+          break;
+
+        case 'bottom':
+          css.top.height = "0";
+          css.bottom.height = "100%";
+          break;
+
+
+        case 'tl':
+          css.top.height = "100%";
+          css.bottom.height = "0";
+
+          css.tl.width = "100%";  css.tl.height = "100%";
+          css.tr.width = "0";
+          break;
+
+        case 'tr':
+          css.top.height = "100%";
+          css.bottom.height = "0";
+
+          css.tr.width = "100%";  css.tr.height = "100%";
+          css.tl.width = "0";
+          break;
+
+        case 'bl':
+          css.top.height = "0";
+          css.bottom.height = "100%";
+
+          css.bl.width = "100%";  css.bl.height = "100%";
+          css.br.width = "0";
+          break;
+
+        case 'br':
+          css.top.height = "0";
+          css.bottom.height = "100%";
+
+          css.br.width = "100%";  css.br.height = "100%";
+          css.bl.width = "0";
+          break;
+      }
+
+      $("#screenselector").attr("class", selection);
+      $("#main-container").attr("class", selection);
+
+      $(".top-frame").css(css.top);
+      $(".bottom-frame").css(css.bottom);
+      $(".frame.lt").css(css.tl);
+      $(".frame.rt").css(css.tr);
+      $(".frame.lb").css(css.bl);
+      $(".frame.rb").css(css.br);
+
+    }
+  </script>
+</head>
+<body lang="ko" style="height: 100vh">
+  <div class="md-toolbar-tools" style="position:absolute; left: 0px; top: 0px; z-index: 5;">
+    <a class="navbar-brand" ui-sref="#"></a>
+    <span class="nav-title"> oneM2M Resource Browser</span>
+    <div id="screenselector" class="all">
+      <div class="screen-select-button all" onclick="selectFrame('all')"></div>
+      &nbsp;
+      <div class="screen-select-button left" onclick="selectFrame('left')"></div>
+      <div class="screen-select-button right" onclick="selectFrame('right')"></div>
+      <div class="screen-select-button top" onclick="selectFrame('top')"></div>
+      <div class="screen-select-button bottom" onclick="selectFrame('bottom')"></div>
+      &nbsp;
+      <div class="screen-select-button tl" onclick="selectFrame('tl')"></div>
+      <div class="screen-select-button tr" onclick="selectFrame('tr')"></div>
+      <div class="screen-select-button bl" onclick="selectFrame('bl')"></div>
+      <div class="screen-select-button br" onclick="selectFrame('br')"></div>
+    </div>
+  </div>
+  <div id="main-container" class="all">
+    <div style="height: 50%; width: 100%" class="top-frame">
+      <div style="height: 100%; width: 50%; float: left" class="frame lt">
+        <iframe src="/#!/monitor/lt" border="0"></iframe>
+        <div class="expand-button tl">
+          <a onclick="selectFrame('tl')" ><i class="fas fa-expand-arrows-alt"></i></a>
+        </div>
+      </div>
+      <div style="height: 100%; width: 50%; float: left" class="frame rt">
+        <iframe src="/#!/monitor/rt" border="0"></iframe>
+        <div class="expand-button tl">
+          <a onclick="selectFrame('tr')"><i class="fas fa-expand-arrows-alt"></i></a>
+        </div>
+      </div>
+    </div>
+    <div style="height: 50%; width: 100%" class="bottom-frame">
+      <div style="height: 100%; width: 50%; float: left" class="frame lb">
+        <iframe src="/#!/monitor/lb" border="0"></iframe>
+        <div class="expand-button tl">
+          <a onclick="selectFrame('bl')"><i class="fas fa-expand-arrows-alt"></i></a>
+        </div>
+      </div>
+      <div style="height: 100%; width: 50%; float: left" class="frame rb">
+        <iframe src="/#!/monitor/rb" border="0"></iframe>
+        <div class="expand-button tl">
+          <a onclick="selectFrame('br')"><i class="fas fa-expand-arrows-alt"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+</html>

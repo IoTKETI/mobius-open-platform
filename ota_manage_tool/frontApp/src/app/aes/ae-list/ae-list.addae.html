@@ -1,0 +1,29 @@
+<h1 mat-dialog-title>AE등록</h1>
+<mat-dialog-content [formGroup]="form">
+    <mat-form-field>
+        <input matInput placeholder="AE Name" formControlName="aeid">
+        <mat-error *ngIf="form.controls['aeid'].hasError('required')">
+            등록할 AE를 입력해주세요.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Tag" formControlName="tag">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Version" formControlName="version">
+        <mat-error *ngIf="form.controls['version'].hasError('required')">
+            업로드 버전 정보를 입력해주세요.
+        </mat-error>
+    </mat-form-field>
+    <mat-form-field>
+        <ngx-mat-file-input formControlName="file" placeholder="File" accept=".hex, .bin" ></ngx-mat-file-input>
+        <mat-icon matSuffix>folder</mat-icon>
+        <mat-error *ngIf="form.controls['file'].hasError('required')">
+            업로드할 파일을 선택해주세요
+        </mat-error>
+    </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions>
+    <button mat-raised-button color="primary" class="button-primary" (click)="addAE()">등록</button>
+    <button mat-raised-button (click)="onNoClick()">취소</button>
+</mat-dialog-actions>

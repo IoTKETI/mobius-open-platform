@@ -1,0 +1,8 @@
+node_modules/
+*.spec.js
+uploads/
+views/
+log/
+fontApp/node_modules/
+fontApp/e2e/
+frontApp/.vscode/

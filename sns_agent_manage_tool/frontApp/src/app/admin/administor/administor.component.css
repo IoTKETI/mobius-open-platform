@@ -1,0 +1,40 @@
+
+.mat-column-control a{
+    font-size: 1.3em;
+    color: #020950;
+}
+.mat-column-control a:hover{
+    transition: color .1s;
+    color: #522ee2;
+}
+
+.functions{
+    font-size: 2em;
+    color: #020950;
+}
+.functions a{
+    margin: 10px;
+}
+
+.selected{
+    opacity: 1;
+    transition: all 0.1s;
+    visibility: visible;
+}
+.selected a i:hover{
+    transition: color .1s;
+    color: #444fcf;
+}
+.notSelected{
+    transition: all 0.1s;
+    opacity: 0;
+    visibility: hidden;
+}
+
+mat-row:hover{
+    background-color: #E4F5FD;
+}
+.mat-row.highlighted {
+    background: #a3ccde;
+    color: #fff;
+}

@@ -1,0 +1,90 @@
+<div class="ae-functions">
+  <button mat-icon-button matTooltip="nCube 추가" color="primary" (click)="openAddAEDialog()" class="addAE">
+      <i class="fas fa-plus-circle"></i>
+  </button>
+  <button mat-icon-button matTooltip="선택된 nCube 패치" color="primary" (click)="openPatchAlert(null)" [ngClass]="selection.hasValue() ? 'selected' : 'notSelected'">
+    <i class="fas fa-sync-alt"></i>
+  </button>
+  <button mat-icon-button matTooltip="선택된 nCube 삭제" color="primary" (click)="openDeleteManyAlert()" [ngClass]="selection.hasValue() ? 'selected' : 'notSelected'">
+      <i class="fas fa-trash"></i>
+  </button>
+</div>
+
+<mat-table [dataSource]="aeList" class="mat-elevation-z8" style="width: 100%; text-align: center;" *ngIf="aeList.length > 0">
+  <ng-container matColumnDef="checked">
+    <mat-header-cell *matHeaderCellDef>
+      <mat-checkbox color="primary"
+        (change)="$event ? masterToggle() : null"
+        [checked]="selection.hasValue() && isAllSelected()"
+        [indeterminate]="selection.hasValue() && !isAllSelected()">
+      </mat-checkbox>
+    </mat-header-cell>
+    <mat-cell *matCellDef="let row">
+      <mat-checkbox  color="primary"
+        (click)="$event.stopPropagation()" 
+        (change)="$event ? onClickRow(row) : null" 
+        [checked]="selection.isSelected(row)">
+      </mat-checkbox>
+    </mat-cell>
+  </ng-container>
+  <div class="cell-line">
+    <div class="cell-line-one">
+      <ng-container matColumnDef="aeid">
+          <mat-header-cell *matHeaderCellDef>nCube Name.</mat-header-cell>
+          <mat-cell *matCellDef="let element"><span class="cell-content">{{element.aeid}}</span></mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="tag">
+          <mat-header-cell *matHeaderCellDef>Tag.</mat-header-cell>
+          <mat-cell *matCellDef="let element"><span class="cell-content">{{element.tag ? element.tag : '-'}}</span></mat-cell>
+        </ng-container>      
+    </div>
+    <div class="cell-line-two">
+      <ng-container matColumnDef="fileName">
+        <mat-header-cell *matHeaderCellDef>File.</mat-header-cell>
+        <mat-cell *matCellDef="let element"><span class="cell-content">{{element.fileName ? element.fileName : '-'}}</span></mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="uploaded">
+        <mat-header-cell *matHeaderCellDef>Uploaded.</mat-header-cell>
+        <mat-cell *matCellDef="let element">{{element.uploaded ? element.uploaded : '-'}}</mat-cell>
+      </ng-container>
+      <ng-container matColumnDef="patch">
+        <mat-header-cell *matHeaderCellDef>Last Patch.</mat-header-cell>
+        <mat-cell *matCellDef="let element">
+          <div class="patch-patching" *ngIf="element.patching && (progressVal[element.aeid] <= 0)"><i class="fas fa-spinner fa-spin"></i></div>
+          <span *ngIf="!element.patching && (progressVal[element.aeid] < 0)">{{element.patched ? element.patched : '-'}}</span>
+          <span class="cell-progressbar" *ngIf="(progressVal[element.aeid] > 0) && (progressVal[element.aeid] <= 100)">
+            <progress-bar class="example-margin"
+            mode="determinate"
+            [progress]="progressVal[element.aeid]">
+            </progress-bar>
+          </span>
+          <div class="patch-success" *ngIf="!element.patching && (progressVal[element.aeid] > 100)">
+            <i class="fas fa-check-circle"></i>
+          </div>
+        </mat-cell>
+      </ng-container>
+    </div>
+    <ng-container matColumnDef="control">
+        <mat-header-cell *matHeaderCellDef>Control</mat-header-cell>
+        <mat-cell *matCellDef="let element;let row;let i = index;">
+          <button mat-icon-button matTooltip="패치" color="primary" (click)="openPatchAlert(row)">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+          <button mat-icon-button matTooltip="이미지 업로드" color="primary" (click)="openUploadDialog(row, i)">
+            <i class="fas fa-file-upload"></i>
+          </button>
+          <button mat-icon-button matTooltip="AE 제거" color="primary" (click)="openDeleteAlert(row, i)">
+            <i class="fas fa-trash"></i>
+          </button>
+        </mat-cell>
+    </ng-container>  
+  </div>
+ 
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumn"></mat-header-row>
+  <mat-row *matRowDef="let row; columns : displayedColumn;" [ngClass]="{highlighted : selection.isSelected(row), new : row.new, fail : row.fl}" (click)="onClickRow(row)"></mat-row>
+</mat-table>
+<div  class="mat-elevation-z8 emptyMessage" *ngIf="aeList.length <= 0">
+  사용중인 nCube가 없습니다. nCube를 등록해주세요.
+</div>

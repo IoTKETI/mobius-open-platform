@@ -1,0 +1,30 @@
+<div class="animated fadeIn" ng-init="init()">
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-header">
+          <div class="col-md-6">
+            <button ui-sref="main.device.device-register" class="btn btn-primary-40"> <i class="icon-plus"></i> 신규 디바이스 등록 </button>
+          </div>
+          <div class="col-md-6">
+            <div class="input-group">
+              <span class="input-group-addon"><i class="fa fa-search"></i></span>
+              <input type="text" ng-model="deviceFilter" class="form-control" placeholder="검색 키워드">
+            </div>
+          </div>
+        </div>
+        <div class="card-block">
+
+          <div class="row">
+
+            <device-list-item  class="col-fixed-210" device="device" command-handler="itemCommandHandler" ng-repeat="device in deviceList | filter:deviceListFilter">
+            </device-list-item>  <!-- device -item -->
+
+          </div>  <!-- row -->
+        </div>  <!-- card-block -->
+      </div>
+    </div>
+    <!--/.col-->
+  </div>
+  <!--/.row-->
+</div>

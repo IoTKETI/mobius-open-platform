@@ -1,0 +1,37 @@
+<div class="animated fadeIn data-browser-view" ng-init="init()">
+
+  <table class="table data-browser-layout">
+    <thead>
+      <tr>
+        <td class="device-list-col">디바이스 선택 </td>
+        <td class="data-browser-col">
+          데이터 탐색기
+          <div class="refresh-button" style="float: right">
+           <button type="button" class="btn btn-sm" ng-click="refreshData()"><i class="fa fa-refresh"></i> 새로고침</button>
+          </div>
+        </td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td class="device-list-col">
+          <div class="list-wrapper">
+            <div mobius-device-list ng-if="deviceList.length > 0" class="mobius-device-list" device-list="deviceList" on-item-selected="onSelectDeviceItem"></div>
+            <div ng-if="deviceList.length == 0" class="mobius-device-list-no-entry" >
+              <br/><br/>
+              등록된 디바이스가 존재하지 않습니다.
+              <br/><br/><br/>
+              <button ui-sref="main.device.device-register" class="btn btn-primary-40"> <i class="icon-plus"></i> 신규 디바이스 등록 </button>
+            </div>
+          </div>
+        </td>
+        <td class="data-browser-col">
+          <div class="list-wrapper">
+            <div mobius-browser id="mobius-browser" class="mobius-browser" browser-data="browserData" selection-depth="selectionDepth" on-item-selected="onSelectBrowserItem"></div>
+          </div>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+
+</div>

@@ -1,0 +1,54 @@
+<div style="margin-top: 10px;">
+  <div>
+    <table class="resource-form">
+      <tr>
+        <td>
+          Resource Name(rn)
+        </td>
+        <td>
+          <input type="text" ng-model="resource.rn" />
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Event Noti. Uri(nu)
+        </td>
+        <td>
+          <input type="text" ng-model="resource.nu" />
+          <label class="radio-inline">
+            <input type="radio" id="resource.nu.json" ng-model="resource.nuType" value="json" checked>JSON
+          </label>
+          <label class="radio-inline">
+            <input type="radio" id="resource.nu.xml" ng-model="resource.nuType" value="xml" >XML
+          </label>                      
+        </td>
+      </tr>
+
+      <tr>
+        <td>
+          Event Noti. Criteria(enc)
+        </td>
+        <td>
+          <label class="checkbox-inline">
+            <input type="checkbox" id="resource.enc.1" ng-model="resource.enc1" value="1" checked> Update of Resource(1) 
+          </label>
+          <br />
+          <label class="checkbox-inline">
+            <input type="checkbox" id="resource.enc.2" ng-model="resource.enc2" value="2"> Delete of Resource(2)
+          </label>
+          <br />
+          <label class="checkbox-inline">
+            <input type="checkbox" id="resource.enc.3" ng-model="resource.enc3" value="3"> Create of Direct Child Resource(3)
+          </label>
+          <br />
+          <label class="checkbox-inline">
+            <input type="checkbox" id="resource.enc.4" ng-model="resource.enc4" value="4"> Delete of Direct Child Resource(4)
+          </label>
+        </td>
+      </tr>
+
+
+   </table>
+  </div>
+</div>

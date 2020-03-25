@@ -1,0 +1,5 @@
+.nw-build
+node_modules/
+public/bower_components/
+.vscode/
+package-lock.json
