@@ -123,29 +123,34 @@ function readJSON(){
     }
   })
 }
+const ValidIpAddressRegex = /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$/;
+
+const ValidHostnameRegex = /^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/;
 function setMobiusURL(){
-  mobiusURL = input.question("변경할 Mobius 주소(IP)와 포트를 입력해주세요(예 : www.mobius.com:7579) : ");
+  var mobiusURL;
+  var in_port;
+  while(true){
+    mobiusURL = input.question("변경할 Mobius의 주소를 입력해주세요(예 : www.mobius.com or 192.168.0.1) : ");
+    in_port= input.question("Mobius의 포트 번호를 입력해주세요 : ")
 
-  regextResult = mobiusURL.match(/(http(s)?\:\/\/)?(www\.)?([\w+\.]+)\:([0-9]{1,9})/);
-  if((regextResult && regextResult.length >= 6) && (regextResult[4] && regextResult[5])) {
-    var host = `http://${regextResult[4]}`;
-    var mqtt = `mqtt://${regextResult[4]}`;
-    var port = Number(regextResult[5]);
+    if((ValidIpAddressRegex.test(mobiusURL) || ValidHostnameRegex.test(mobiusURL)) && !isNaN(in_port)) break;
+    else console.log("대상 Mobius의 주소 또는 포트번호가 잘못 입력되었습니다.");
+  } 
+  
+  var host = `http://${mobiusURL}`;
+  var mqtt = `mqtt://${mobiusURL}`;
+  var port = Number(in_port);
 
-    var configs = readJSON();
-    
-    var promises = configs.map(el => {
-      el.config = modifyMobiusSetting(el.config, el.service, host, mqtt, port);
-      return saveConfig(el.config, el.service)
-    });
-    return Promise.all(promises);
-  } else {
-    return Promise.reject(new Error("변경할 Mobius의 주소 혹은 포트를 찾을 수 없습니다."));
-  }
+  var configs = readJSON();
+  
+  configs.forEach(el => {
+    el.config = modifyMobiusSetting(el.config, el.service, host, mqtt, port);
+    saveConfig(el.config, el.service)
+  });
 }
 function modifyMobiusSetting(source, service, host, mqtt, port) {
   var config = source.default;
-  if(!config.mobius) if(!config) return reject(new Error("Invalid CONFIG source")); else return;
+  if(!config.mobius) if(!config) return reject(new Error("Invalid CONFIG source")); else return source;
   config.mobius.host = host;
   
   config.mobius.mqtt = mqtt;
@@ -155,17 +160,12 @@ function modifyMobiusSetting(source, service, host, mqtt, port) {
   return source;
 }
 function saveConfig(source, service) {
-  return new Promise(function(resolve, reject) {
-
-    configStr = JSON.stringify(source, null, 2);
-    fs.writeFileSync(`${CONFIGS[service].packageLocation}`, configStr, 'utf8', function(err){
-      if(err){
-        console.error(err);
-        reject(err);
-      } else {
-        resolve();
-      }
-    })
+  configStr = JSON.stringify(source, null, 2);
+  fs.writeFileSync(`${CONFIGS[service].packageLocation}`, configStr, 'utf8', function(err){
+    if(err){
+      console.error(err);
+      throw new Error(err);
+    }
   })
 }
 function getPort(service, origin) {
@@ -311,27 +311,36 @@ function setAddress() {
     }
   })
 }
-gulp.task('init', function(){
-  return new Promise(function(resolve, reject){
-    if(input.keyInYN("Mobius URL을 변경하시겠습니까? ")) {
-      setMobiusURL()
-        .then(() => {
-          resolve();
-        })
-    }else {
-      resolve();
+function changeMobius() {
+  return new Promise(function(_resolve, _reject) {
+    try {
+      if(input.keyInYN("Mobius URL을 변경하시겠습니까? ")) {
+        setMobiusURL();
+        _resolve();
+      } else {
+        _resolve();
+      }
+    } catch (error) {
+      _reject(error);  
     }
   })
-    .then(() => {
-      return setServicePort();
-    })
-    .then(() => {
-      return setAddress();
-    })
-    .then(() => {
-      return gulp.series([setDatabase, npmInstall])();
-    })
-    .catch(err => {
-      console.error(err);
-    })
+}
+gulp.task('init', function(){
+  return new Promise(function(resolve, reject){
+      changeMobius()
+      .then(() => {
+        return setServicePort();
+      })
+      .then(() => {
+        return setAddress();
+      })
+      .then(() => {
+        resolve();
+        return gulp.series([setDatabase, npmInstall])();
+      })
+      .catch(err => {
+        console.error(err);
+        reject(err);
+      })
+  })
 })
