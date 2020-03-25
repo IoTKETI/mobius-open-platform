@@ -1,5 +1,5 @@
 # Service Install
-## VERSION : 0.1
+## VERSION : V0.1_R20200325-02
 
 ## 1. Install Gulp
 >$> npm install gulp-cli -g  
