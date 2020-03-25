@@ -244,7 +244,7 @@ function __createUserACP(origin, userAe){
 
       .then(function(aeObj){
 
-        resolve(_acpObj);
+        resolve(_acpObj || aeObj);
       })
 
       .catch(function (error) {
