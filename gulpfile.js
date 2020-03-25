@@ -327,20 +327,26 @@ function changeMobius() {
   })
 }
 gulp.task('domainList', function(){
-  var json = readJSON();
-
-  var domain = json[0].config.default.domains;
-  if(!domain){ 
-    console.error("플랫폼 설정이 완료되지 않았습니다. 'gulp init'으로 설정을 마쳐주세요");
-    return;
-  } else {
-    var mainDomain = json[0].config.default.cookie ? json[0].config.default.cookie.domain : null;
-    if(mainDomain) console.log(`Main Domain : ${mainDomain}`);
-    Object.keys(domain).forEach(el => {
-      console.log(`${el} : ${domain[el]}`)
-    });
-
-  }
+  return new Promise(function(resolve, reject){
+    try {
+      var json = readJSON();
+  
+      var domain = json[0].config.default.domains;
+      if(!domain){ 
+        console.error("플랫폼 설정이 완료되지 않았습니다. 'gulp init'으로 설정을 마쳐주세요");
+        resolve();
+      } else {
+        var mainDomain = json[0].config.default.cookie ? json[0].config.default.cookie.domain : null;
+        if(mainDomain) console.log(`Main Domain : ${mainDomain}`);
+        Object.keys(domain).forEach(el => {
+          console.log(`${el} : ${domain[el]}`)
+        });
+      }
+      resolve();
+    } catch (error) {
+      reject(error)
+    }
+  })
 })
 gulp.task('init', function(){
   return new Promise(function(resolve, reject){
