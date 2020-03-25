@@ -41,11 +41,13 @@ const CONFIGS = {
     packageLocation : './resource_browser/bin/config.json'
   }
 }
-const SUBDOMAINS = [{name : "WEBPORTAL", service : "Webportal", subdomain : "portal"},
-{name : "DASHBOARD", service : "Dashboard", subdomain : "dashboard"},
-{name : "OTA", service : "OTA manage tool", subdomain : "ota"},
-{name : "SNS", service : "SNS agent manage tool", subdomain : "sns"},
-{name : "RES", service : "Resource Browser", subdomain : "res"}]
+const SUBDOMAINS = [
+  {name : "WEBPORTAL",  service : "Webportal",              subdomain : "portal"},
+  {name : "DASHBOARD",  service : "Dashboard",              subdomain : "dashboard"},
+  {name : "OTA",        service : "OTA manage tool",        subdomain : "ota"},
+  {name : "SNS",        service : "SNS agent manage tool",  subdomain : "sns"},
+  {name : "RES",        service : "Resource Browser",       subdomain : "res"}
+];
 
 function filterArgvOptions(argv) {
 
@@ -170,7 +172,7 @@ function saveConfig(source, service) {
 }
 function getPort(service, origin) {
   while(true) {
-    var port = input.questionInt(`서비스 ${service}의 포트를 ${origin}에서 포트를 입력해주세요 : `);
+    var port = input.questionInt(`서비스 ${service}에 할당할 포트 번호를 입력해주세요(기본값 : ${origin}) : `);
     if(!port && port <= 0 ) {
       console.log("0보다 큰 수를 입력해주세요.");
       continue;
@@ -188,7 +190,7 @@ function setServicePort() {
     var serviceNames = json.map(el => {
       return el.service;
     });
-    serviceNames.push('done');
+    serviceNames.push('next');
     var temp = [];
     while(true) {
       var choise = input.keyInSelect(serviceNames, "포트번호를 변경할 서비스를 선택해주세요.");
@@ -210,7 +212,6 @@ function setServicePort() {
         reject(new Error("사용자가 설치를 중단했습니다."));
         return;
       } else {
-        console.log(changedConfig);
         temp.push({
           service : serviceNames[choise],
           config : changedConfig
@@ -218,7 +219,6 @@ function setServicePort() {
       }
     }
     var promises = temp.map(el => {
-      console.log(el.config);
       saveConfig(el.config, el.service);
     })
     Promise.all(promises).then(() => {
@@ -251,7 +251,7 @@ function setAddress() {
       var mainAddress = null;
       var domainList = [];
       while(true) {
-        mainAddress = input.question("서비스 주소를 설정합니다. 서브 도메인을 사용하는 경우 Nginx 설정과 동일하게 입력해주세요.(ex iotocean.org : ");
+        mainAddress = input.question("서비스 주소를 설정합니다. \n서브 도메인을 사용하는 경우 Nginx 설정과 동일하게 입력해주세요.(ex iotocean.org : ");
         if(dnsCheck(mainAddress)){
           break;
         } else {
@@ -263,7 +263,7 @@ function setAddress() {
       if(useSub) {
         var subDomains = SUBDOMAINS;
         var names = subDomains.map(el => { return `${el.service} => ${el.subdomain}`});
-        names.push('done');
+        names.push('next');
         while(true){
           var choise = input.keyInSelect(names, "서브도메인을 변경할 서비스를 선택해주세요 : ");
           var replaceDomain = null;
@@ -280,7 +280,7 @@ function setAddress() {
             subDomains = SUBDOMAINS;
             break;
           }
-          else if(choise === 5) {//done
+          else if(choise === 5) {//next
             printDomains(mainAddress, subDomains);
             if(input.keyInYN("서비스 도메인을 위와 같이 사용하시겠습니까?")) break;
           } else {
@@ -298,9 +298,10 @@ function setAddress() {
       var configs = readJSON();
       configs.map(el => {
         el.config.default.domains = domainList;
-        if(el.service === 'WEBPORTAL') {
-          el.config.default.cookie.domain = `.${mainAddress}`
-        }
+        
+        if(!el.config.default.cookie) el.config.default.cookie = {};
+        el.config.default.cookie.domain = `.${mainAddress}`;
+
         saveConfig(el.config, el.service);
       })
 
@@ -325,6 +326,22 @@ function changeMobius() {
     }
   })
 }
+gulp.task('domainList', function(){
+  var json = readJSON();
+
+  var domain = json[0].config.default.domains;
+  if(!domain){ 
+    console.error("플랫폼 설정이 완료되지 않았습니다. 'gulp init'으로 설정을 마쳐주세요");
+    return;
+  } else {
+    var mainDomain = json[0].config.default.cookie ? json[0].config.default.cookie.domain : null;
+    if(mainDomain) console.log(`Main Domain : ${mainDomain}`);
+    Object.keys(domain).forEach(el => {
+      console.log(`${el} : ${domain[el]}`)
+    });
+
+  }
+})
 gulp.task('init', function(){
   return new Promise(function(resolve, reject){
       changeMobius()
