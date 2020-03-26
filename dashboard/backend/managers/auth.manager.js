@@ -195,7 +195,7 @@ try{
     let email = req.query.email;
     // 로그아웃이라면 저장되어 있는 Refresh토큰을 제거한다.
     http({
-      uri : CONFIG.domains.WEBPORTAL + "/auth/logout",
+      uri : "http://" +CONFIG.domains.WEBPORTAL + "/auth/logout",
       method : "post",
       headers : {
         "accept" : "application/json"
@@ -217,7 +217,7 @@ try{
         res.status(200).json({
             message : '성공적으로 로그아웃 되었습니다. 감사합니다.'
         })
-        LOGGER.info(`[AUTH] : ${email}님이 로그아웃 했습니다.`);
+        console.log(`[AUTH] : ${email}님이 로그아웃 했습니다.`);
     }).catch(err => {
         sendError (res, err, '로그아웃 도중 문제가 발생했습니다. 지속시 관리자에게 문의 바랍니다.');
     })

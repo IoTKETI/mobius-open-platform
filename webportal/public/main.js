@@ -19,8 +19,8 @@
           s.sns = `http://${serviceUrl.SNS}`;
           s.dashboard = `http://${serviceUrl.DASHBOARD}`;
           $rootScope.serviceUrl = s;
-          $rootScope.serverUrl = `http://${serviceUrl.WEBPORTAL}`;          
-          $rootScope.domain = ".iotocean.org;.iotmobius.com";
+          $rootScope.serverUrl = `http://${serviceUrl.WEBPORTAL}`;
+          $rootScope.domain = serviceUrl.domain;
         })
       amMoment.changeLocale('ko')
     })

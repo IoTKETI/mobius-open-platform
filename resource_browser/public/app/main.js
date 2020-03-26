@@ -88,6 +88,7 @@
   MainLayoutController.$inject = ['$rootScope', '$scope', '$stateParams', '$mdSidenav'];
 
 
+    $scope.serviceUrl = $rootScope.serviceUrl;
     function MainLayoutController($rootScope, $scope, $stateParams, $mdSidenav) {
 
       $scope.history = [
@@ -137,6 +138,7 @@
           s.dashboard = `http://${serviceUrl.DASHBOARD}`;
           $rootScope.serviceUrl = s;
           $rootScope.serverUrl = `http://${serviceUrl.WEBPORTAL}`;
+          $rootScope.domain = serviceUrl.domain;
         })
 
       $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams, options){
