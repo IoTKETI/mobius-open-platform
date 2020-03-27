@@ -34,7 +34,7 @@ export class UrlStore {
         this.serviceUrl.mobiusState = `http://${serviceUrl.WEBPORTAL}/#!/dashboard`;
         this.serviceUrl.deviceManage = `http://${serviceUrl.WEBPORTAL}/#!/device-list`;
         this.serviceUrl.accessProtect = `http://${serviceUrl.WEBPORTAL}/#!/acp-list/`;
-        this.serviceUrl.dataBrowser = `http://${serviceUrl.WEBPORTAL}/#!/data-browser/"`;
+        this.serviceUrl.dataBrowser = `http://${serviceUrl.WEBPORTAL}/#!/data-browser/`;
         this.serviceUrl.resmon = `http://${serviceUrl.RES}`;
         this.serviceUrl.ota = `http://${serviceUrl.OTA}`;
         this.serviceUrl.sns = `http://${serviceUrl.SNS}`;
