@@ -6,7 +6,7 @@ import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
-import * as myGlobal from "../../services/server.url";
+import { UrlStore } from "../../services/server.url";
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -17,7 +17,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService : AuthService, 
     private router : Router, 
-    private notifier : NotifierService) { }
+    private notifier : NotifierService,
+    private urlStore : UrlStore) { }
 
   title = "Login";
   email : String;
@@ -40,7 +41,7 @@ export class LoginComponent implements OnInit {
           .unsubscribe();
         } else {
           this.notifier.notify('error', err.error ? err.error.message : '서버와 접속이 되지 않습니다.');
-          window.location.href=myGlobal.portalURL+"/#!/login"
+          window.location.href= this.urlStore.portalURL+"/#!/login"
         }
       }
     )

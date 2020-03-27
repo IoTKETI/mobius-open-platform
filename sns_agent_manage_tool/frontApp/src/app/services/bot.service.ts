@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { serverURL } from './server.url';
+import { UrlStore } from './server.url';
 @Injectable({
   providedIn: 'root'
 })
@@ -9,8 +9,8 @@ export class BotService {
 
   private URL;
 
-  constructor(private http : HttpClient) { 
-    this.URL = serverURL + '/bot';
+  constructor(private http : HttpClient, private urlStore : UrlStore) { 
+    this.URL = this.urlStore.serverURL + '/bot';
     console.log(this.URL);
   }
 

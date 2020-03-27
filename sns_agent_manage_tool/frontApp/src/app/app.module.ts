@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'
@@ -34,6 +34,13 @@ import { BotViewDirective } from './bot-view/bot-view.directive';
 import { CommandMainComponent, DialogBotAdd, DialogBotDelete, BotRegisterGuide } from './command-main/command-main.component';
 import { CommandViewDirective } from './command-main/command-main.directive';
 import { CookieService } from 'ngx-cookie-service';
+
+import { UrlStore } from './services/server.url';
+
+export function get_urls(urlLoader : UrlStore) {
+  return () => urlLoader.loadURL();
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,6 +98,8 @@ import { CookieService } from 'ngx-cookie-service';
     NgxSpinnerModule,
   ],
   providers: [
+    UrlStore,
+    {provide : APP_INITIALIZER, useFactory: get_urls, deps : [UrlStore],  multi : true},
     {provide : HTTP_INTERCEPTORS, useClass : TokenHttpInterceptor, multi : true},
     //Custom Services
     CommandService,

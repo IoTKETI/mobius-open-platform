@@ -1,17 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpBackend } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { serverURL } from './server.url';
+import { UrlStore } from './server.url';
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private URL = `${serverURL}/user`;
+  private URL = null;
   private regHttp : HttpClient;
   constructor(
-    private http : HttpClient, handler : HttpBackend) { 
+    private http : HttpClient, handler : HttpBackend, private urlStore : UrlStore) { 
       this.regHttp = new HttpClient(handler);
+      this.URL = `${urlStore.serverURL}/user`;
     }
 
   userSignUpRequest(user){

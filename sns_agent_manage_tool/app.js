@@ -11,9 +11,6 @@ var app = express();
 // view engine setup
 // app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-const originWhitelist = [
-  'http://localhost:4200'
-]
 var crosOptions = {
   origin : function(origin, callback){
     var isWhiteListed = originWhitelist.indexOf(origin) !== -1;
@@ -40,7 +37,7 @@ app.use(express.static(path.join(__dirname, 'dist/app')));
 app.use('/api', routerMgmt);
 app.get('*', (req, res) => {
   res.sendFile(path.join(__dirname, 'dist/app/index.html'));
-  });
+});
 
 
 // catch 404 and forward to error handler

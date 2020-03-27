@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { serverURL } from './server.url'
+import { UrlStore } from './server.url'
 import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root'
@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 export class CommandService {
 
   private URL : String;
-  constructor(private http : HttpClient) { 
-    this.URL = serverURL + '/cmd';
+  constructor(private http : HttpClient, private urlStore : UrlStore) { 
+    this.URL = this.urlStore.serverURL + '/cmd';
     console.log(this.URL);
   }
 
