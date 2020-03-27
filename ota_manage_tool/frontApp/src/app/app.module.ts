@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms/';
@@ -38,6 +38,14 @@ import { config } from 'rxjs';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ProgressBarModule } from 'angular-progress-bar';
 import { CookieService } from 'ngx-cookie-service';
+
+
+import { UrlStore } from './services/serverURL';
+
+export function get_urls(urlLoader : UrlStore) {
+  return () => urlLoader.loadURL();
+}
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -80,6 +88,8 @@ import { CookieService } from 'ngx-cookie-service';
     ProgressBarModule
   ],
   providers: [
+    UrlStore,
+    {provide : APP_INITIALIZER, useFactory: get_urls, deps : [UrlStore],  multi : true},
     {provide : HTTP_INTERCEPTORS, useClass : TokenHttpInterceptor, multi : true},
     {provide : NGX_MAT_FILE_INPUT_CONFIG, useValue : config },
     JwtHelperService,

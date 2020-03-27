@@ -5,10 +5,10 @@ import { map, catchError, flatMap, share, switchMap } from "rxjs/operators";
 import { throwError } from 'rxjs/internal/observable/throwError'
 import { Router } from '@angular/router';
 import { AuthService } from "../services/auth.service";
-import * as myGlobal from "../services/serverURL";
+import { UrlStore } from "../services/serverURL";
 @Injectable()
 export class TokenHttpInterceptor implements HttpInterceptor{
-    constructor(private router : Router, private inj : Injector){}
+    constructor(private router : Router, private inj : Injector, private urlStore : UrlStore){}
 
     inflightAuthRequset = null;
 
@@ -47,7 +47,7 @@ export class TokenHttpInterceptor implements HttpInterceptor{
                     const isFromRefreshTokenEndPoint = !err.success;
                     if(isFromRefreshTokenEndPoint){
                         auth.clearTokens();
-                        window.location.href=myGlobal.portalURL+"/#!/login";
+                        window.location.href=this.urlStore.portalURL+"/#!/login";
                         return throwError(err);
                     }
                     if(!this.inflightAuthRequset){
@@ -56,7 +56,7 @@ export class TokenHttpInterceptor implements HttpInterceptor{
                         if(!this.inflightAuthRequset){
                             //remove existing tokens
                             auth.clearTokens();
-                            window.location.href=myGlobal.portalURL+"/#!/login";
+                            window.location.href=this.urlStore.portalURL+"/#!/login";
                             return throwError(err);
                         }
                     }

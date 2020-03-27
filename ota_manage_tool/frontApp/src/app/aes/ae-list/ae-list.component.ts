@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { CookieService } from 'ngx-cookie-service';
-import * as myGlobal from "../../services/serverURL";
+import { UrlStore } from "../../services/serverURL";
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -36,7 +36,8 @@ export class AeListComponent implements OnInit {
     private ngxService : NgxSpinnerService,
     private authService : AuthService,
     private rotuer : Router,
-    private cookie : CookieService) {
+    private cookie : CookieService,
+    private urlStore : UrlStore) {
 
     this.formData = {
       aeid : null,
@@ -51,7 +52,7 @@ export class AeListComponent implements OnInit {
     let token = this.cookie.get('ocean-ac-token');
     if(!token || token === "undefine"){
       this.notifier.notify('warning', "사용 전 로그인이 필요합니다.");
-      window.location.href=myGlobal.portalURL+"/#!/login";
+      window.location.href=this.urlStore.portalURL+"/#!/login";
       return;
     }
     let userEmail = new JwtHelperService().decodeToken(token).u_e;

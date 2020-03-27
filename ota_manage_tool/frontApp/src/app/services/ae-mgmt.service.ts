@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { apiConfig } from './serverURL';
+import { UrlStore } from './serverURL';
 import { map, catchError } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
@@ -11,8 +11,8 @@ export class AeMgmtService {
 
   private url : string;
 
-  constructor(private http : HttpClient) { 
-    this.url = apiConfig + "/ae";
+  constructor(private http : HttpClient, private urlStore : UrlStore) { 
+    this.url = this.urlStore.apiConfig + "/ae";
   }
 
   postNewAE(data, file : File){

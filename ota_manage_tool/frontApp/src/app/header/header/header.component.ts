@@ -4,7 +4,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from  'ngx-spinner'
-import * as myGlobal from "../../services/serverURL";
+import { UrlStore } from "../../services/serverURL";
 import { map, catchError } from 'rxjs/operators';
 import { throwError } from 'rxjs';
 
@@ -19,14 +19,16 @@ export class HeaderComponent implements OnInit {
   public open : boolean = false;
   public account : boolean = false;
   public user : any = null;
-  public serviceUrl : any = myGlobal.serviceUrl;
+  public serviceUrl : any = null;
   constructor(
     private router : Router, 
     private dialogRef : MatDialog, 
     private authService : AuthService,
     private notifier : NotifierService,
-    private spinner : NgxSpinnerService
+    private spinner : NgxSpinnerService,
+    private urlStore : UrlStore
     ) { 
+      this.serviceUrl = this.urlStore.serviceUrl;
       authService.getUserInfo()
       .subscribe(rs => {
         if(rs){
@@ -40,7 +42,7 @@ export class HeaderComponent implements OnInit {
             this.user = rs.userInfo;
           }else{
             this.notifier.notify('warning', '관리자 권한을 가지지 않았습니다.');
-            window.location.href=myGlobal.portalURL+"/#!/login";
+            window.location.href=this.urlStore.portalURL+"/#!/login";
             return false;
           }
         }),
@@ -82,7 +84,7 @@ export class HeaderComponent implements OnInit {
           res => {
             this.authService.clearTokens();
             this.notifier.notify('success', "로그아웃 처리 되었습니다.");
-            window.location.href=myGlobal.portalURL+"/#!/login";
+            window.location.href=this.urlStore.portalURL+"/#!/login";
           },
           err => {
             this.notifier.notify('error', err.error.message);

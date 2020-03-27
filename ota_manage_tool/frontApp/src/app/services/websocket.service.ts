@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as io from 'socket.io-client'
 import { Observable, Observer } from 'rxjs';
-import { serverSocket } from '../services/serverURL';
+import { UrlStore } from '../services/serverURL';
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +10,7 @@ export class WebsocketService {
   /* for Progress bar */
   // private socket : SocketIOClient.Socket;
   
-  constructor() { }
+  constructor( private urlStore : UrlStore) { }
 
   private socketList = {};
   connect(aeid){
@@ -19,7 +19,7 @@ export class WebsocketService {
     if(this.socketList[aeid]){
       socket = this.socketList[aeid];
     }else{
-      socket = io(serverSocket);
+      socket = io(this.urlStore.serverSocket);
   
       socket.emit('aeid', aeid);
   

@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpBackend, HttpHeaders, HttpResponse } from '@angular/common/http'
 import { Observable, of, throwError, from } from 'rxjs';
-import { apiConfig, domain } from './serverURL';
+import { UrlStore } from './serverURL';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { map, catchError, flatMap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
@@ -13,9 +13,9 @@ export class AuthService{
   private url : string;
   private http : HttpClient;
   
-  constructor(handler : HttpBackend, private cookie : CookieService) {
+  constructor(handler : HttpBackend, private cookie : CookieService, private urlStore : UrlStore) {
     this.http = new HttpClient(handler);
-    this.url = apiConfig.toString() + "/auth";
+    this.url = this.urlStore.apiConfig.toString() + "/auth";
   }
 
   userAuthentiate(){
@@ -109,8 +109,8 @@ export class AuthService{
   }
 
   clearTokens(){
-    this.cookie.delete('ocean-ac-token', null, domain);
-    this.cookie.delete('ocean-re-token', null, domain);
+    this.cookie.delete('ocean-ac-token', null, this.urlStore.domain);
+    this.cookie.delete('ocean-re-token', null, this.urlStore.domain);
   }
 
 }
