@@ -27,12 +27,12 @@
 >$> pm2 list
 
 #
-#
+# Service List
 <div align="center">
 <img src="http://developers.iotocean.org/wp-content/uploads/2020/04/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA-2020-04-29-%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE-12.40.23.png" width="600"/>
 </div>
 
-#
+# Service description
 |서비스|설명|
 |------|---|
 |Mobius 상태 조회|현재 Mobius 상태를 시각화 하여 보여주는 서비스|
@@ -44,22 +44,13 @@
 |OTA 관리기|Mobius 와 연결된 nCube 을 대상으로 원격 펌웨어 업데이트 제공|
 |에이전트 관리기|Mobius 와 상호작용이 가능한 Telegram Bot 을 등록,명령어 생성 및 관리하는 서비스|
 
-# 111
-<div align="center">
-<img src="http://developers.iotocean.org/wp-content/uploads/2020/04/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA-2020-04-29-%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE-12.41.25-1024x467.png" width="600"/>
-</div>
 
-# 222
+# Service configuration
 <div align="center">
 <img src="http://developers.iotocean.org/wp-content/uploads/2020/04/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA-2020-04-29-%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE-12.42.45-768x772.png" width="600"/>
 </div>
 
-# 333
-<div align="center">
-<img src="http://developers.iotocean.org/wp-content/uploads/2020/04/%E1%84%89%E1%85%B3%E1%84%8F%E1%85%B3%E1%84%85%E1%85%B5%E1%86%AB%E1%84%89%E1%85%A3%E1%86%BA-2020-04-29-%E1%84%8B%E1%85%A9%E1%84%92%E1%85%AE-12.43.22-1024x457.png" width="600"/>
-</div>
-
-# 444
+# Service Contents
 |서비스|설명|
 |------|---|
 |웹 포탈|Mobius 상태조회, 디바이스 관리, 접근 권한관리, 데이터 탐색 등 Mobius에 대한 정보 확인 및 설정 등 관리가 가능하다.|
