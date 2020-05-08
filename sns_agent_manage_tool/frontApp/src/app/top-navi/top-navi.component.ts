@@ -4,7 +4,7 @@ import { NotifierService } from 'angular-notifier';
 import { Router, NavigationEnd } from '@angular/router';
 import { AuthService } from '../services/auth.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import * as myGlobal from "../services/server.url";
+import { UrlStore } from "../services/server.url";
 
 @Component({
   selector: 'app-top-navi',
@@ -17,14 +17,15 @@ export class TopNaviComponent implements OnInit {
   url = '';
   public open : boolean = false;
   public account : boolean = false;
-  public serviceUrl : any = myGlobal.serviceUrl;
+  public serviceUrl : any = null;
   public user : any = null;
   constructor(
     private router : Router, 
     private dialog : MatDialog, 
     private authService : AuthService,
     private notifier : NotifierService,
-    private ngxService : NgxSpinnerService
+    private ngxService : NgxSpinnerService,
+    private urlStore : UrlStore
     ) { 
       router.events.subscribe((route) => {
         if(route instanceof NavigationEnd){
@@ -75,7 +76,7 @@ export class TopNaviComponent implements OnInit {
             this.ngxService.hide();
             this.authService.clearTokens();
             this.notifier.notify('success','로그아웃 되었습니다.');
-            window.location.href=myGlobal.portalURL+"/#!/login";
+            window.location.href= this.urlStore.portalURL+"/#!/login";
           },
           err => {
             this.notifier.notify('error', err.message || "로그아웃 도중 장애가 발생했습니다.");

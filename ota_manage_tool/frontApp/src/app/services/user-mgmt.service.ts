@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpBackend } from '@angular/common/http';
 import { UserVO } from '../vo/user';
-import { apiConfig } from './serverURL';
+import { UrlStore } from './serverURL';
 import { map } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
@@ -11,9 +11,9 @@ export class UserMgmtService {
   private url : string;
   private firmware : string;
   private backHttp : HttpClient;
-  constructor(private http : HttpClient, handler : HttpBackend) { 
-    this.url = apiConfig +"/user";
-    this.firmware = apiConfig + "/fw";
+  constructor(private http : HttpClient, handler : HttpBackend, private urlStore : UrlStore) { 
+    this.url = this.urlStore.apiConfig +"/user";
+    this.firmware = this.urlStore.apiConfig + "/fw";
     this.backHttp = new HttpClient(handler);
   }
 

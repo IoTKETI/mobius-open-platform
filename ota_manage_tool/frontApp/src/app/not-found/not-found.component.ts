@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { Router } from '@angular/router';
-import * as myGlobal from "../services/serverURL";
+import { UrlStore } from "../services/serverURL";
 
 @Component({
   selector: 'app-not-found',
@@ -12,7 +12,8 @@ export class NotFoundComponent implements OnInit {
 
   constructor(
     private location : Location,
-    private router : Router
+    private router : Router,
+    private urlStore : UrlStore
   ) { }
 
   ngOnInit() {
@@ -23,6 +24,6 @@ export class NotFoundComponent implements OnInit {
   }
 
   main(){
-    window.location.href=myGlobal.portalURL+"/#!/login";
+    window.location.href=this.urlStore.portalURL+"/#!/login";
   }
 }

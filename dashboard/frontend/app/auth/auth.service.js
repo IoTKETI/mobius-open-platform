@@ -241,6 +241,8 @@
             }
           })
           .then(function(){
+            $cookies.remove('ocean-ac-token', {domain : $rootScope.domain});
+            $cookies.remove('ocean-re-token', {domain : $rootScope.domain});
             resolve();
           })
           .catch(function(err){

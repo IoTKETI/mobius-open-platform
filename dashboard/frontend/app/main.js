@@ -353,6 +353,7 @@
         s.dashboard = `http://${serviceUrl.DASHBOARD}`;
         $rootScope.serviceUrl = s;
         $rootScope.serverUrl = `http://${serviceUrl.WEBPORTAL}`;
+        $rootScope.domain = serviceUrl.domain;
       })
 
 

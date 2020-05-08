@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
 import { MatDialogRef, MatDialog, MAT_DIALOG_DATA } from '@angular/material';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import * as myGlobal from "../../services/serverURL";
+import { UrlStore } from "../../services/serverURL";
 
 @Component({
   selector: 'app-user-list',
@@ -27,13 +27,14 @@ export class UserListComponent implements OnInit {
     private dialog : MatDialog,
     private packetDialog : MatDialog,
     router : Router, 
+    private urlStore : UrlStore
     ) { 
     this.userList = new Array<Element>();
     //토큰에서 admin정보를 확인
     let admin = localStorage.getItem('admin');
     if(admin !== 'true'){
       this.notifier.notify('error', '올바른 경로로 접근하지 않았습니다.');
-      window.location.href=myGlobal.portalURL+"/#!/login";
+      window.location.href=this.urlStore.portalURL+"/#!/login";
     }
   }
 

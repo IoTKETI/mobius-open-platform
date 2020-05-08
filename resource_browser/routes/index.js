@@ -8,6 +8,7 @@ router.get('/', function(req, res, next) {
 router.get('/info', function(req, res, next) {
   var info = {};
   info.serviceUrl = config.domains;
+  info.serviceUrl['domain'] = config.cookie.domain;
 
   res.status(200).json(info);
 })

@@ -1,9 +1,9 @@
 var MongodbClient = require('mongodb').MongoClient;
 var dbInfo = require('./dbInfo.json');
 
-function connect() {
+function connect(admin, pwd) {
   return new Promise(function(resolve, reject) {
-    MongodbClient.connect(`mongodb://${dbInfo.common.host}:${dbInfo.common.port}`, 
+    MongodbClient.connect(`mongodb://${admin}:${pwd}@${dbInfo.common.host}:${dbInfo.common.port}`, 
       function(err, client) {
         if(err){
           reject(err);
@@ -38,10 +38,10 @@ function createUser(db, info) {
   })
 }
 
-function run() {
+function run(admin, pwd) {
 
   var client;
-  return connect()
+  return connect(admin, pwd)
     .then(function(_client) {
       client = _client;
       var promises = Object.keys(dbInfo.DBs).map(function(key) {

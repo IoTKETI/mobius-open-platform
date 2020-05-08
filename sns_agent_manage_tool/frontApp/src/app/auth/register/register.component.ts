@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { NotifierService } from 'angular-notifier';
 import { NgxSpinnerService } from 'ngx-spinner';
-import * as myGlobal from "../../services/server.url";
+import { UrlStore } from "../../services/server.url";
 
 @Component({
   selector: 'app-register',
@@ -67,7 +67,7 @@ export class RegisterComponent implements OnInit {
   }
   
   backLogin(){
-    //window.location.href=myGlobal.portalURL+"/#!/login";
+    //window.location.href=UrlStore.portalURL+"/#!/login";
   }
 
   checkEmail() : Object{

@@ -5,13 +5,13 @@ import { AuthService } from './auth.service';
 import { NotifierService } from 'angular-notifier';
 import { map, catchError } from 'rxjs/operators';
 import 'rxjs/add/observable/of';
-import * as myGlobal from "../services/server.url";
+import { UrlStore } from "../services/server.url";
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuardService implements  CanActivate{
 
-  constructor(private authService : AuthService, private notifier : NotifierService, private router : Router) {}
+  constructor(private authService : AuthService, private notifier : NotifierService, private router : Router, private urlStore : UrlStore) {}
 
   canActivate(next : ActivatedRouteSnapshot, state : RouterStateSnapshot) : Observable<boolean> | Promise<boolean> | boolean { 
     const token = this.authService.getToken();
@@ -29,6 +29,6 @@ export class AuthGuardService implements  CanActivate{
 
   redirectToLogin(){
     this.notifier.notify('error', '로그인이 필요합니다. 로그인을 해주세요.')
-    window.location.href=myGlobal.portalURL+"/#!/login";
+    window.location.href=this.urlStore.portalURL+"/#!/login";
   }
 }

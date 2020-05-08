@@ -3,7 +3,7 @@ import { MatDialog } from '@angular/material';
 import { AuthService } from 'src/app/services/auth.service';
 import { Router } from '@angular/router';
 import { NotifierService } from 'angular-notifier';
-import * as myGlobal from "../../services/serverURL";
+import { UrlStore } from "../../services/serverURL";
 
 @Component({
   selector: 'app-login',
@@ -15,7 +15,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private authService : AuthService, 
     private router : Router, 
-    private notifier : NotifierService) { }
+    private notifier : NotifierService,
+    private urlStore : UrlStore) { }
 
   title = "Login";
   email : String;
@@ -38,7 +39,7 @@ export class LoginComponent implements OnInit {
           .unsubscribe();
         }
         this.notifier.notify('error',  (err.error ? err.error.message : '서버와 접속이 되지 않습니다.'));
-        window.location.href=myGlobal.portalURL+"/#!/login";
+        window.location.href=this.urlStore.portalURL+"/#!/login";
       }
     )
   }

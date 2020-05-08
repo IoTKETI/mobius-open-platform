@@ -4,8 +4,8 @@
  * Module dependencies.
  */
 
-var app = require('../app');
 global.CONFIG = require('./config.js')('../config.json');
+var app = require('../app');
 var debug = require('debug')('otadevleopmentassistserver:server');
 var http = require('http');
 var dbConnector = require('./db/dbConnector');

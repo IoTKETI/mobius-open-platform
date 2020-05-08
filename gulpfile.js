@@ -89,7 +89,10 @@ function npmInstall() {
 gulp.task('npmInstall', npmInstall);
 
 function setDatabase (){
-  return dbSetting();
+  var admin = input.question("MongoDB에 설정된 Admin 계정을 입력해주세요 : ");
+  var adminPwd = input.question(`${admin}의 패스워드 : `);
+
+  return dbSetting(admin, adminPwd);
 }
 gulp.task('setDatabase', setDatabase)
 
