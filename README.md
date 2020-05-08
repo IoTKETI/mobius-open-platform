@@ -1,30 +1,10 @@
 # Service Install
 ## VERSION : V0.1_R20200508-01
 
-## 1. Install Gulp
->$> npm install gulp-cli -g  
->...  
->$> npm install gulp --save-dev
+## Install
+### Please follow the instructions in the link below.
+Link: [Mobius 오픈 IoT 플랫폼 설치 가이드.pdf](https://github.com/IoTKETI/mobius-open-platform/blob/master/Mobius%20%EC%98%A4%ED%94%88%20IoT%20%ED%94%8C%EB%9E%AB%ED%8F%BC%20%EC%84%A4%EC%B9%98%20%EA%B0%80%EC%9D%B4%EB%93%9C.pdf)
 
-## 2. Pull Repositories
->$> gulp updateSubmodule
-
-## 3. Install npm libraries
->$> gulp installNPM
-
-## 4. Set Databases
->$> gulp setDatabase
-
-
-
-# Service Start
-
-## Start PM2 
->$> gulp startPm2
-***
-
-## Check appliations 
->$> pm2 list
 
 #
 # Service List
