@@ -27,7 +27,7 @@
     "angular-notifier": "^4.1.1",
     "bootstrap": "^4.4.0",
     "core-js": "^2.5.4",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "ngx-cookie-service": "^2.2.0",
     "ngx-spinner": "^6.1.2",
     "rxjs": "~6.3.3",
