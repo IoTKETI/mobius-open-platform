@@ -29,7 +29,7 @@
     "angular-progress-bar": "^1.0.9",
     "bootstrap": "^4.4.0",
     "core-js": "^2.5.4",
-    "i": "^0.3.6",
+    "i": "^0.3.7",
     "ngx-cookie-service": "^2.2.0",
     "ngx-material-file-input": "^0.3.1",
     "ngx-spinner": "^6.1.2",
