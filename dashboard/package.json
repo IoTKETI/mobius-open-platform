@@ -9,7 +9,7 @@
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.3.1",
     "@uirouter/angularjs": "^1.0.20",
-    "angular": "^1.7.4",
+    "angular": "^1.8.3",
     "angular-animate": "^1.7.4",
     "angular-aria": "^1.7.4",
     "angular-cookies": "^1.7.9",
