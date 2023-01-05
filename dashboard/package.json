@@ -34,7 +34,7 @@
     "highlight.js": "^9.16.2",
     "jquery": "^3.4.1",
     "js-base64": "^2.4.8",
-    "json5": "^2.0.1",
+    "json5": "^2.2.2",
     "jsonwebtoken": "^8.3.0",
     "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
