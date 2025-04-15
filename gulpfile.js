@@ -84,6 +84,8 @@ function npmInstall() {
     .on('error', reject)
     .pipe(gulp.src("./package.json"))
     .on('end', resolve);
+
+    resolve();
   })
 }
 gulp.task('npmInstall', npmInstall);
